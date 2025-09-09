@@ -1,5 +1,16 @@
+interface Ticket {
+  name: string;
+  price: string;
+  currency: string;
+  features: string[];
+  popular: boolean;
+  available: boolean;
+  originalPrice?: string;
+  note?: string;
+}
+
 export default function Registration() {
-  const tickets = [
+  const tickets: Ticket[] = [
     {
       name: 'General Admission',
       price: 'FREE',

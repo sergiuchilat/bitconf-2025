@@ -3,9 +3,17 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
+interface Photo {
+  id: number;
+  src: string;
+  alt: string;
+  filename: string;
+}
+
 export default function Gallery2024() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [displayedPhotos, setDisplayedPhotos] = useState<any[]>([]);
+  const [displayedPhotos, setDisplayedPhotos] = useState<Photo[]>([]);
+  const [photosToShow, setPhotosToShow] = useState(16);
 
   // All BitConf 2024 photos (auto-generated)
   const allPhotos = [
@@ -990,7 +998,7 @@ export default function Gallery2024() {
 ];
 
   // Shuffle array function
-  const shuffleArray = (array: any[]) => {
+  const shuffleArray = (array: Photo[]) => {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -1002,10 +1010,20 @@ export default function Gallery2024() {
   // Initialize with shuffled photos
   useEffect(() => {
     setDisplayedPhotos(shuffleArray(allPhotos));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const reshufflePhotos = () => {
     setDisplayedPhotos(shuffleArray(allPhotos));
+    setPhotosToShow(16);
+  };
+
+  const showMorePhotos = () => {
+    setPhotosToShow(prev => Math.min(prev + 16, allPhotos.length));
+  };
+
+  const showAllPhotos = () => {
+    setPhotosToShow(allPhotos.length);
   };
 
   return (
@@ -1013,20 +1031,14 @@ export default function Gallery2024() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">BitConf 2024 Edition</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Relive the amazing moments from our previous conference - inspiring talks, meaningful connections, and innovative ideas
           </p>
-          <button
-            onClick={reshufflePhotos}
-            className="bg-bitconf-accent text-white px-6 py-3 rounded-lg font-semibold hover:bg-bitconf-accent/80 transition-colors"
-          >
-            🔀 Shuffle Photos
-          </button>
         </div>
 
         {/* Photo Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
-          {displayedPhotos.map((photo) => (
+          {displayedPhotos.slice(0, photosToShow).map((photo) => (
             <div
               key={photo.id}
               className="group relative overflow-hidden rounded-lg cursor-pointer transform transition-all duration-300 hover:scale-105"
@@ -1049,6 +1061,35 @@ export default function Gallery2024() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Show More and Shuffle Buttons */}
+        <div className="text-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            {photosToShow < displayedPhotos.length && (
+              <button
+                onClick={photosToShow + 16 >= displayedPhotos.length ? showAllPhotos : showMorePhotos}
+                className="bg-bitconf-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-bitconf-primary/80 transition-colors flex items-center gap-2"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                {photosToShow + 16 >= displayedPhotos.length ? 
+                  `Show All ${displayedPhotos.length} Photos` : 
+                  `Show More Photos (${photosToShow}/${displayedPhotos.length})`
+                }
+              </button>
+            )}
+            <button
+              onClick={reshufflePhotos}
+              className="bg-bitconf-accent text-white px-6 py-3 rounded-lg font-semibold hover:bg-bitconf-accent/80 transition-colors flex items-center gap-2"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              Shuffle Photos
+            </button>
+          </div>
         </div>
 
         {/* Stats Section */}

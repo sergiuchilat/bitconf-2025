@@ -5,7 +5,7 @@ export default function About() {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">About BitConf</h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Moldova's leading technology conference bringing together innovators, developers, and tech enthusiasts
+            Moldova&apos;s leading technology conference bringing together innovators, developers, and tech enthusiasts
           </p>
         </div>
 

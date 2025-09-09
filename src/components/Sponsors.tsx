@@ -73,7 +73,7 @@ export default function Sponsors() {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">Our Sponsors</h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            BitConf is made possible by the generous support of our sponsors who believe in Moldova's tech community
+            BitConf is made possible by the generous support of our sponsors who believe in Moldova&apos;s tech community
           </p>
         </div>
 
@@ -98,7 +98,9 @@ export default function Sponsors() {
                   >
                     <div className="text-center">
                       <div className="w-16 h-16 bg-gray-300 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                        <span className="text-2xl">🏢</span>
+                        <svg className="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
                       </div>
                       <p className="font-semibold text-gray-300">{sponsor.name}</p>
                     </div>
@@ -114,7 +116,7 @@ export default function Sponsors() {
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold text-white mb-4">Become a Sponsor</h3>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Partner with BitConf and connect with Moldova's most talented developers, entrepreneurs, and tech leaders
+              Partner with BitConf and connect with Moldova&apos;s most talented developers, entrepreneurs, and tech leaders
             </p>
           </div>
 

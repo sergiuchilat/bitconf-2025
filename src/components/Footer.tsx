@@ -12,7 +12,7 @@ export default function Footer() {
               <span className="ml-2 text-sm text-gray-400">4th Edition</span>
             </div>
             <p className="text-gray-300 mb-6 max-w-md">
-              Moldova's premier IT conference bringing together innovators, developers, and tech enthusiasts 
+              Moldova&apos;s premier IT conference bringing together innovators, developers, and tech enthusiasts 
               to shape the future of technology in the region.
             </p>
             <div className="flex space-x-4">

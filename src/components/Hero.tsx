@@ -82,7 +82,7 @@ export default function Hero() {
             </div>
             
             <p className="text-xl sm:text-2xl lg:text-3xl font-light mb-8 text-gray-300 max-w-3xl">
-              Moldova's Premier Technology Conference
+              Moldova&apos;s Premier Technology Conference
             </p>
             
             {/* Event details */}
