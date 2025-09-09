@@ -1096,7 +1096,7 @@ export default function Gallery2024() {
         <div className="bg-bitconf-dark/50 rounded-lg p-8 border border-bitconf-primary/20">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-3xl font-bold text-bitconf-accent mb-2">450+</div>
+              <div className="text-3xl font-bold text-bitconf-accent mb-2">150+</div>
               <div className="text-gray-300">Attendees</div>
             </div>
             <div>

@@ -116,7 +116,7 @@ export default function Schedule() {
               onClick={() => setActiveDay('day1')}
               className="px-6 py-3 rounded-md font-semibold transition-colors bg-bitconf-primary text-white"
             >
-              November 9, 2025
+              November 8, 2025
             </button>
           </div>
         </div>

@@ -48,11 +48,11 @@ export default function About() {
               <div className="text-gray-300">Edition</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-bitconf-primary mb-2">500+</div>
+              <div className="text-3xl font-bold text-bitconf-primary mb-2">150+</div>
               <div className="text-gray-300">Attendees</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-bitconf-primary mb-2">20+</div>
+              <div className="text-3xl font-bold text-bitconf-primary mb-2">15+</div>
               <div className="text-gray-300">Speakers</div>
             </div>
             <div>
