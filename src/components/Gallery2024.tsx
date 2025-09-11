@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
 interface Photo {
@@ -14,6 +14,14 @@ export default function Gallery2024() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [displayedPhotos, setDisplayedPhotos] = useState<Photo[]>([]);
   const [photosToShow, setPhotosToShow] = useState(16);
+  const [isVisible, setIsVisible] = useState({
+    title: false,
+    gallery: false,
+    stats: false
+  });
+  const titleRef = useRef<HTMLDivElement>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
 
   // All BitConf 2024 photos (auto-generated)
   const allPhotos = [
@@ -1013,6 +1021,35 @@ export default function Gallery2024() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Intersection observer for scroll animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const target = entry.target;
+            if (target === titleRef.current) {
+              setIsVisible(prev => ({ ...prev, title: true }));
+            } else if (target === galleryRef.current) {
+              setIsVisible(prev => ({ ...prev, gallery: true }));
+            } else if (target === statsRef.current) {
+              setIsVisible(prev => ({ ...prev, stats: true }));
+            }
+          }
+        });
+      },
+      { threshold: 0.2, rootMargin: '0px 0px -100px 0px' }
+    );
+
+    if (titleRef.current) observer.observe(titleRef.current);
+    if (galleryRef.current) observer.observe(galleryRef.current);
+    if (statsRef.current) observer.observe(statsRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   const reshufflePhotos = () => {
     setDisplayedPhotos(shuffleArray(allPhotos));
     setPhotosToShow(16);
@@ -1027,9 +1064,23 @@ export default function Gallery2024() {
   };
 
   return (
-    <section id="gallery2024" className="py-20 bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+    <section id="gallery2024" className="py-20 bg-gray-900 relative overflow-hidden">
+      {/* Parallax Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-16 left-1/5 w-56 h-56 bg-bitconf-primary/4 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-16 right-1/6 w-64 h-64 bg-bitconf-accent/6 rounded-full blur-2xl"></div>
+        <div className="absolute top-1/3 right-1/3 w-48 h-48 bg-bitconf-secondary/5 rounded-full blur-2xl"></div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div 
+          ref={titleRef}
+          className={`text-center mb-16 transition-all duration-1000 ease-out ${
+            isVisible.title 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-4xl font-bold text-white mb-4">BitConf 2024 Edition</h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Relive the amazing moments from our previous conference - inspiring talks, meaningful connections, and innovative ideas
@@ -1037,25 +1088,41 @@ export default function Gallery2024() {
         </div>
 
         {/* Photo Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+        <div 
+          ref={galleryRef}
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12 transition-all duration-1200 ease-out ${
+            isVisible.gallery 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-12'
+          }`}
+        >
           {displayedPhotos.slice(0, photosToShow).map((photo) => (
             <div
               key={photo.id}
-              className="group relative overflow-hidden rounded-lg cursor-pointer transform transition-all duration-300 hover:scale-105"
+              className="group relative overflow-hidden rounded-lg cursor-pointer transition-all duration-400 ease-out hover:opacity-90"
               onClick={() => setSelectedImage(photo.src)}
             >
-              <div className="aspect-square bg-gray-800 overflow-hidden">
+              <div className="aspect-square bg-gray-800 overflow-hidden rounded-lg border border-transparent group-hover:border-bitconf-primary/50 transition-all duration-500">
                 <img
                   src={photo.src}
                   alt={photo.alt}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-opacity duration-400 ease-out group-hover:opacity-90"
                   loading={photo.id <= 12 ? "eager" : "lazy"}
                 />
               </div>
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/0 via-transparent to-black/0 group-hover:from-bitconf-primary/20 group-hover:via-transparent group-hover:to-bitconf-secondary/20 transition-all duration-500 flex items-center justify-center rounded-lg">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="bg-white/20 backdrop-blur-sm rounded-full p-3 border border-white/30">
+                    <svg className="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-2 group-hover:translate-x-0">
+                <div className="bg-bitconf-accent/80 backdrop-blur-sm rounded-full w-6 h-6 flex items-center justify-center">
+                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 12l-5-5 1.41-1.41L10 9.17l3.59-3.58L15 7l-5 5z"/>
                   </svg>
                 </div>
               </div>
@@ -1069,47 +1136,66 @@ export default function Gallery2024() {
             {photosToShow < displayedPhotos.length && (
               <button
                 onClick={photosToShow + 16 >= displayedPhotos.length ? showAllPhotos : showMorePhotos}
-                className="bg-bitconf-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-bitconf-primary/80 transition-colors flex items-center gap-2"
+                className="group bg-bitconf-primary text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 ease-out hover:bg-bitconf-primary/80 flex items-center gap-2"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 transition-transform duration-300 ease-out group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                {photosToShow + 16 >= displayedPhotos.length ? 
-                  `Show All ${displayedPhotos.length} Photos` : 
-                  `Show More Photos (${photosToShow}/${displayedPhotos.length})`
-                }
+                <span className="transition-all duration-300">
+                  {photosToShow + 16 >= displayedPhotos.length ? 
+                    `Show All ${displayedPhotos.length} Photos` : 
+                    `Show More Photos (${photosToShow}/${displayedPhotos.length})`
+                  }
+                </span>
               </button>
             )}
             <button
               onClick={reshufflePhotos}
-              className="bg-bitconf-accent text-white px-6 py-3 rounded-lg font-semibold hover:bg-bitconf-accent/80 transition-colors flex items-center gap-2"
+              className="group bg-bitconf-accent text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 ease-out hover:bg-bitconf-accent/80 flex items-center gap-2"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 transition-transform duration-300 ease-out group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
-              Shuffle Photos
+              <span className="transition-all duration-300">
+                Shuffle Photos
+              </span>
             </button>
           </div>
         </div>
 
         {/* Stats Section */}
-        <div className="bg-bitconf-dark/50 rounded-lg p-8 border border-bitconf-primary/20">
+        <div 
+          ref={statsRef}
+          className={`group bg-bitconf-dark/50 rounded-lg p-8 border border-bitconf-primary/20 transition-all duration-300 ease-out cursor-pointer hover:bg-bitconf-dark/70 hover:border-bitconf-primary/30 ${
+            isVisible.stats 
+              ? 'opacity-100 translate-y-0 scale-100' 
+              : 'opacity-0 translate-y-8 scale-95'
+          }`}
+        >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-3xl font-bold text-bitconf-accent mb-2">150+</div>
-              <div className="text-gray-300">Attendees</div>
+            <div className={`transition-all duration-300 ease-out ${
+              isVisible.stats ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`} style={{ transitionDelay: isVisible.stats ? '100ms' : '0ms' }}>
+              <div className="text-3xl font-bold text-bitconf-accent mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">150+</div>
+              <div className="text-gray-300 transition-colors duration-300 group-hover:text-white">Attendees</div>
             </div>
-            <div>
-              <div className="text-3xl font-bold text-bitconf-accent mb-2">163</div>
-              <div className="text-gray-300">Photos</div>
+            <div className={`transition-all duration-300 ease-out ${
+              isVisible.stats ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`} style={{ transitionDelay: isVisible.stats ? '200ms' : '0ms' }}>
+              <div className="text-3xl font-bold text-bitconf-accent mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">163</div>
+              <div className="text-gray-300 transition-colors duration-300 group-hover:text-white">Photos</div>
             </div>
-            <div>
-              <div className="text-3xl font-bold text-bitconf-accent mb-2">18</div>
-              <div className="text-gray-300">Speakers</div>
+            <div className={`transition-all duration-300 ease-out ${
+              isVisible.stats ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`} style={{ transitionDelay: isVisible.stats ? '300ms' : '0ms' }}>
+              <div className="text-3xl font-bold text-bitconf-accent mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">18</div>
+              <div className="text-gray-300 transition-colors duration-300 group-hover:text-white">Speakers</div>
             </div>
-            <div>
-              <div className="text-3xl font-bold text-bitconf-accent mb-2">12</div>
-              <div className="text-gray-300">Sessions</div>
+            <div className={`transition-all duration-300 ease-out ${
+              isVisible.stats ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`} style={{ transitionDelay: isVisible.stats ? '400ms' : '0ms' }}>
+              <div className="text-3xl font-bold text-bitconf-accent mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">12</div>
+              <div className="text-gray-300 transition-colors duration-300 group-hover:text-white">Sessions</div>
             </div>
           </div>
         </div>
