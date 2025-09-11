@@ -51,65 +51,10 @@ export default function About() {
 
   return (
     <section id="about" className="py-20 bg-slate-950 relative overflow-hidden">
-      {/* Enhanced Parallax Background Abstractions */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Large gradient orbs with complex movement */}
-        <div className="absolute top-20 right-1/4 w-96 h-96 bg-gradient-to-br from-bitconf-primary/8 via-bitconf-secondary/6 to-transparent rounded-full blur-3xl transition-transform duration-1000"
-             style={{
-               transform: `translateY(${scrollY * -0.15}px) translateX(${scrollY * 0.1}px) rotate(${scrollY * 0.05}deg) scale(${1 + scrollY * 0.0002})`
-             }}></div>
-        <div className="absolute bottom-20 left-1/5 w-80 h-80 bg-gradient-to-tr from-bitconf-turquoise/10 via-bitconf-accent/8 to-transparent rounded-full blur-2xl transition-transform duration-1000"
-             style={{
-               transform: `translateY(${scrollY * 0.2}px) translateX(${scrollY * -0.05}px) rotate(${scrollY * -0.03}deg)`
-             }}></div>
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-bl from-bitconf-secondary/12 to-transparent rounded-full blur-2xl transition-transform duration-1000"
-             style={{
-               transform: `translateY(${scrollY * -0.1}px) rotate(${scrollY * 0.08}deg) scale(${1.2 - scrollY * 0.0001})`
-             }}></div>
-
-        {/* Abstract geometric patterns */}
-        <div className="absolute top-10 left-10 w-32 h-32 border border-bitconf-primary/20 rotate-45 transition-transform duration-1000"
-             style={{
-               transform: `translateY(${scrollY * 0.25}px) rotate(${45 + scrollY * 0.15}deg)`
-             }}></div>
-        <div className="absolute top-32 right-20 w-24 h-24 border-2 border-bitconf-accent/30 rounded-full transition-transform duration-1000"
-             style={{
-               transform: `translateY(${scrollY * -0.3}px) translateX(${scrollY * 0.1}px) scale(${1 + scrollY * 0.0003})`
-             }}></div>
-        
-        {/* Floating lines and paths */}
-        <svg className="absolute top-16 left-1/4 w-48 h-48 text-bitconf-turquoise/15 transition-transform duration-1000" 
-             style={{ transform: `translateY(${scrollY * -0.2}px) rotate(${scrollY * 0.1}deg)` }}
-             viewBox="0 0 100 100">
-          <path d="M20,20 Q50,5 80,20 T80,50 Q65,80 35,65 T20,20" fill="none" stroke="currentColor" strokeWidth="0.5"/>
-          <circle cx="20" cy="20" r="2" fill="currentColor"/>
-          <circle cx="80" cy="50" r="1.5" fill="currentColor"/>
-        </svg>
-
-        {/* Animated mesh pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="aboutMesh" width="80" height="80" patternUnits="userSpaceOnUse"
-                       patternTransform={`rotate(${scrollY * 0.05}) scale(${1 + scrollY * 0.0001})`}>
-                <path d="M 80 0 L 40 40 L 0 0 M 40 40 L 80 80 M 40 40 L 0 80" fill="none" stroke="currentColor" strokeWidth="0.3"/>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#aboutMesh)" />
-          </svg>
-        </div>
-
-        {/* Dynamic particles */}
-        <div className="absolute top-1/4 right-16 w-3 h-3 bg-bitconf-primary/40 rounded-full transition-transform duration-1000"
-             style={{
-               transform: `translateY(${scrollY * -0.35}px) translateX(${scrollY * 0.15}px)`,
-               boxShadow: `0 0 ${8 + scrollY * 0.02}px rgba(59, 130, 246, 0.3)`
-             }}></div>
-        <div className="absolute bottom-1/3 left-20 w-2 h-2 bg-bitconf-accent/50 rounded-full transition-transform duration-1000"
-             style={{
-               transform: `translateY(${scrollY * 0.28}px) translateX(${scrollY * -0.08}px)`,
-               boxShadow: `0 0 ${6 + scrollY * 0.015}px rgba(16, 185, 129, 0.4)`
-             }}></div>
+      {/* Simple Background */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-bitconf-primary/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-bitconf-accent/5 rounded-full blur-2xl"></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

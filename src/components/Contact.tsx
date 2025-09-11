@@ -45,48 +45,64 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-20 bg-bitconf-dark relative overflow-hidden">
-      {/* Parallax Background Elements */}
-      <div className="absolute inset-0">
-        {/* Gradient background orbs */}
-        <div className="absolute top-32 left-1/6 w-80 h-80 bg-bitconf-primary/4 rounded-full blur-3xl transition-transform duration-1000"
+      {/* Enhanced Parallax Background Abstractions */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Large gradient orbs with complex movement */}
+        <div className="absolute top-20 right-1/4 w-96 h-96 bg-gradient-to-br from-bitconf-primary/25 via-bitconf-secondary/20 to-transparent rounded-full blur-3xl transition-transform duration-600 ease-out"
              style={{
-               transform: `translateY(${scrollY * -0.12}px) translateX(${scrollY * 0.08}px)`
+               transform: `translateY(${scrollY * -0.8}px) translateX(${scrollY * 0.4}px) rotate(${scrollY * 0.2}deg) scale(${1 + scrollY * 0.002})`
              }}></div>
-        <div className="absolute bottom-32 right-1/5 w-96 h-96 bg-bitconf-secondary/6 rounded-full blur-3xl transition-transform duration-1000"
+        <div className="absolute bottom-20 left-1/5 w-80 h-80 bg-gradient-to-tr from-bitconf-turquoise/30 via-bitconf-accent/25 to-transparent rounded-full blur-2xl transition-transform duration-600 ease-out"
              style={{
-               transform: `translateY(${scrollY * 0.18}px) translateX(${scrollY * -0.1}px)`
+               transform: `translateY(${scrollY * 1.0}px) translateX(${scrollY * -0.3}px) rotate(${scrollY * -0.15}deg)`
              }}></div>
-        <div className="absolute top-1/3 right-1/3 w-56 h-56 bg-bitconf-turquoise/5 rounded-full blur-2xl transition-transform duration-1000"
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-bl from-bitconf-secondary/35 to-transparent rounded-full blur-2xl transition-transform duration-600 ease-out"
              style={{
-               transform: `translateY(${scrollY * -0.15}px) rotate(${scrollY * 0.05}deg)`
-             }}></div>
-
-        {/* Floating accent elements */}
-        <div className="absolute top-24 right-16 w-6 h-6 bg-bitconf-accent/25 rotate-45 transition-transform duration-1000"
-             style={{
-               transform: `translateY(${scrollY * 0.28}px) rotate(${45 + scrollY * 0.12}deg)`
-             }}></div>
-        <div className="absolute top-48 left-20 w-3 h-3 bg-bitconf-primary/35 rounded-full transition-transform duration-1000"
-             style={{
-               transform: `translateY(${scrollY * -0.25}px) translateX(${scrollY * 0.08}px)`
-             }}></div>
-        <div className="absolute bottom-28 left-1/3 w-4 h-4 bg-bitconf-secondary/30 rotate-45 transition-transform duration-1000"
-             style={{
-               transform: `translateY(${scrollY * 0.22}px) rotate(${45 + scrollY * -0.08}deg)`
-             }}></div>
-        <div className="absolute bottom-16 right-1/4 w-2 h-2 bg-bitconf-turquoise/40 rounded-full transition-transform duration-1000"
-             style={{
-               transform: `translateY(${scrollY * -0.32}px) translateX(${scrollY * -0.15}px)`
+               transform: `translateY(${scrollY * -0.6}px) rotate(${scrollY * 0.4}deg) scale(${1.2 - scrollY * 0.001})`
              }}></div>
 
-        {/* Subtle animated lines */}
-        <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-bitconf-primary/8 to-transparent transform rotate-3 transition-transform duration-1000"
+        {/* Abstract geometric patterns */}
+        <div className="absolute top-10 left-10 w-32 h-32 border border-bitconf-primary/20 rotate-45 transition-transform duration-1000"
              style={{
-               transform: `translateY(${scrollY * 0.15}px) rotate(${3 + scrollY * 0.02}deg)`
+               transform: `translateY(${scrollY * 0.25}px) rotate(${45 + scrollY * 0.15}deg)`
              }}></div>
-        <div className="absolute bottom-1/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-bitconf-secondary/6 to-transparent transform -rotate-2 transition-transform duration-1000"
+        <div className="absolute top-32 right-20 w-24 h-24 border-2 border-bitconf-accent/30 rounded-full transition-transform duration-1000"
              style={{
-               transform: `translateY(${scrollY * -0.18}px) rotate(${-2 + scrollY * -0.03}deg)`
+               transform: `translateY(${scrollY * -0.3}px) translateX(${scrollY * 0.1}px) scale(${1 + scrollY * 0.0003})`
+             }}></div>
+        
+        {/* Floating lines and paths */}
+        <svg className="absolute top-16 left-1/4 w-48 h-48 text-bitconf-turquoise/15 transition-transform duration-1000" 
+             style={{ transform: `translateY(${scrollY * -0.2}px) rotate(${scrollY * 0.1}deg)` }}
+             viewBox="0 0 100 100">
+          <path d="M20,20 Q50,5 80,20 T80,50 Q65,80 35,65 T20,20" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+          <circle cx="20" cy="20" r="2" fill="currentColor"/>
+          <circle cx="80" cy="50" r="1.5" fill="currentColor"/>
+        </svg>
+
+        {/* Animated mesh pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="contactMesh" width="80" height="80" patternUnits="userSpaceOnUse"
+                       patternTransform={`rotate(${scrollY * 0.05}) scale(${1 + scrollY * 0.0001})`}>
+                <path d="M 80 0 L 40 40 L 0 0 M 40 40 L 80 80 M 40 40 L 0 80" fill="none" stroke="currentColor" strokeWidth="0.3"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#contactMesh)" />
+          </svg>
+        </div>
+
+        {/* Dynamic particles */}
+        <div className="absolute top-1/4 right-16 w-3 h-3 bg-bitconf-primary/40 rounded-full transition-transform duration-1000"
+             style={{
+               transform: `translateY(${scrollY * -0.35}px) translateX(${scrollY * 0.15}px)`,
+               boxShadow: `0 0 ${8 + scrollY * 0.02}px rgba(59, 130, 246, 0.3)`
+             }}></div>
+        <div className="absolute bottom-1/3 left-20 w-2 h-2 bg-bitconf-accent/50 rounded-full transition-transform duration-1000"
+             style={{
+               transform: `translateY(${scrollY * 0.28}px) translateX(${scrollY * -0.08}px)`,
+               boxShadow: `0 0 ${6 + scrollY * 0.015}px rgba(16, 185, 129, 0.4)`
              }}></div>
       </div>
 
