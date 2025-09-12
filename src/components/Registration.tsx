@@ -167,7 +167,7 @@ export default function Registration() {
             </span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Experience Moldova's premier blockchain conference. Network with industry leaders, learn from experts, and shape the future of decentralized technology.
+            Experience Moldova&apos;s premier blockchain conference. Network with industry leaders, learn from experts, and shape the future of decentralized technology.
           </p>
         </div>
 
@@ -209,7 +209,7 @@ export default function Registration() {
                         </div>
                       </div>
                       <p className="text-gray-300 text-lg mb-6">
-                        Thanks to our amazing sponsors, we're making this world-class blockchain conference accessible to everyone.
+                        Thanks to our amazing sponsors, we&apos;re making this world-class blockchain conference accessible to everyone.
                       </p>
                     </div>
 
