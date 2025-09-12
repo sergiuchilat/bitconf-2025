@@ -2,6 +2,36 @@
 
 import { useEffect, useState, useRef } from 'react';
 
+// Counter animation hook
+const useCountAnimation = (end: number, duration: number = 2000, isVisible: boolean = false) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    let startTime: number | null = null;
+    let animationFrame: number;
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+
+      // Easing function for smooth animation
+      const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(end * easeOutCubic));
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [end, duration, isVisible]);
+
+  return count;
+};
+
 export default function About() {
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState({
@@ -13,6 +43,12 @@ export default function About() {
   const titleRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
+
+  // Animated counters
+  const editionCount = useCountAnimation(4, 1500, isVisible.stats);
+  const attendeesCount = useCountAnimation(150, 2000, isVisible.stats);
+  const speakersCount = useCountAnimation(15, 1800, isVisible.stats);
+  const dayCount = useCountAnimation(1, 1000, isVisible.stats);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,7 +78,7 @@ export default function About() {
     if (statsRef.current) observer.observe(statsRef.current);
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       observer.disconnect();
@@ -58,7 +94,7 @@ export default function About() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div 
+        <div
           ref={titleRef}
           className={`text-center mb-16 transition-all duration-1000 ease-out ${
             isVisible.title 
@@ -72,7 +108,7 @@ export default function About() {
           </p>
         </div>
 
-        <div 
+        <div
           ref={cardsRef}
           className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 transition-all duration-1200 ease-out ${
             isVisible.cards 
@@ -117,7 +153,7 @@ export default function About() {
           </div>
         </div>
 
-        <div 
+        <div
           ref={statsRef}
           className={`group bg-bitconf-dark/50 rounded-lg p-8 border border-bitconf-primary/20 transition-all duration-300 ease-out cursor-pointer hover:bg-bitconf-dark/70 hover:border-bitconf-primary/30 ${
             isVisible.stats 
@@ -129,29 +165,39 @@ export default function About() {
             <div className={`transition-all duration-300 ease-out ${
               isVisible.stats ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`} style={{ transitionDelay: isVisible.stats ? '100ms' : '0ms' }}>
-              <div className="text-3xl font-bold text-bitconf-primary mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">4th</div>
+              <div className="text-3xl font-bold text-bitconf-primary mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">
+                {editionCount}{editionCount === 4 ? 'th' : ''}
+              </div>
               <div className="text-gray-300 transition-colors duration-300 group-hover:text-white">Edition</div>
             </div>
             <div className={`transition-all duration-300 ease-out ${
               isVisible.stats ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`} style={{ transitionDelay: isVisible.stats ? '200ms' : '0ms' }}>
-              <div className="text-3xl font-bold text-bitconf-primary mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">150+</div>
+              <div className="text-3xl font-bold text-bitconf-primary mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">
+                {attendeesCount}{attendeesCount === 150 ? '+' : ''}
+              </div>
               <div className="text-gray-300 transition-colors duration-300 group-hover:text-white">Attendees</div>
             </div>
             <div className={`transition-all duration-300 ease-out ${
               isVisible.stats ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`} style={{ transitionDelay: isVisible.stats ? '300ms' : '0ms' }}>
-              <div className="text-3xl font-bold text-bitconf-primary mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">15+</div>
+              <div className="text-3xl font-bold text-bitconf-primary mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">
+                {speakersCount}{speakersCount === 15 ? '+' : ''}
+              </div>
               <div className="text-gray-300 transition-colors duration-300 group-hover:text-white">Speakers</div>
             </div>
             <div className={`transition-all duration-300 ease-out ${
               isVisible.stats ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`} style={{ transitionDelay: isVisible.stats ? '400ms' : '0ms' }}>
-              <div className="text-3xl font-bold text-bitconf-primary mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">1</div>
+              <div className="text-3xl font-bold text-bitconf-primary mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">
+                {dayCount}
+              </div>
               <div className="text-gray-300 transition-colors duration-300 group-hover:text-white">Day</div>
             </div>
           </div>
         </div>
+
+
       </div>
     </section>
   );

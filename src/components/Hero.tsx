@@ -165,7 +165,7 @@ export default function Hero() {
             <div className="mb-8">
               <h1 className="text-7xl sm:text-8xl lg:text-9xl font-bold tracking-tight mb-4">
                 <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                  BitConf 2025
+                  BitConf <span className="text-yellow-400">2025</span>
                 </span>
               </h1>
               <div className="text-2xl sm:text-3xl lg:text-4xl font-light text-bitconf-turquoise mb-4">

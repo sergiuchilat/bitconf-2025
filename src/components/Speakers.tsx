@@ -8,7 +8,7 @@ export default function Speakers() {
       image: "/placeholder-speaker.jpg"
     },
     {
-      name: "Coming Soon", 
+      name: "Coming Soon",
       role: "Tech Leader",
       company: "TBA",
       bio: "We're curating an exceptional group of speakers for you.",
@@ -16,7 +16,7 @@ export default function Speakers() {
     },
     {
       name: "Coming Soon",
-      role: "Innovation Pioneer", 
+      role: "Innovation Pioneer",
       company: "TBA",
       bio: "Get ready to learn from the best in the industry.",
       image: "/placeholder-speaker.jpg"
@@ -53,9 +53,11 @@ export default function Speakers() {
           <p className="text-lg text-gray-300 mb-6">
             Want to speak at BitConf 4th Edition?
           </p>
-          <button className="bg-bitconf-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-bitconf-primary/80 transition-colors">
-            Submit Your Proposal
-          </button>
+          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+            <button className="bg-bitconf-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-bitconf-primary/80 transition-colors">
+              Submit Your Proposal
+            </button>
+          </div>
         </div>
       </div>
     </section>

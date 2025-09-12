@@ -5,6 +5,7 @@ import Speakers from '@/components/Speakers';
 import Schedule from '@/components/Schedule';
 import Registration from '@/components/Registration';
 import Gallery2024 from '@/components/Gallery2024';
+import Partners from '@/components/Partners';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
@@ -18,6 +19,7 @@ export default function Home() {
       <Schedule />
       <Registration />
       <Gallery2024 />
+      <Partners />
       <Contact />
       <Footer />
     </div>
