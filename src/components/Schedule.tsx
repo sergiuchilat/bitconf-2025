@@ -132,7 +132,7 @@ export default function Schedule() {
       ]
     },
     {
-      time: '14:30 - 15:00',
+      time: '14:30 - 15:00 / 14:30 - 15:30',
       events: [
         {
           title: 'I Logged Out: What Happens After You Leave IT?',
@@ -140,6 +140,13 @@ export default function Schedule() {
           type: 'talk',
           track: 'presentations',
           duration: '30 min'
+        },
+        {
+          title: 'TBA',
+          speaker: 'TBA',
+          type: 'workshop',
+          track: 'workshops',
+          duration: '2 hours'
         }
       ]
     },
