@@ -86,7 +86,7 @@ export default function Schedule() {
       time: '11:00 - 11:30',
       events: [
         {
-          title: 'How to test an API in the era of AI',
+          title: 'Delivery Director SER Region, Amdaris, Entrepreneur, Commercial mentor and Ironman athlete',
           speaker: 'Radu Tataru (Delivery Director SER Region, Amdaris)',
           type: 'talk',
           track: 'presentations',
