@@ -62,7 +62,7 @@ export default function Schedule() {
   }, []);
   // Create a structured schedule with parallel sessions grouped together
   const scheduleSlots: ScheduleSlot[] = [
-    { time: '10:15 - 10:30', events: [{ title: 'Opening Remarks', speaker: 'Conference Host', type: 'keynote' }] },
+    { time: '10:15 - 10:30', events: [{ title: 'Opening Remarks', speaker: 'Natalia Gaşiţoi, Alecu Russo Balti State University, Rector', type: 'keynote' }] },
     {
       time: '10:30 - 11:00 / 10:30 - 12:30',
       events: [
