@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from 'react';
 
 export default function Partners() {
+  return null;
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState({
     title: false,
@@ -36,7 +37,7 @@ export default function Partners() {
     if (contentRef.current) observer.observe(contentRef.current);
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       observer.disconnect();
@@ -50,13 +51,13 @@ export default function Partners() {
       website: "#"
     },
     {
-      name: "Partner 2", 
+      name: "Partner 2",
       logo: "https://via.placeholder.com/200x100/F56565/FFFFFF?text=Partner+2",
       website: "#"
     },
     {
       name: "Partner 3",
-      logo: "https://via.placeholder.com/200x100/10B981/FFFFFF?text=Partner+3", 
+      logo: "https://via.placeholder.com/200x100/10B981/FFFFFF?text=Partner+3",
       website: "#"
     },
     {
@@ -134,7 +135,7 @@ export default function Partners() {
              style={{
                transform: `translateY(${scrollY * -0.25}px) translateX(${scrollY * 0.08}px) scale(${1 + scrollY * 0.0002})`
              }}></div>
-        
+
         {/* Floating particles */}
         <div className="absolute top-1/3 left-16 w-3 h-3 bg-bitconf-secondary/40 rounded-full transition-transform duration-1000"
              style={{
@@ -149,7 +150,7 @@ export default function Partners() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div 
+        <div
           ref={titleRef}
           className={`text-center mb-16 transition-all duration-1000 ease-out ${
             isVisible.title 
@@ -163,7 +164,7 @@ export default function Partners() {
           </p>
         </div>
 
-        <div 
+        <div
           ref={contentRef}
           className={`transition-all duration-1200 ease-out ${
             isVisible.content 
