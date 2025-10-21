@@ -314,7 +314,7 @@ export default function Registration() {
                         type="submit"
                         className="w-full bg-gradient-to-r from-bitconf-primary to-bitconf-secondary text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-bitconf-primary/25 focus:outline-none focus:ring-2 focus:ring-bitconf-primary/20"
                       >
-                        Register Now - It's Free!
+                        Register Now - It &apos;s Free!
                       </button>
                     </form>
 
