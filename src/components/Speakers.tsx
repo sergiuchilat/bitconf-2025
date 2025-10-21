@@ -60,7 +60,7 @@ export default function Speakers() {
       role: "Delivery Director SER Region, Amdaris, Entrepreneur, Commercial mentor and Ironman athlete",
       company: "Amdaris",
       companyLink: "https://amdaris.com",
-      bio: "Get ready to learn from the best in the industry.",
+      bio: "Pitch It. Scope It. Deliver It. How to sell ambitiously and deliver delight by design",
       image: "/speakers/Website speaker - Radu Tataru.png"
     },
     {
@@ -103,17 +103,6 @@ export default function Speakers() {
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <p className="text-lg text-gray-300 mb-6">
-            Want to speak at BitConf 4th Edition?
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
-            <button className="bg-bitconf-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-bitconf-primary/80 transition-colors">
-              Submit Your Proposal
-            </button>
-          </div>
         </div>
       </div>
     </section>

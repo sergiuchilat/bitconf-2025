@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface ScheduleEvent {
   title: string;
@@ -64,74 +64,112 @@ export default function Schedule() {
   const scheduleSlots: ScheduleSlot[] = [
     { time: '10:15 - 10:30', events: [{ title: 'Opening Remarks', speaker: 'Conference Host', type: 'keynote' }] },
     {
-      time: '10:30 - 11:00 / 10:30 - 12:00',
+      time: '10:30 - 11:00 / 10:30 - 12:30',
       events: [
-        { title: 'Scaling Microservices for High-Traffic Systems', speaker: 'Alice Johnson (Cloud Architect, TechNova)', type: 'talk', track: 'presentations', duration: '30 min' },
-        { title: 'Hands-On Kubernetes: Deploying and Scaling Apps', speaker: 'David Lee (DevOps Consultant)', type: 'workshop', track: 'workshops', duration: '1.5 hours' }
+        {
+          title: 'Chasing the AI Hype: A Senior Developer’s Perspective.',
+          speaker: 'Roman Fiodorov(Founder Filosoft Company, Tech-Lead at Aiomed.com)',
+          type: 'talk',
+          track: 'presentations',
+          duration: '30 min'
+        },
+        {
+          title: 'Bug Hunting – how a QA thinks',
+          speaker: 'Cristina Sucner, Cristina Volontir, Marina Zubcu, Cristina Grosu(Orange Systems)',
+          type: 'workshop',
+          track: 'workshops',
+          duration: '2 hours'
+        }
       ]
     },
     {
       time: '11:00 - 11:30',
       events: [
-        { title: 'Zero-Trust Security in Modern Enterprises', speaker: 'Dr. Victor Chen (CISO, SecureNet)', type: 'talk', track: 'presentations', duration: '30 min' }
+        {
+          title: 'How to test an API in the era of AI',
+          speaker: 'Radu Tataru (Delivery Director SER Region, Amdaris)',
+          type: 'talk',
+          track: 'presentations',
+          duration: '30 min'
+        }
       ]
     },
     {
       time: '11:30 - 12:00',
       events: [
-        { title: 'From Monolith to Serverless: Lessons Learned', speaker: 'Maria Popescu (Lead Engineer, SoftWorks)', type: 'talk', track: 'presentations', duration: '30 min' }
-      ]
-    },
-    { time: '12:00 - 12:15', events: [{ title: 'Coffee Break', speaker: '', type: 'break' }] },
-    {
-      time: '12:15 - 12:45 / 12:15 - 13:45',
-      events: [
-        { title: 'AI-Driven Observability: Detecting Issues Before Users Do', speaker: 'Sofia Martinez (Data Engineer, InsightAI)', type: 'talk', track: 'presentations', duration: '30 min' },
-        { title: 'Building Real-Time Dashboards with Grafana', speaker: 'Emma Brown (Monitoring Specialist)', type: 'workshop', track: 'workshops', duration: '1.5 hours' }
-      ]
-    },
-    {
-      time: '12:45 - 13:15',
-      events: [
-        { title: 'Designing APIs for Global Scale', speaker: 'Andrei Ivanov (Backend Engineer, ConnectHub)', type: 'talk', track: 'presentations', duration: '30 min' }
+        {
+          title: 'How to test an API in the era of AI',
+          speaker: 'Eugen Zagorcea (Principal QA Engineer, flow48.com)',
+          type: 'talk',
+          track: 'presentations',
+          duration: '30 min'
+        }
       ]
     },
     {
-      time: '13:15 - 13:45',
+      time: '12:00 - 12:30',
       events: [
-        { title: 'Breaking Silos: DevOps Culture in Practice', speaker: 'John Smith (Engineering Manager, FlowOps)', type: 'talk', track: 'presentations', duration: '30 min' }
+        {
+          title: 'Collected Insights (2024–2025): Docker, Java, Vim, Linux, etc.',
+          speaker: 'Radu Dumbraveanu (Tech Leader at AmSoft)',
+          type: 'talk',
+          track: 'presentations',
+          duration: '30 min'
+        }
       ]
     },
-    { time: '13:45 - 14:45', events: [{ title: 'Lunch Break', speaker: '', type: 'break' }] },
+    { time: '12:30 - 13:15', events: [{ title: 'Coffee Break', speaker: '', type: 'break' }] },
     {
-      time: '14:45 - 15:15 / 14:45 - 16:15',
+      time: '13:15 - 14:30 / 13:15 - 15:15',
       events: [
-        { title: 'Event-Driven Architectures with Kafka', speaker: 'Ravi Patel (Systems Architect, Streamly)', type: 'talk', track: 'presentations', duration: '30 min' },
-        { title: 'Practical Machine Learning Deployment with MLOps', speaker: 'Hiroshi Tanaka (ML Engineer)', type: 'workshop', track: 'workshops', duration: '1.5 hours' }
+        {
+          title: 'Tech Movers: From Ideas to Startups',
+          speaker: 'Petru Maleru (General Manager at ARA), Veronica Covali (Co-Founder at stilio.md)',
+          type: 'talk',
+          track: 'presentations',
+          duration: '30 min'
+        }
       ]
     },
     {
-      time: '15:15 - 15:45',
+      time: '14:30 - 15:00',
       events: [
-        { title: 'Securing APIs with OAuth2 and Beyond', speaker: 'Olga Kuznetsova (Security Engineer, AuthX)', type: 'talk', track: 'presentations', duration: '30 min' }
+        {
+          title: 'I Logged Out: What Happens After You Leave IT?',
+          speaker: 'Diana Lari (Former Product Owner)',
+          type: 'talk',
+          track: 'presentations',
+          duration: '30 min'
+        }
       ]
     },
     {
-      time: '15:45 - 16:15',
+      time: '15:00 - 15:30',
       events: [
-        { title: 'Next-Gen Databases: ClickHouse, Redis & Beyond', speaker: 'Michael Thompson (DBA, DataEdge)', type: 'talk', track: 'presentations', duration: '30 min' }
+        {
+          title: 'From Code to Impact: How to Bring Value Beyond Code',
+          speaker: 'Adrian Romanov (Full-stack Software Engineer at Cegeka)',
+          type: 'talk',
+          track: 'presentations',
+          duration: '30 min'
+        }
       ]
     },
-    { time: '16:15 - 16:30', events: [{ title: 'Coffee Break', speaker: '', type: 'break' }] },
     {
-      time: '16:30 - 17:00 / 16:30 - 18:00',
+      time: '15:30 - 16:00',
       events: [
-        { title: 'Green IT: Building Sustainable Data Centers', speaker: 'Laura Becker (Infrastructure Lead, EcoCompute)', type: 'talk', track: 'presentations', duration: '30 min' },
-        { title: 'Advanced Git Workflows for Teams', speaker: 'Carlos Mendes (Senior Developer, CodeCraft)', type: 'workshop', track: 'workshops', duration: '1.5 hours' }
+        {
+          title: 'Balancing AI and Traditional Methods in IT: From Academia to Industry',
+          speaker: 'Sergiu Chilat(DevOps at Adteligent)',
+          type: 'presentation'
+        }
       ]
     },
-    { time: '17:00 - 17:30', events: [{ title: 'Closing Keynote / Panel Discussion', speaker: 'Industry Experts Roundtable', type: 'keynote' }] },
-    { time: '18:00', events: [{ title: 'Conference Ends', speaker: '', type: 'networking' }] }
+    {
+      time: '16:00 - 16:15',
+      events: [{ title: 'Closing Keynote / Panel Discussion', speaker: '', type: 'keynote' }]
+    },
+    { time: '16:15 - 17:00', events: [{ title: 'Conference Ends', speaker: 'Networking', type: 'networking' }] }
   ];
 
 
@@ -230,9 +268,9 @@ export default function Schedule() {
              style={{
                transform: `translateY(${scrollY * -1.0}px) translateX(${scrollY * 0.4}px) scale(${1 + scrollY * 0.001})`
              }}></div>
-        
+
         {/* Floating lines and paths */}
-        <svg className="absolute top-16 left-1/4 w-48 h-48 text-bitconf-turquoise/15 transition-transform duration-1000" 
+        <svg className="absolute top-16 left-1/4 w-48 h-48 text-bitconf-turquoise/15 transition-transform duration-1000"
              style={{ transform: `translateY(${scrollY * -0.2}px) rotate(${scrollY * 0.1}deg)` }}
              viewBox="0 0 100 100">
           <path d="M20,20 Q50,5 80,20 T80,50 Q65,80 35,65 T20,20" fill="none" stroke="currentColor" strokeWidth="0.5"/>
