@@ -10,6 +10,36 @@ interface Photo {
   filename: string;
 }
 
+// Counter animation hook
+const useCountAnimation = (end: number, duration: number = 2000, isVisible: boolean = false) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    let startTime: number | null = null;
+    let animationFrame: number;
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+
+      // Easing function for smooth animation
+      const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(end * easeOutCubic));
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [end, duration, isVisible]);
+
+  return count;
+};
+
 export default function Gallery2024() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [displayedPhotos, setDisplayedPhotos] = useState<Photo[]>([]);
@@ -22,6 +52,12 @@ export default function Gallery2024() {
   const titleRef = useRef<HTMLDivElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
+
+  // Animated counters
+  const attendeesCount = useCountAnimation(150, 2000, isVisible.stats);
+  const photosCount = useCountAnimation(163, 1800, isVisible.stats);
+  const speakersCount = useCountAnimation(18, 1500, isVisible.stats);
+  const sessionsCount = useCountAnimation(12, 1200, isVisible.stats);
 
   // All BitConf 2024 photos (auto-generated)
   const allPhotos = [
@@ -1176,25 +1212,25 @@ export default function Gallery2024() {
             <div className={`transition-all duration-300 ease-out ${
               isVisible.stats ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`} style={{ transitionDelay: isVisible.stats ? '100ms' : '0ms' }}>
-              <div className="text-3xl font-bold text-bitconf-accent mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">150+</div>
+              <div className="text-3xl font-bold text-bitconf-accent mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">{attendeesCount}{attendeesCount === 150 ? '+' : ''}</div>
               <div className="text-gray-300 transition-colors duration-300 group-hover:text-white">Attendees</div>
             </div>
             <div className={`transition-all duration-300 ease-out ${
               isVisible.stats ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`} style={{ transitionDelay: isVisible.stats ? '200ms' : '0ms' }}>
-              <div className="text-3xl font-bold text-bitconf-accent mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">163</div>
+              <div className="text-3xl font-bold text-bitconf-accent mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">{photosCount}</div>
               <div className="text-gray-300 transition-colors duration-300 group-hover:text-white">Photos</div>
             </div>
             <div className={`transition-all duration-300 ease-out ${
               isVisible.stats ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`} style={{ transitionDelay: isVisible.stats ? '300ms' : '0ms' }}>
-              <div className="text-3xl font-bold text-bitconf-accent mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">18</div>
+              <div className="text-3xl font-bold text-bitconf-accent mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">{speakersCount}</div>
               <div className="text-gray-300 transition-colors duration-300 group-hover:text-white">Speakers</div>
             </div>
             <div className={`transition-all duration-300 ease-out ${
               isVisible.stats ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`} style={{ transitionDelay: isVisible.stats ? '400ms' : '0ms' }}>
-              <div className="text-3xl font-bold text-bitconf-accent mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">12</div>
+              <div className="text-3xl font-bold text-bitconf-accent mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">{sessionsCount}</div>
               <div className="text-gray-300 transition-colors duration-300 group-hover:text-white">Sessions</div>
             </div>
           </div>

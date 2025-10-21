@@ -235,21 +235,99 @@ export default function Registration() {
                     </div>
                   </div>
 
-                  {/* Right Side - Features Grid */}
+                  {/* Right Side - Registration Form */}
                   <div>
-                    <div className="grid grid-cols-2 gap-4">
-                      {features.map((feature, index) => (
+                    <form className="space-y-4">
+                      <div>
+                        <label htmlFor="fullName" className="block text-sm font-medium text-gray-300 mb-2">
+                          Full Name *
+                        </label>
+                        <input
+                          type="text"
+                          id="fullName"
+                          name="fullName"
+                          required
+                          className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-400 focus:border-bitconf-primary/50 focus:ring-2 focus:ring-bitconf-primary/20 focus:outline-none transition-all duration-300"
+                          placeholder="Enter your full name"
+                        />
+                      </div>
+                      
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                          Email Address *
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          required
+                          className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-400 focus:border-bitconf-primary/50 focus:ring-2 focus:ring-bitconf-primary/20 focus:outline-none transition-all duration-300"
+                          placeholder="your.email@example.com"
+                        />
+                      </div>
+                      
+                      <div>
+                        <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-2">
+                          Company/Organization
+                        </label>
+                        <input
+                          type="text"
+                          id="company"
+                          name="company"
+                          className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-400 focus:border-bitconf-primary/50 focus:ring-2 focus:ring-bitconf-primary/20 focus:outline-none transition-all duration-300"
+                          placeholder="Your company or organization"
+                        />
+                      </div>
+                      
+                      <div>
+                        <label htmlFor="role" className="block text-sm font-medium text-gray-300 mb-2">
+                          Professional Role
+                        </label>
+                        <select
+                          id="role"
+                          name="role"
+                          className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700/50 rounded-xl text-white focus:border-bitconf-primary/50 focus:ring-2 focus:ring-bitconf-primary/20 focus:outline-none transition-all duration-300"
+                        >
+                          <option value="">Select your role</option>
+                          <option value="developer">Developer</option>
+                          <option value="founder">Founder/CEO</option>
+                          <option value="investor">Investor</option>
+                          <option value="researcher">Researcher</option>
+                          <option value="student">Student</option>
+                          <option value="consultant">Consultant</option>
+                          <option value="other">Other</option>
+                        </select>
+                      </div>
+                      
+                      <div>
+                        <label className="flex items-center space-x-3 text-sm text-gray-300">
+                          <input
+                            type="checkbox"
+                            name="newsletter"
+                            className="w-4 h-4 bg-gray-800/50 border border-gray-700/50 rounded focus:ring-2 focus:ring-bitconf-primary/20 text-bitconf-primary"
+                          />
+                          <span>Subscribe to our newsletter for updates</span>
+                        </label>
+                      </div>
+                      
+                      <button
+                        type="submit"
+                        className="w-full bg-gradient-to-r from-bitconf-primary to-bitconf-secondary text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-bitconf-primary/25 focus:outline-none focus:ring-2 focus:ring-bitconf-primary/20"
+                      >
+                        Register Now - It's Free! 🎟️
+                      </button>
+                    </form>
+                    
+                    <div className="mt-6 grid grid-cols-2 gap-3">
+                      {features.slice(0, 4).map((feature, index) => (
                         <div
                           key={index}
-                          className="group bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-4 hover:border-bitconf-primary/30 hover:bg-bitconf-primary/5 transition-all duration-300 ease-out hover:scale-105"
+                          className="flex items-center space-x-2 text-xs text-gray-400"
                         >
-                          <div className="flex items-center mb-2">
-                            <div className="text-bitconf-primary group-hover:text-bitconf-accent transition-colors duration-300">
-                              {feature.icon}
-                            </div>
-                            <h4 className="text-white font-semibold text-sm ml-2">{feature.title}</h4>
+                          <div className="text-bitconf-primary flex-shrink-0">
+                            {feature.icon}
                           </div>
-                          <p className="text-gray-400 text-xs leading-relaxed">{feature.description}</p>
+                          <span>{feature.title}</span>
                         </div>
                       ))}
                     </div>

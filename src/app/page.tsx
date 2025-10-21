@@ -17,9 +17,9 @@ export default function Home() {
       <About />
       <Speakers />
       <Schedule />
-      <Registration />
       <Gallery2024 />
       <Partners />
+      <Registration />
       <Contact />
       <Footer />
     </div>
