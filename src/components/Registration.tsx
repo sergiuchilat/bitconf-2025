@@ -15,7 +15,7 @@ const useCountAnimation = (end: number, duration: number = 2000, isVisible: bool
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
-      
+
       // Easing function for smooth animation
       const easeOutCubic = 1 - Math.pow(1 - progress, 3);
       setCount(Math.floor(end * easeOutCubic));
@@ -42,7 +42,7 @@ export default function Registration() {
   const titleRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
-  
+
   // Animated counters
   const attendeesCount = useCountAnimation(150, 2000, isVisible.stats);
   const speakersCount = useCountAnimation(20, 1800, isVisible.stats);
@@ -251,7 +251,7 @@ export default function Registration() {
                           placeholder="Enter your full name"
                         />
                       </div>
-                      
+
                       <div>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
                           Email Address *
@@ -265,7 +265,7 @@ export default function Registration() {
                           placeholder="your.email@example.com"
                         />
                       </div>
-                      
+
                       <div>
                         <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-2">
                           Company/Organization
@@ -278,7 +278,7 @@ export default function Registration() {
                           placeholder="Your company or organization"
                         />
                       </div>
-                      
+
                       <div>
                         <label htmlFor="role" className="block text-sm font-medium text-gray-300 mb-2">
                           Professional Role
@@ -298,7 +298,7 @@ export default function Registration() {
                           <option value="other">Other</option>
                         </select>
                       </div>
-                      
+
                       <div>
                         <label className="flex items-center space-x-3 text-sm text-gray-300">
                           <input
@@ -309,15 +309,15 @@ export default function Registration() {
                           <span>Subscribe to our newsletter for updates</span>
                         </label>
                       </div>
-                      
+
                       <button
                         type="submit"
                         className="w-full bg-gradient-to-r from-bitconf-primary to-bitconf-secondary text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-bitconf-primary/25 focus:outline-none focus:ring-2 focus:ring-bitconf-primary/20"
                       >
-                        Register Now - It's Free! 🎟️
+                        Register Now - It's Free!
                       </button>
                     </form>
-                    
+
                     <div className="mt-6 grid grid-cols-2 gap-3">
                       {features.slice(0, 4).map((feature, index) => (
                         <div
