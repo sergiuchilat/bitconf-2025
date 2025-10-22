@@ -26,6 +26,91 @@ export default function Schedule() {
   const dateBlockRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
 
+  // Function to get speaker avatars based on speaker name(s)
+  const getSpeakerAvatars = (speaker: string): string[] => {
+    const speakerName = speaker.toLowerCase();
+    const avatars: string[] = [];
+    
+    // Map speaker names to their avatar files
+    if (speakerName.includes('adrian romanov')) {
+      avatars.push('/schedule/Schedule photo - Adrian Romanov.png');
+    }
+    if (speakerName.includes('diana lari')) {
+      avatars.push('/schedule/Schedule photo - Diana Lari.png');
+    }
+    if (speakerName.includes('eugen zagorcea')) {
+      avatars.push('/schedule/Schedule photo - Eugen Zagorcea.png');
+    }
+    if (speakerName.includes('petru maleru')) {
+      avatars.push('/schedule/Schedule photo - Petru Maleru.png');
+    }
+    if (speakerName.includes('radu dumbraveanu')) {
+      avatars.push('/schedule/Schedule photo - Radu Dumbraveanu.png');
+    }
+    if (speakerName.includes('radu tataru')) {
+      avatars.push('/schedule/Schedule photo - Radu Tataru.png');
+    }
+    if (speakerName.includes('roman fiodorov')) {
+      avatars.push('/schedule/Schedule photo - Roman Fiodorov.png');
+    }
+    if (speakerName.includes('sergiu chilat')) {
+      avatars.push('/schedule/Schedule photo - Sergiu Chilat.png');
+    }
+    if (speakerName.includes('veronica covali')) {
+      avatars.push('/schedule/Schedule photo - Veronica Covali.png');
+    }
+    
+    return avatars;
+  };
+
+  // Function to render speaker avatars (single or multiple)
+  const renderSpeakerAvatars = (speaker: string, hoverColor: string = 'bitconf-secondary') => {
+    const avatars = getSpeakerAvatars(speaker);
+    
+    if (avatars.length === 0) {
+      // Fallback to generic icon
+      return (
+        <div className="w-12 h-12 rounded-full bg-gray-600 flex items-center justify-center transition-all duration-300 ease-out group-hover:bg-bitconf-secondary/30">
+          <svg className="w-6 h-6 text-gray-400 transition-colors duration-300 group-hover:text-bitconf-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        </div>
+      );
+    }
+    
+    if (avatars.length === 1) {
+      // Single avatar
+      return (
+        <div className={`w-12 h-12 rounded-full overflow-hidden border-2 border-gray-600 transition-all duration-300 ease-out group-hover:border-${hoverColor}/50`}>
+          <img 
+            src={avatars[0]} 
+            alt={speaker}
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        </div>
+      );
+    }
+    
+    // Multiple avatars - display them side by side with slight overlap
+    return (
+      <div className="flex -space-x-2">
+        {avatars.map((avatar, index) => (
+          <div 
+            key={index}
+            className={`w-10 h-10 rounded-full overflow-hidden border-2 border-gray-600 transition-all duration-300 ease-out group-hover:border-${hoverColor}/50`}
+            style={{ zIndex: avatars.length - index }}
+          >
+            <img 
+              src={avatar} 
+              alt={`Speaker ${index + 1}`}
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -389,11 +474,7 @@ export default function Schedule() {
                         <div key={eventIndex} className={`group rounded-xl p-4 border backdrop-blur-sm bg-gray-800/20 ${getEventColor(event.type)} cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/30 hover:border-bitconf-secondary/50 h-40 flex flex-col justify-between`}>
                           <div className="flex items-start gap-4 h-full">
                             <div className="flex-shrink-0">
-                              <div className="w-12 h-12 rounded-full bg-gray-600 flex items-center justify-center transition-all duration-300 ease-out group-hover:bg-bitconf-secondary/30">
-                                <svg className="w-6 h-6 text-gray-400 transition-colors duration-300 group-hover:text-bitconf-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                </svg>
-                              </div>
+                              {renderSpeakerAvatars(event.speaker, 'bitconf-secondary')}
                             </div>
                             <div className="flex-grow flex flex-col justify-between h-full">
                               <div>
@@ -427,11 +508,7 @@ export default function Schedule() {
                         <div key={eventIndex} className={`group rounded-xl p-4 border backdrop-blur-sm bg-gray-800/20 ${getEventColor(event.type)} cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/30 hover:border-bitconf-accent/50 h-40 flex flex-col justify-between`}>
                           <div className="flex items-start gap-4 h-full">
                             <div className="flex-shrink-0">
-                              <div className="w-12 h-12 rounded-full bg-gray-600 flex items-center justify-center transition-all duration-300 ease-out group-hover:bg-bitconf-accent/30">
-                                <svg className="w-6 h-6 text-gray-400 transition-colors duration-300 group-hover:text-bitconf-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7-7h14a7 7 0 00-7 7z" />
-                                </svg>
-                              </div>
+                              {renderSpeakerAvatars(event.speaker, 'bitconf-accent')}
                             </div>
                             <div className="flex-grow flex flex-col justify-between h-full">
                               <div>
@@ -459,11 +536,15 @@ export default function Schedule() {
                         <div className="flex items-start gap-4">
                           {/* Icon or Speaker Photo */}
                           <div className="flex-shrink-0">
-                            <div className={`w-12 h-12 rounded-full flex items-center justify-center ${getEventColor(event.type)} transition-all duration-300 ease-out`}>
-                              <div className="transition-all duration-300">
-                                {getEventIcon(event.type)}
+                            {getSpeakerAvatars(event.speaker).length > 0 ? (
+                              renderSpeakerAvatars(event.speaker, 'bitconf-primary')
+                            ) : (
+                              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${getEventColor(event.type)} transition-all duration-300 ease-out`}>
+                                <div className="transition-all duration-300">
+                                  {getEventIcon(event.type)}
+                                </div>
                               </div>
-                            </div>
+                            )}
                           </div>
 
                           <div className="flex-grow">
