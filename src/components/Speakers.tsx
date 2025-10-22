@@ -73,7 +73,7 @@ export default function Speakers() {
     },
     {
       name: "Sergiu Chilat",
-      role: "DevOps Engineer & Team Lead",
+      role: "DevOps Engineer & NOC Team Lead",
       company: "Adtelligent",
       companyLink: "https://adtelligent.com",
       bio: "Balancing AI and Traditional Methods in IT: From Academia to Industry",
