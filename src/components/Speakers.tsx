@@ -83,8 +83,8 @@ export default function Speakers() {
     {
       name: "TBA",
       role: "To Be Announced",
-      company: "Coming Soon",
-      companyLink: "#",
+      company: "Orange Systems",
+      companyLink: "https://systems.orange.md/",
       bio: "We're excited to announce this speaker soon. Stay tuned for updates!",
       image: "",
       linkedinUrl: ""
@@ -92,6 +92,24 @@ export default function Speakers() {
     {
       name: "TBA",
       role: "To Be Announced", 
+      company: "Orange Systems",
+      companyLink: "https://systems.orange.md/",
+      bio: "We're excited to announce this speaker soon. Stay tuned for updates!",
+      image: "",
+      linkedinUrl: ""
+    },
+    {
+      name: "TBA",
+      role: "To Be Announced",
+      company: "Orange Systems", 
+      companyLink: "https://systems.orange.md/",
+      bio: "We're excited to announce this speaker soon. Stay tuned for updates!",
+      image: "",
+      linkedinUrl: ""
+    },
+    {
+      name: "TBA",
+      role: "To Be Announced",
       company: "Coming Soon",
       companyLink: "#",
       bio: "We're excited to announce this speaker soon. Stay tuned for updates!",
@@ -101,7 +119,16 @@ export default function Speakers() {
     {
       name: "TBA",
       role: "To Be Announced",
-      company: "Coming Soon", 
+      company: "Coming Soon",
+      companyLink: "#",
+      bio: "We're excited to announce this speaker soon. Stay tuned for updates!",
+      image: "",
+      linkedinUrl: ""
+    },
+    {
+      name: "TBA",
+      role: "To Be Announced",
+      company: "Coming Soon",
       companyLink: "#",
       bio: "We're excited to announce this speaker soon. Stay tuned for updates!",
       image: "",

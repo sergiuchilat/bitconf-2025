@@ -47,7 +47,7 @@ export default function About() {
   // Animated counters
   const editionCount = useCountAnimation(4, 1500, isVisible.stats);
   const attendeesCount = useCountAnimation(150, 2000, isVisible.stats);
-  const speakersCount = useCountAnimation(12, 1800, isVisible.stats);
+  const speakersCount = useCountAnimation(15, 1800, isVisible.stats);
   const dayCount = useCountAnimation(1, 1000, isVisible.stats);
 
   useEffect(() => {
@@ -182,7 +182,7 @@ export default function About() {
               isVisible.stats ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`} style={{ transitionDelay: isVisible.stats ? '300ms' : '0ms' }}>
               <div className="text-3xl font-bold text-bitconf-primary mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">
-                {speakersCount}{speakersCount === 10 ? '' : ''}
+                {speakersCount}
               </div>
               <div className="text-gray-300 transition-colors duration-300 group-hover:text-white">Speakers</div>
             </div>
