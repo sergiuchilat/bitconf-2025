@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Speakers() {
   const speakers = [
@@ -151,14 +151,17 @@ export default function Speakers() {
     return shuffled;
   };
 
-  // Shuffle speakers once and keep the order stable
-  const finalSpeakers = useMemo(() => {
-    const confirmedSpeakers = speakers.filter(speaker => speaker.name !== "TBA");
-    const tbaSpeakers = speakers.filter(speaker => speaker.name === "TBA");
-    
-    // Shuffle only confirmed speakers and keep TBA at the end
+  // Separate confirmed speakers from TBA speakers
+  const confirmedSpeakers = speakers.filter(speaker => speaker.name !== "TBA");
+  const tbaSpeakers = speakers.filter(speaker => speaker.name === "TBA");
+  
+  // Use original order initially to prevent hydration mismatch
+  const [finalSpeakers, setFinalSpeakers] = useState([...confirmedSpeakers, ...tbaSpeakers]);
+
+  // Shuffle only on client after mount
+  useEffect(() => {
     const shuffledConfirmedSpeakers = shuffleArray(confirmedSpeakers);
-    return [...shuffledConfirmedSpeakers, ...tbaSpeakers];
+    setFinalSpeakers([...shuffledConfirmedSpeakers, ...tbaSpeakers]);
   }, []);
 
 
