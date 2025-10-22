@@ -70,11 +70,41 @@ export default function Speakers() {
       companyLink: "https://adtelligent.com",
       bio: "Balancing AI and Traditional Methods in IT: From Academia to Industry",
       image: "/speakers/Website speaker - Sergiu Chilat.png"
+    },
+    {
+      name: "TBA",
+      role: "To Be Announced",
+      company: "Coming Soon",
+      companyLink: "#",
+      bio: "We're excited to announce this speaker soon. Stay tuned for updates!",
+      image: ""
+    },
+    {
+      name: "TBA",
+      role: "To Be Announced", 
+      company: "Coming Soon",
+      companyLink: "#",
+      bio: "We're excited to announce this speaker soon. Stay tuned for updates!",
+      image: ""
+    },
+    {
+      name: "TBA",
+      role: "To Be Announced",
+      company: "Coming Soon", 
+      companyLink: "#",
+      bio: "We're excited to announce this speaker soon. Stay tuned for updates!",
+      image: ""
     }
 
   ];
 
-  const shuffledSpeakers = speakers.sort(() => 0.5 - Math.random());
+  // Separate confirmed speakers from TBA speakers
+  const confirmedSpeakers = speakers.filter(speaker => speaker.name !== "TBA");
+  const tbaSpeakers = speakers.filter(speaker => speaker.name === "TBA");
+  
+  // Shuffle only confirmed speakers and keep TBA at the end
+  const shuffledConfirmedSpeakers = confirmedSpeakers.sort(() => 0.5 - Math.random());
+  const finalSpeakers = [...shuffledConfirmedSpeakers, ...tbaSpeakers];
 
 
   return (
@@ -88,10 +118,18 @@ export default function Speakers() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {shuffledSpeakers.map((speaker, index) => (
+          {finalSpeakers.map((speaker, index) => (
             <div key={index} className="bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-bitconf-primary/20">
               <div className="h-64 bg-gradient-to-br from-bitconf-secondary to-bitconf-primary flex items-center justify-center">
-                <img src={speaker.image} alt=""/>
+                {speaker.name === "TBA" ? (
+                  <div className="text-center text-white">
+                    <div className="text-6xl mb-4">🎤</div>
+                    <div className="text-xl font-bold">TBA</div>
+                    <div className="text-sm opacity-75">Coming Soon</div>
+                  </div>
+                ) : (
+                  <img src={speaker.image} alt={speaker.name}/>
+                )}
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-white mb-1">{speaker.name}</h3>
