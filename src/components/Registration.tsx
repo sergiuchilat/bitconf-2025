@@ -192,145 +192,63 @@ export default function Registration() {
               </div>
 
               <div className="relative p-8 md:p-12">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
-                  {/* Left Side - Value Proposition */}
-                  <div>
-                    <div className="mb-8">
-                      <h3 className="text-4xl font-bold text-white mb-4">
-                        Everything Included
-                      </h3>
-                      <div className="flex items-baseline mb-4">
-                        <span className="text-6xl font-black text-transparent bg-gradient-to-r from-bitconf-primary to-bitconf-accent bg-clip-text">
-                          FREE
-                        </span>
-                        <div className="ml-4">
-                          <div className="text-gray-400 text-lg line-through">€50 Value</div>
-                          <div className="text-bitconf-accent font-semibold">100% Sponsored</div>
-                        </div>
+                <div className="max-w-4xl mx-auto text-center">
+                  {/* Value Proposition */}
+                  <div className="mb-12">
+                    <h3 className="text-4xl font-bold text-white mb-6">
+                      Everything Included
+                    </h3>
+                    <div className="flex items-center justify-center mb-6">
+                      <span className="text-6xl font-black text-transparent bg-gradient-to-r from-bitconf-primary to-bitconf-accent bg-clip-text">
+                        FREE
+                      </span>
+                      <div className="ml-6 text-left">
+                        <div className="text-gray-400 text-lg line-through">€50 Value</div>
+                        <div className="text-bitconf-accent font-semibold">100% Sponsored</div>
                       </div>
-                      <p className="text-gray-300 text-lg mb-6">
-                        Thanks to our amazing sponsors, we&apos;re making this world-class blockchain conference accessible to everyone.
-                      </p>
                     </div>
-
-                    {/* CTA Button */}
-                    <div className="space-y-4">
-                      <a
-                        href="https://www.eventbrite.com/e/bit-conference-2025-tickets-1680101241039?aff=oddtdtcreator"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group w-full bg-gradient-to-r from-bitconf-primary to-bitconf-secondary text-white py-4 px-8 rounded-2xl font-bold text-lg transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-bitconf-primary/25 relative overflow-hidden inline-block text-center"
-                      >
-                        <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out"></div>
-                        <span className="relative flex items-center justify-center">
-                          🚀 Reserve Your Spot Now
-                          <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                          </svg>
-                        </span>
-                      </a>
-                      <p className="text-center text-gray-400 text-sm">
-                        No hidden fees • Instant confirmation • Limited to 150 attendees
-                      </p>
-                    </div>
+                    <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+                      Thanks to our amazing sponsors, we&apos;re making this world-class blockchain conference accessible to everyone.
+                    </p>
                   </div>
 
-                  {/* Right Side - Registration Form */}
-                  <div>
-                    <form className="space-y-4">
-                      <div>
-                        <label htmlFor="fullName" className="block text-sm font-medium text-gray-300 mb-2">
-                          Full Name *
-                        </label>
-                        <input
-                          type="text"
-                          id="fullName"
-                          name="fullName"
-                          required
-                          className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-400 focus:border-bitconf-primary/50 focus:ring-2 focus:ring-bitconf-primary/20 focus:outline-none transition-all duration-300"
-                          placeholder="Enter your full name"
-                        />
-                      </div>
+                  {/* CTA Button */}
+                  <div className="space-y-4 mb-12">
+                    <a
+                      href="https://www.eventbrite.com/e/bit-conference-2025-tickets-1680101241039?aff=oddtdtcreator"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-block bg-gradient-to-r from-bitconf-primary to-bitconf-secondary text-white py-4 px-12 rounded-2xl font-bold text-xl transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-bitconf-primary/25 relative overflow-hidden"
+                    >
+                      <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out"></div>
+                      <span className="relative flex items-center justify-center">
+                        🚀 Reserve Your Spot Now
+                        <svg className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                      </span>
+                    </a>
+                    <p className="text-gray-400 text-sm">
+                      No hidden fees • Instant confirmation • Limited to 150 attendees
+                    </p>
+                  </div>
 
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                          Email Address *
-                        </label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          required
-                          className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-400 focus:border-bitconf-primary/50 focus:ring-2 focus:ring-bitconf-primary/20 focus:outline-none transition-all duration-300"
-                          placeholder="your.email@example.com"
-                        />
-                      </div>
-
-                      <div>
-                        <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-2">
-                          Company/Organization
-                        </label>
-                        <input
-                          type="text"
-                          id="company"
-                          name="company"
-                          className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-400 focus:border-bitconf-primary/50 focus:ring-2 focus:ring-bitconf-primary/20 focus:outline-none transition-all duration-300"
-                          placeholder="Your company or organization"
-                        />
-                      </div>
-
-                      <div>
-                        <label htmlFor="role" className="block text-sm font-medium text-gray-300 mb-2">
-                          Professional Role
-                        </label>
-                        <select
-                          id="role"
-                          name="role"
-                          className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700/50 rounded-xl text-white focus:border-bitconf-primary/50 focus:ring-2 focus:ring-bitconf-primary/20 focus:outline-none transition-all duration-300"
-                        >
-                          <option value="">Select your role</option>
-                          <option value="developer">Developer</option>
-                          <option value="founder">Founder/CEO</option>
-                          <option value="investor">Investor</option>
-                          <option value="researcher">Researcher</option>
-                          <option value="student">Student</option>
-                          <option value="consultant">Consultant</option>
-                          <option value="other">Other</option>
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="flex items-center space-x-3 text-sm text-gray-300">
-                          <input
-                            type="checkbox"
-                            name="newsletter"
-                            className="w-4 h-4 bg-gray-800/50 border border-gray-700/50 rounded focus:ring-2 focus:ring-bitconf-primary/20 text-bitconf-primary"
-                          />
-                          <span>Subscribe to our newsletter for updates</span>
-                        </label>
-                      </div>
-
-                      <button
-                        type="submit"
-                        className="w-full bg-gradient-to-r from-bitconf-primary to-bitconf-secondary text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-bitconf-primary/25 focus:outline-none focus:ring-2 focus:ring-bitconf-primary/20"
+                  {/* Features Grid */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+                    {features.map((feature, index) => (
+                      <div
+                        key={index}
+                        className="flex flex-col items-center space-y-2 p-4 bg-gray-800/20 rounded-xl border border-gray-700/30"
                       >
-                        Register Now - It &apos;s Free!
-                      </button>
-                    </form>
-
-                    <div className="mt-6 grid grid-cols-2 gap-3">
-                      {features.slice(0, 4).map((feature, index) => (
-                        <div
-                          key={index}
-                          className="flex items-center space-x-2 text-xs text-gray-400"
-                        >
-                          <div className="text-bitconf-primary flex-shrink-0">
-                            {feature.icon}
-                          </div>
-                          <span>{feature.title}</span>
+                        <div className="text-bitconf-primary text-2xl">
+                          {feature.icon}
                         </div>
-                      ))}
-                    </div>
+                        <div className="text-center">
+                          <div className="text-white font-semibold text-sm mb-1">{feature.title}</div>
+                          <div className="text-gray-400 text-xs">{feature.description}</div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
