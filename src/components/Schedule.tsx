@@ -147,7 +147,7 @@ export default function Schedule() {
   }, []);
   // Create a structured schedule with parallel sessions grouped together
   const scheduleSlots: ScheduleSlot[] = [
-    { time: '10:15 - 10:30', events: [{ title: 'Opening Remarks', speaker: 'Natalia Gaşiţoi, Alecu Russo Balti State University, Rector', type: 'keynote' }] },
+    { time: '10:15 - 10:30', events: [{ title: 'Opening Remarks', speaker: 'Natalia Gaşiţoi, Alecu Russo Balti State University, Rector', type: 'keynote', duration: '15 min' }] },
     {
       time: '10:30 - 11:00 / 10:30 - 12:30',
       events: [
@@ -203,7 +203,7 @@ export default function Schedule() {
         }
       ]
     },
-    { time: '12:30 - 13:15', events: [{ title: 'Coffee Break', speaker: '', type: 'break' }] },
+    { time: '12:30 - 13:15', events: [{ title: 'Coffee Break', speaker: '', type: 'break', duration: '45 min' }] },
     {
       time: '13:15 - 14:30 / 13:15 - 15:15',
       events: [
@@ -253,15 +253,16 @@ export default function Schedule() {
         {
           title: 'Balancing AI and Traditional Methods in IT: From Academia to Industry',
           speaker: 'Sergiu Chilat(DevOps at Adteligent)',
-          type: 'presentation'
+          type: 'presentation',
+          duration: '30 min'
         }
       ]
     },
     {
       time: '16:00 - 16:15',
-      events: [{ title: 'Closing Keynote / Panel Discussion', speaker: '', type: 'keynote' }]
+      events: [{ title: 'Closing Keynote / Panel Discussion', speaker: '', type: 'keynote', duration: '15 min' }]
     },
-    { time: '16:15 - 17:00', events: [{ title: 'Conference Ends', speaker: 'Networking', type: 'networking' }] }
+    { time: '16:15 - 17:00', events: [{ title: 'Conference Ends', speaker: 'Networking', type: 'networking', duration: '45 min' }] }
   ];
 
 
@@ -551,6 +552,13 @@ export default function Schedule() {
                             <h4 className="text-lg font-semibold text-white leading-tight mb-2 transition-colors duration-300 group-hover:text-bitconf-primary">{event.title}</h4>
                             {event.speaker && (
                               <p className="text-bitconf-accent text-sm transition-colors duration-300 group-hover:text-white group-hover:font-medium">{event.speaker}</p>
+                            )}
+                            {event.duration && (
+                              <div className="mt-2">
+                                <span className="px-2 py-1 rounded-full text-xs font-medium bg-bitconf-primary/20 text-bitconf-primary transition-all duration-300 group-hover:bg-bitconf-primary/30 group-hover:text-white">
+                                  {event.duration}
+                                </span>
+                              </div>
                             )}
                           </div>
                         </div>
