@@ -1,3 +1,7 @@
+'use client';
+
+import { useMemo } from 'react';
+
 export default function Speakers() {
   const speakers = [
     {
@@ -137,13 +141,25 @@ export default function Speakers() {
 
   ];
 
-  // Separate confirmed speakers from TBA speakers
-  const confirmedSpeakers = speakers.filter(speaker => speaker.name !== "TBA");
-  const tbaSpeakers = speakers.filter(speaker => speaker.name === "TBA");
-  
-  // Shuffle only confirmed speakers and keep TBA at the end
-  const shuffledConfirmedSpeakers = confirmedSpeakers.sort(() => 0.5 - Math.random());
-  const finalSpeakers = [...shuffledConfirmedSpeakers, ...tbaSpeakers];
+  // Fisher-Yates shuffle algorithm
+  const shuffleArray = <T,>(array: T[]): T[] => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
+  // Shuffle speakers once and keep the order stable
+  const finalSpeakers = useMemo(() => {
+    const confirmedSpeakers = speakers.filter(speaker => speaker.name !== "TBA");
+    const tbaSpeakers = speakers.filter(speaker => speaker.name === "TBA");
+    
+    // Shuffle only confirmed speakers and keep TBA at the end
+    const shuffledConfirmedSpeakers = shuffleArray(confirmedSpeakers);
+    return [...shuffledConfirmedSpeakers, ...tbaSpeakers];
+  }, []);
 
 
   return (
