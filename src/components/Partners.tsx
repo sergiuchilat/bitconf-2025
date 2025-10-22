@@ -3,7 +3,6 @@
 import { useEffect, useState, useRef } from 'react';
 
 export default function Partners() {
-  return null;
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState({
     title: false,
@@ -45,66 +44,11 @@ export default function Partners() {
   }, []);
 
   const partners = [
-    {
-      name: "Partner 1",
-      logo: "https://via.placeholder.com/200x100/3B82F6/FFFFFF?text=Partner+1",
-      website: "#"
-    },
-    {
-      name: "Partner 2",
-      logo: "https://via.placeholder.com/200x100/F56565/FFFFFF?text=Partner+2",
-      website: "#"
-    },
-    {
-      name: "Partner 3",
-      logo: "https://via.placeholder.com/200x100/10B981/FFFFFF?text=Partner+3",
-      website: "#"
-    },
-    {
-      name: "Partner 4",
-      logo: "https://via.placeholder.com/200x100/8B5CF6/FFFFFF?text=Partner+4",
-      website: "#"
-    },
-    {
-      name: "Partner 5",
-      logo: "https://via.placeholder.com/200x100/F59E0B/FFFFFF?text=Partner+5",
-      website: "#"
-    },
-    {
-      name: "Partner 6",
-      logo: "https://via.placeholder.com/200x100/EF4444/FFFFFF?text=Partner+6",
-      website: "#"
-    },
-    {
-      name: "Partner 7",
-      logo: "https://via.placeholder.com/200x100/06B6D4/FFFFFF?text=Partner+7",
-      website: "#"
-    },
-    {
-      name: "Partner 8",
-      logo: "https://via.placeholder.com/200x100/84CC16/FFFFFF?text=Partner+8",
-      website: "#"
-    },
-    {
-      name: "Partner 9",
-      logo: "https://via.placeholder.com/200x100/EC4899/FFFFFF?text=Partner+9",
-      website: "#"
-    },
-    {
-      name: "Partner 10",
-      logo: "https://via.placeholder.com/200x100/6366F1/FFFFFF?text=Partner+10",
-      website: "#"
-    },
-    {
-      name: "Partner 11",
-      logo: "https://via.placeholder.com/200x100/14B8A6/FFFFFF?text=Partner+11",
-      website: "#"
-    },
-    {
-      name: "Partner 12",
-      logo: "https://via.placeholder.com/200x100/F97316/FFFFFF?text=Partner+12",
-      website: "#"
-    }
+    { name: 'Innovate Moldova', logo: '/partners/Partner - Innovate Moldova.png', website: 'https://www.facebook.com/InnovateMoldova' },
+    { name: 'Apip', logo: '/partners/Partner - Apip.png', website: 'https://apip.md' },
+    { name: 'USARB', logo: '/partners/Partner - USARB.png', website: 'https://usarb.md' },
+    { name: 'Sweden', logo: '/partners/Partner - Sweden.png', website: 'https://swedenabroad.se/en/embassies/moldova-chisinau/' },
+    { name: 'Nortek', logo: '/partners/Partner - Nortek.png', website: 'https://nortek.md' }
   ];
 
 
