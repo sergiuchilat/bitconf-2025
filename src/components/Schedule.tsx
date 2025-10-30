@@ -59,6 +59,15 @@ export default function Schedule() {
     if (speakerName.includes('veronica covali')) {
       avatars.push('/schedule/Schedule photo - Veronica Covali.png');
     }
+    if (speakerName.includes('cristina sucner')) {
+      avatars.push('/schedule/Schedule photo - Cristina Grosu.png');
+    }
+    if (speakerName.includes('cristina volontir')) {
+      avatars.push('/schedule/Schedule photo - Cristina Volontir.png');
+    }
+    if (speakerName.includes('marina zubcu')) {
+      avatars.push('/schedule/Schedule photo - Marina Zubcu.png');
+    }
     
     return avatars;
   };
