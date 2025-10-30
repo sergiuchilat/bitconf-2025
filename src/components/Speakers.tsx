@@ -85,31 +85,31 @@ export default function Speakers() {
       linkedinUrl: "https://www.linkedin.com/in/sergiu-chilat/"
     },
     {
-      name: "TBA",
-      role: "To Be Announced",
+      name: "Cristina Volontir",
+      role: "Test manager",
       company: "Orange Systems",
       companyLink: "https://systems.orange.md/",
-      bio: "We're excited to announce this speaker soon. Stay tuned for updates!",
-      image: "",
-      linkedinUrl: ""
+      bio: "Bug Hunting. How a QA thinks",
+      image: "/speakers/Website speaker - Cristina Volontir.png",
+      linkedinUrl: "https://www.linkedin.com/in/cristina-volontir-03335b212"
     },
     {
-      name: "TBA",
-      role: "To Be Announced", 
+      name: "Cristina Grosu",
+      role: "QA Analyst", 
       company: "Orange Systems",
       companyLink: "https://systems.orange.md/",
-      bio: "We're excited to announce this speaker soon. Stay tuned for updates!",
-      image: "",
-      linkedinUrl: ""
+      bio: "Bug Hunting. How a QA thinks",
+      image: "/speakers/Website speaker - Cristina Grosu.png",
+      linkedinUrl: "https://www.linkedin.com/in/cristina-grosu-772b39b7"
     },
     {
-      name: "TBA",
-      role: "To Be Announced",
+      name: "Marina Zubcu",
+      role: "QA Analyst",
       company: "Orange Systems", 
       companyLink: "https://systems.orange.md/",
-      bio: "We're excited to announce this speaker soon. Stay tuned for updates!",
-      image: "",
-      linkedinUrl: ""
+      bio: "Bug Hunting. How a QA thinks",
+      image: "/speakers/Website speaker - Marina Zubcu.png",
+      linkedinUrl: "https://www.linkedin.com/in/zubcu-marina-973a561a0"
     },
     {
       name: "TBA",
