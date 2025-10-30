@@ -68,6 +68,9 @@ export default function Schedule() {
     if (speakerName.includes('marina zubcu')) {
       avatars.push('/schedule/Schedule photo - Marina Zubcu.png');
     }
+    if (speakerName.includes('pavel curcovici')) {
+      avatars.push('/schedule/Schedule photo - Pavel Curcovici.png');
+    }
     
     return avatars;
   };
@@ -218,7 +221,7 @@ export default function Schedule() {
       events: [
         {
           title: 'Tech Movers: From Ideas to Startups',
-          speaker: 'Petru Maleru (General Manager at ARA), Veronica Covali (Co-Founder at stilio.md)',
+          speaker: 'Petru Maleru (General Manager at ARA), Veronica Covali (Co-Founder at stilio.md), Pavel Curcovici(Tekwill Balti Administrator)',
           type: 'talk',
           track: 'presentations',
           duration: '30 min'

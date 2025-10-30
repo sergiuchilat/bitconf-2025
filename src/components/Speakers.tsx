@@ -112,13 +112,13 @@ export default function Speakers() {
       linkedinUrl: "https://www.linkedin.com/in/zubcu-marina-973a561a0"
     },
     {
-      name: "TBA",
-      role: "To Be Announced",
-      company: "Coming Soon",
-      companyLink: "#",
-      bio: "We're excited to announce this speaker soon. Stay tuned for updates!",
-      image: "",
-      linkedinUrl: ""
+      name: "Pavel Curcovici",
+      role: "Tekwill Balti Administrator",
+      company: "Tekwill",
+      companyLink: "https://tekwill.md/",
+      bio: "Tech Movers: From Ideas to Startups",
+      image: "/speakers/Website speaker - Pavel Curcovici.png",
+      linkedinUrl: "https://www.linkedin.com/in/curcovici-pavel-461590101"
     },
     {
       name: "TBA",
