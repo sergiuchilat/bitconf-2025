@@ -172,7 +172,7 @@ export default function Schedule() {
         },
         {
           title: 'Bug Hunting – how a QA thinks',
-          speaker: 'Cristina Sucner, Cristina Volontir, Marina Zubcu, Cristina Grosu(Orange Systems)',
+          speaker: 'Cristina Volontir, Marina Zubcu, Cristina Grosu(Orange Systems)',
           type: 'workshop',
           track: 'workshops',
           duration: '2 hours'
