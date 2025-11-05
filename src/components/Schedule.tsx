@@ -26,6 +26,105 @@ export default function Schedule() {
   const dateBlockRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
 
+  const handlePrint = () => {
+    // Generate print-friendly HTML dynamically
+    const generatePrintHTML = () => {
+      let html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BIT Conference 2025 - Schedule</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; padding: 8px 12px; background: white; color: #000; font-size: 12px; }
+    .header { text-align: center; margin-bottom: 6px; padding-bottom: 4px; border-bottom: 2px solid #3b82f6; }
+    .header h1 { font-size: 22px; margin-bottom: 2px; color: #1e293b; }
+    .header .date { font-size: 13px; color: #64748b; margin-top: 2px; }
+    .schedule-slot { margin-top: 1em; margin-bottom: 6px; page-break-inside: avoid; }
+    .time { font-size: 13px; font-weight: bold; color: #3b82f6; margin-bottom: 3px; padding-bottom: 2px; border-bottom: 1px solid #e2e8f0; }
+    .event { margin-bottom: 4px; padding: 5px 6px; border-left: 2px solid #10b981; background: #f8fafc; }
+    .event.keynote { border-left-color: #3b82f6; }
+    .event.workshop { border-left-color: #10b981; }
+    .event.break { border-left-color: #94a3b8; background: #f1f5f9; }
+    .event-content { font-size: 12px; color: #1e293b; line-height: 1.2; }
+    .event-content strong { color: #3b82f6; font-weight: bold; }
+    .parallel-sessions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .track-header { font-size: 11px; font-weight: bold; margin-bottom: 2px; padding: 2px 4px; background: #e2e8f0; text-align: center; border-radius: 2px; }
+    @media print {
+      @page { size: A4; margin: 8mm; }
+      body { padding: 0; margin: 0; }
+      .schedule-slot { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>BIT Conference 2025</h1>
+    <div class="date">November 8, 2025 | Nortek Center, Bălți</div>
+  </div>
+  <div class="schedule">`;
+
+      scheduleSlots.forEach(slot => {
+        html += `<div class="schedule-slot"><div class="time">${slot.time}</div>`;
+        
+        const hasParallel = slot.events.some(e => e.track === 'presentations') && slot.events.some(e => e.track === 'workshops');
+        
+        if (hasParallel) {
+          html += `<div class="parallel-sessions">`;
+          html += `<div><div class="track-header">Presentations Track</div>`;
+          slot.events.filter(e => e.track === 'presentations').forEach(event => {
+            html += generateEventHTML(event);
+          });
+          html += `</div><div><div class="track-header">Workshops Track</div>`;
+          slot.events.filter(e => e.track === 'workshops').forEach(event => {
+            html += generateEventHTML(event);
+          });
+          html += `</div></div>`;
+        } else {
+          slot.events.forEach(event => {
+            html += generateEventHTML(event);
+          });
+        }
+        html += `</div>`;
+      });
+
+      html += `</div></body></html>`;
+      return html;
+    };
+
+    const generateEventHTML = (event: ScheduleEvent) => {
+      const eventClass = event.type === 'keynote' ? 'event keynote' : 
+                         event.type === 'workshop' ? 'event workshop' :
+                         event.type === 'break' ? 'event break' : 'event';
+      
+      let prefix = '';
+      if (event.duration) {
+        prefix = event.duration;
+        if (event.track === 'workshops') {
+          prefix += ' (workshop)';
+        }
+      }
+      
+      let content = '';
+      if (prefix) content += `<strong>${prefix}</strong> - `;
+      content += event.title;
+      if (event.speaker) content += ` - <strong>${event.speaker}</strong>`;
+      
+      return `<div class="${eventClass}"><div class="event-content">${content}</div></div>`;
+    };
+
+    // Open new window and print
+    const printWindow = window.open('', '_blank');
+    if (printWindow) {
+      printWindow.document.write(generatePrintHTML());
+      printWindow.document.close();
+      printWindow.onload = () => {
+        printWindow.print();
+      };
+    }
+  };
+
   // Function to get speaker avatars based on speaker name(s)
   const getSpeakerAvatars = (speaker: string): string[] => {
     const speakerName = speaker.toLowerCase();
@@ -159,6 +258,7 @@ export default function Schedule() {
   }, []);
   // Create a structured schedule with parallel sessions grouped together
   const scheduleSlots: ScheduleSlot[] = [
+    { time: '9:45 - 10:15', events: [{ title: 'Registration & Coffee', speaker: '', type: 'break', duration: '30 min' }] },
     { time: '10:15 - 10:30', events: [{ title: 'Opening Remarks', speaker: 'Natalia Gaşiţoi, Alecu Russo Balti State University, Rector', type: 'keynote', duration: '15 min' }] },
     {
       time: '10:30 - 11:00 / 10:30 - 12:30',
@@ -195,8 +295,8 @@ export default function Schedule() {
       time: '11:30 - 12:00',
       events: [
         {
-          title: 'How to test an API in the era of AI',
-          speaker: 'Eugen Zagorcea (Principal QA Engineer, flow48.com)',
+          title: 'Collected Insights (2024–2025): Docker, Java, Vim, Linux, etc.',
+          speaker: 'Radu Dumbraveanu (Tech Leader at AmSoft)',
           type: 'talk',
           track: 'presentations',
           duration: '30 min'
@@ -207,15 +307,15 @@ export default function Schedule() {
       time: '12:00 - 12:30',
       events: [
         {
-          title: 'Collected Insights (2024–2025): Docker, Java, Vim, Linux, etc.',
-          speaker: 'Radu Dumbraveanu (Tech Leader at AmSoft)',
+          title: 'I Logged Out: What Happens After You Leave IT?',
+          speaker: 'Diana Lari (Former Product Owner)',
           type: 'talk',
           track: 'presentations',
           duration: '30 min'
         }
       ]
     },
-    { time: '12:30 - 13:15', events: [{ title: 'Coffee Break', speaker: '', type: 'break', duration: '45 min' }] },
+    { time: '12:30 - 13:15', events: [{ title: 'Lunch', speaker: '', type: 'break', duration: '45 min' }] },
     {
       time: '13:15 - 14:30 / 13:15 - 15:15',
       events: [
@@ -229,21 +329,14 @@ export default function Schedule() {
       ]
     },
     {
-      time: '14:30 - 15:00 / 14:30 - 15:30',
+      time: '14:30 - 15:00',
       events: [
         {
-          title: 'I Logged Out: What Happens After You Leave IT?',
-          speaker: 'Diana Lari (Former Product Owner)',
+          title: 'How to test an API in the era of AI',
+          speaker: 'Eugen Zagorcea (Principal QA Engineer, flow48.com)',
           type: 'talk',
           track: 'presentations',
           duration: '30 min'
-        },
-        {
-          title: 'TBA',
-          speaker: 'TBA',
-          type: 'workshop',
-          track: 'workshops',
-          duration: '2 hours'
         }
       ]
     },
@@ -309,7 +402,7 @@ export default function Schedule() {
       case 'break':
         return (
           <svg className={iconClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 18v-6a9 9 0 0118 0v6M3 18h18M3 18c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2M7 6V4a2 2 0 012-2h6a2 2 0 012 2v2" />
           </svg>
         );
       case 'networking':
@@ -590,6 +683,18 @@ export default function Schedule() {
             </svg>
             <strong>Schedule is tentative</strong> - Final agenda will be announced closer to the event date
           </p>
+        </div>
+
+        <div className="text-center mt-8">
+          <button 
+            onClick={handlePrint}
+            className="inline-flex items-center gap-3 px-8 py-4 bg-bitconf-primary hover:bg-bitconf-primary/90 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl print:hidden"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+            Print Schedule
+          </button>
         </div>
       </div>
     </section>

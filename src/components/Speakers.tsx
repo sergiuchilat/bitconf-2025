@@ -119,24 +119,6 @@ export default function Speakers() {
       bio: "Tech Movers: From Ideas to Startups",
       image: "/speakers/Website speaker - Pavel Curcovici.png",
       linkedinUrl: "https://www.linkedin.com/in/curcovici-pavel-461590101"
-    },
-    {
-      name: "TBA",
-      role: "To Be Announced",
-      company: "Coming Soon",
-      companyLink: "#",
-      bio: "We're excited to announce this speaker soon. Stay tuned for updates!",
-      image: "",
-      linkedinUrl: ""
-    },
-    {
-      name: "TBA",
-      role: "To Be Announced",
-      company: "Coming Soon",
-      companyLink: "#",
-      bio: "We're excited to announce this speaker soon. Stay tuned for updates!",
-      image: "",
-      linkedinUrl: ""
     }
 
   ];
@@ -175,9 +157,9 @@ export default function Speakers() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="flex flex-wrap justify-center gap-8">
           {finalSpeakers.map((speaker, index) => (
-            <div key={index} className="bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-bitconf-primary/20">
+            <div key={index} className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)] bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-bitconf-primary/20">
               <div className="h-64 bg-gradient-to-br from-bitconf-secondary to-bitconf-primary flex items-center justify-center">
                 {speaker.name === "TBA" ? (
                   <div className="text-center text-white">
