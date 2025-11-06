@@ -283,7 +283,7 @@ export default function Schedule() {
       time: '11:00 - 11:30',
       events: [
         {
-          title: 'Delivery Director SER Region, Amdaris, Entrepreneur, Commercial mentor and Ironman athlete',
+          title: 'Pitch It. Scope It. Deliver It. How to sell ambitiously and deliver delight by design',
           speaker: 'Radu Tataru (Delivery Director SER Region, Amdaris)',
           type: 'talk',
           track: 'presentations',
