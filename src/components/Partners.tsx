@@ -48,7 +48,9 @@ export default function Partners() {
     { name: 'Apip', logo: '/partners/Partner - Apip.png', website: 'https://apip.md' },
     { name: 'USARB', logo: '/partners/Partner - USARB.png', website: 'https://usarb.md' },
     { name: 'Sweden', logo: '/partners/Partner - Sweden.png', website: 'https://swedenabroad.se/en/embassies/moldova-chisinau/' },
-    { name: 'Nortek', logo: '/partners/Partner - Nortek.png', website: 'https://nortek.md' }
+    { name: 'UK', logo: '/partners/Partner - UK.png', website: 'https://www.gov.uk/world/organisations/british-embassy-chisinau' },
+    { name: 'Nortek', logo: '/partners/Partner - Nortek.png', website: 'https://nortek.md' },
+    { name: 'HumanSoft', logo: '/partners/Partner - HumanSoft.png', website: 'https://humansoft.md' }
   ];
 
 
@@ -118,14 +120,14 @@ export default function Partners() {
         >
           {/* All Partners */}
           <div className="mb-16">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            <div className="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto">
               {partners.map((partner, index) => (
                 <a
                   key={index}
                   href={partner.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative p-4 rounded-xl border-2 border-gray-600/30 bg-gray-800/10 hover:border-gray-500/50 hover:bg-gray-700/20 transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg"
+                  className="group relative p-4 rounded-xl border-2 border-gray-600/30 bg-gray-800/10 hover:border-gray-500/50 hover:bg-gray-700/20 transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg w-56"
                 >
                   <div className="flex items-center justify-center h-16">
                     <img

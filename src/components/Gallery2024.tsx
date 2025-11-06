@@ -44,6 +44,7 @@ export default function Gallery2024() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [displayedPhotos, setDisplayedPhotos] = useState<Photo[]>([]);
   const [photosToShow, setPhotosToShow] = useState(16);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [isVisible, setIsVisible] = useState({
     title: false,
     gallery: false,
@@ -52,6 +53,7 @@ export default function Gallery2024() {
   const titleRef = useRef<HTMLDivElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
 
   // Animated counters
   const attendeesCount = useCountAnimation(150, 2000, isVisible.stats);
@@ -1089,6 +1091,7 @@ export default function Gallery2024() {
   const reshufflePhotos = () => {
     setDisplayedPhotos(shuffleArray(allPhotos));
     setPhotosToShow(16);
+    setCurrentSlide(0); // Reset slider to first slide
   };
 
   const showMorePhotos = () => {
@@ -1097,6 +1100,35 @@ export default function Gallery2024() {
 
   const showAllPhotos = () => {
     setPhotosToShow(allPhotos.length);
+  };
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % displayedPhotos.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + displayedPhotos.length) % displayedPhotos.length);
+  };
+
+  // Touch handling for mobile swipe
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 75) {
+      nextSlide();
+    }
+    if (touchStart - touchEnd < -75) {
+      prevSlide();
+    }
   };
 
   return (
@@ -1123,10 +1155,76 @@ export default function Gallery2024() {
           </p>
         </div>
 
-        {/* Photo Grid */}
+        {/* Mobile Slider - visible on small screens */}
         <div 
           ref={galleryRef}
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12 transition-all duration-1200 ease-out ${
+          className={`md:hidden mb-12 transition-all duration-1200 ease-out ${
+            isVisible.gallery 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-12'
+          }`}
+        >
+          <div 
+            ref={sliderRef}
+            className="relative"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div className="overflow-hidden rounded-lg">
+              <div 
+                className="flex transition-transform duration-500 ease-out"
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              >
+                {displayedPhotos.map((photo) => (
+                  <div
+                    key={photo.id}
+                    className="min-w-full px-2"
+                    onClick={() => setSelectedImage(photo.src)}
+                  >
+                    <div className="aspect-square bg-gray-800 overflow-hidden rounded-lg border border-bitconf-primary/30">
+                      <img
+                        src={photo.src}
+                        alt={photo.alt}
+                        className="w-full h-full object-cover"
+                        loading={photo.id <= 12 ? "eager" : "lazy"}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation Arrows */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm border border-white/20"
+              aria-label="Previous photo"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              onClick={nextSlide}
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm border border-white/20"
+              aria-label="Next photo"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            {/* Slide Counter */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full text-sm backdrop-blur-sm border border-white/20">
+              {currentSlide + 1} / {displayedPhotos.length}
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Photo Grid - visible on medium screens and up */}
+        <div 
+          className={`hidden md:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12 transition-all duration-1200 ease-out ${
             isVisible.gallery 
               ? 'opacity-100 translate-y-0' 
               : 'opacity-0 translate-y-12'
@@ -1169,10 +1267,11 @@ export default function Gallery2024() {
         {/* Show More and Shuffle Buttons */}
         <div className="text-center mb-12">
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            {/* Show More button - only on desktop */}
             {photosToShow < displayedPhotos.length && (
               <button
                 onClick={photosToShow + 16 >= displayedPhotos.length ? showAllPhotos : showMorePhotos}
-                className="group bg-bitconf-primary text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 ease-out hover:bg-bitconf-primary/80 flex items-center gap-2"
+                className="hidden md:flex group bg-bitconf-primary text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 ease-out hover:bg-bitconf-primary/80 items-center gap-2"
               >
                 <svg className="w-5 h-5 transition-transform duration-300 ease-out group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -1185,6 +1284,7 @@ export default function Gallery2024() {
                 </span>
               </button>
             )}
+            {/* Shuffle button */}
             <button
               onClick={reshufflePhotos}
               className="group bg-bitconf-accent text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 ease-out hover:bg-bitconf-accent/80 flex items-center gap-2"
