@@ -317,7 +317,7 @@ export default function Schedule() {
     },
     { time: '12:30 - 13:15', events: [{ title: 'Lunch', speaker: '', type: 'break', duration: '45 min' }] },
     {
-      time: '13:15 - 14:30 / 13:15 - 15:15',
+      time: '13:15 - 14:30',
       events: [
         {
           title: 'Tech Movers: From Ideas to Startups',
