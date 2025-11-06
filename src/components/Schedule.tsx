@@ -365,7 +365,8 @@ export default function Schedule() {
     },
     {
       time: '16:00 - 16:15',
-      events: [{ title: 'Closing Keynote / Panel Discussion. Negara Corina, Nortek Administrator', speaker: '', type: 'keynote', duration: '15 min' }]
+      events: [{ 
+        title: 'Closing Keynote / Panel Discussion.', speaker: 'Negara Corina, Nortek Administrator. Vitalie Ticau, Head of Math and Computer Science department', type: 'keynote', duration: '15 min' }]
     },
     { time: '16:15 - 17:00', events: [{ title: 'Conference Ends', speaker: 'Networking', type: 'networking', duration: '45 min' }] }
   ];
