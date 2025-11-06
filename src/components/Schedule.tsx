@@ -315,25 +315,25 @@ export default function Schedule() {
         }
       ]
     },
-    { time: '12:30 - 13:15', events: [{ title: 'Lunch', speaker: '', type: 'break', duration: '45 min' }] },
     {
-      time: '13:15 - 14:30',
+      time: '12:30 - 13:00',
       events: [
         {
-          title: 'Tech Movers: From Ideas to Startups',
-          speaker: 'Petru Maleru (General Manager at ARA), Veronica Covali (Co-Founder at stilio.md), Pavel Curcovici(Tekwill Balti Administrator)',
+          title: 'How to test an API in the era of AI',
+          speaker: 'Eugen Zagorcea (Principal QA Engineer, flow48.com)',
           type: 'talk',
           track: 'presentations',
           duration: '30 min'
         }
       ]
     },
+    { time: '13:00 - 13:45', events: [{ title: 'Lunch', speaker: '', type: 'break', duration: '45 min' }] },
     {
-      time: '14:30 - 15:00',
+      time: '13:45 - 15:00',
       events: [
         {
-          title: 'How to test an API in the era of AI',
-          speaker: 'Eugen Zagorcea (Principal QA Engineer, flow48.com)',
+          title: 'Tech Movers: From Ideas to Startups',
+          speaker: 'Petru Maleru (General Manager at ARA), Veronica Covali (Co-Founder at stilio.md), Pavel Curcovici(Tekwill Balti Administrator)',
           type: 'talk',
           track: 'presentations',
           duration: '30 min'
