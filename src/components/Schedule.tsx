@@ -158,7 +158,7 @@ export default function Schedule() {
     if (speakerName.includes('veronica covali')) {
       avatars.push('/schedule/Schedule photo - Veronica Covali.png');
     }
-    if (speakerName.includes('cristina sucner')) {
+    if (speakerName.includes('cristina grosu')) {
       avatars.push('/schedule/Schedule photo - Cristina Grosu.png');
     }
     if (speakerName.includes('cristina volontir')) {
