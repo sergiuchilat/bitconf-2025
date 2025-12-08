@@ -17,7 +17,7 @@ const scheduleSlots = [
       },
       {
         title: 'Bug Hunting – how a QA thinks',
-        speaker: 'Cristina Volontir, Marina Zubcu, Cristina Grosu (Orange Systems)',
+        speaker: 'Cristina Volontir, Marina Zubcu(Orange Systems)',
         type: 'workshop',
         track: 'workshops',
         duration: '2 hours'
@@ -252,12 +252,12 @@ function generateHTML() {
   scheduleSlots.forEach(slot => {
     html += `    <div class="schedule-slot">\n`;
     html += `      <div class="time">${slot.time}</div>\n`;
-    
+
     const hasParallelTracks = slot.events.some(e => e.track === 'presentations') && slot.events.some(e => e.track === 'workshops');
-    
+
     if (hasParallelTracks) {
       html += `      <div class="parallel-sessions">\n`;
-      
+
       // Presentations track
       html += `        <div>\n`;
       html += `          <div class="track-header">Presentations Track</div>\n`;
@@ -265,7 +265,7 @@ function generateHTML() {
         html += generateEventHTML(event);
       });
       html += `        </div>\n`;
-      
+
       // Workshops track
       html += `        <div>\n`;
       html += `          <div class="track-header">Workshops Track</div>\n`;
@@ -273,14 +273,14 @@ function generateHTML() {
         html += generateEventHTML(event);
       });
       html += `        </div>\n`;
-      
+
       html += `      </div>\n`;
     } else {
       slot.events.forEach(event => {
         html += generateEventHTML(event);
       });
     }
-    
+
     html += `    </div>\n`;
   });
 
@@ -289,17 +289,17 @@ function generateHTML() {
 </body>
 </html>
 `;
-  
+
   return html;
 }
 
 function generateEventHTML(event) {
-  const eventClass = event.type === 'keynote' ? 'event keynote' : 
+  const eventClass = event.type === 'keynote' ? 'event keynote' :
                      event.type === 'workshop' ? 'event workshop' :
                      event.type === 'break' ? 'event break' : 'event';
-  
+
   let html = `        <div class="${eventClass}">\n`;
-  
+
   // Build the prefix with track and duration
   let prefix = '';
   if (event.track) {
@@ -308,7 +308,7 @@ function generateEventHTML(event) {
   if (event.duration) {
     prefix += (prefix ? ' ' : '') + event.duration;
   }
-  
+
   // Single line format: PREFIX - Title - Speaker
   let content = '';
   if (prefix) {
@@ -318,10 +318,10 @@ function generateEventHTML(event) {
   if (event.speaker) {
     content += ` - <strong>${event.speaker}</strong>`;
   }
-  
+
   html += `          <div class="event-content">${content}</div>\n`;
   html += `        </div>\n`;
-  
+
   return html;
 }
 

@@ -67,9 +67,9 @@ export default function Schedule() {
 
       scheduleSlots.forEach(slot => {
         html += `<div class="schedule-slot"><div class="time">${slot.time}</div>`;
-        
+
         const hasParallel = slot.events.some(e => e.track === 'presentations') && slot.events.some(e => e.track === 'workshops');
-        
+
         if (hasParallel) {
           html += `<div class="parallel-sessions">`;
           html += `<div><div class="track-header">Presentations Track</div>`;
@@ -94,10 +94,10 @@ export default function Schedule() {
     };
 
     const generateEventHTML = (event: ScheduleEvent) => {
-      const eventClass = event.type === 'keynote' ? 'event keynote' : 
+      const eventClass = event.type === 'keynote' ? 'event keynote' :
                          event.type === 'workshop' ? 'event workshop' :
                          event.type === 'break' ? 'event break' : 'event';
-      
+
       let prefix = '';
       if (event.duration) {
         prefix = event.duration;
@@ -105,12 +105,12 @@ export default function Schedule() {
           prefix += ' (workshop)';
         }
       }
-      
+
       let content = '';
       if (prefix) content += `<strong>${prefix}</strong> - `;
       content += event.title;
       if (event.speaker) content += ` - <strong>${event.speaker}</strong>`;
-      
+
       return `<div class="${eventClass}"><div class="event-content">${content}</div></div>`;
     };
 
@@ -129,7 +129,7 @@ export default function Schedule() {
   const getSpeakerAvatars = (speaker: string): string[] => {
     const speakerName = speaker.toLowerCase();
     const avatars: string[] = [];
-    
+
     // Map speaker names to their avatar files
     if (speakerName.includes('adrian romanov')) {
       avatars.push('/schedule/Schedule photo - Adrian Romanov.png');
@@ -158,9 +158,6 @@ export default function Schedule() {
     if (speakerName.includes('veronica covali')) {
       avatars.push('/schedule/Schedule photo - Veronica Covali.png');
     }
-    if (speakerName.includes('cristina grosu')) {
-      avatars.push('/schedule/Schedule photo - Cristina Grosu.png');
-    }
     if (speakerName.includes('cristina volontir')) {
       avatars.push('/schedule/Schedule photo - Cristina Volontir.png');
     }
@@ -170,14 +167,14 @@ export default function Schedule() {
     if (speakerName.includes('pavel curcovici')) {
       avatars.push('/schedule/Schedule photo - Pavel Curcovici.png');
     }
-    
+
     return avatars;
   };
 
   // Function to render speaker avatars (single or multiple)
   const renderSpeakerAvatars = (speaker: string, hoverColor: string = 'bitconf-secondary') => {
     const avatars = getSpeakerAvatars(speaker);
-    
+
     if (avatars.length === 0) {
       // Fallback to generic icon
       return (
@@ -188,31 +185,31 @@ export default function Schedule() {
         </div>
       );
     }
-    
+
     if (avatars.length === 1) {
       // Single avatar
       return (
         <div className={`w-12 h-12 rounded-full overflow-hidden border-2 border-gray-600 transition-all duration-300 ease-out group-hover:border-${hoverColor}/50`}>
-          <img 
-            src={avatars[0]} 
+          <img
+            src={avatars[0]}
             alt={speaker}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
         </div>
       );
     }
-    
+
     // Multiple avatars - display them side by side with slight overlap
     return (
       <div className="flex -space-x-2">
         {avatars.map((avatar, index) => (
-          <div 
+          <div
             key={index}
             className={`w-10 h-10 rounded-full overflow-hidden border-2 border-gray-600 transition-all duration-300 ease-out group-hover:border-${hoverColor}/50`}
             style={{ zIndex: avatars.length - index }}
           >
-            <img 
-              src={avatar} 
+            <img
+              src={avatar}
               alt={`Speaker ${index + 1}`}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
@@ -272,7 +269,7 @@ export default function Schedule() {
         },
         {
           title: 'Bug Hunting – how a QA thinks',
-          speaker: 'Cristina Volontir, Marina Zubcu, Cristina Grosu(Orange Systems)',
+          speaker: 'Cristina Volontir, Marina Zubcu(Orange Systems)',
           type: 'workshop',
           track: 'workshops',
           duration: '2 hours'
@@ -365,7 +362,7 @@ export default function Schedule() {
     },
     {
       time: '16:00 - 16:15',
-      events: [{ 
+      events: [{
         title: 'Closing Keynote / Panel Discussion.', speaker: 'Negara Corina, Nortek Administrator. Vitalie Ticau, Head of Math and Computer Science department', type: 'keynote', duration: '15 min' }]
     },
     { time: '16:15 - 17:00', events: [{ title: 'Conference Ends', speaker: 'Networking', type: 'networking', duration: '45 min' }] }
@@ -687,7 +684,7 @@ export default function Schedule() {
         </div>
 
         <div className="text-center mt-8">
-          <button 
+          <button
             onClick={handlePrint}
             className="inline-flex items-center gap-3 px-8 py-4 bg-bitconf-primary hover:bg-bitconf-primary/90 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl print:hidden"
           >

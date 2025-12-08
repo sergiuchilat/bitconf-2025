@@ -94,18 +94,9 @@ export default function Speakers() {
       linkedinUrl: "https://www.linkedin.com/in/cristina-volontir-03335b212"
     },
     {
-      name: "Cristina Grosu",
-      role: "QA Analyst", 
-      company: "Orange Systems",
-      companyLink: "https://systems.orange.md/",
-      bio: "Bug Hunting. How a QA thinks",
-      image: "/speakers/Website speaker - Cristina Grosu.png",
-      linkedinUrl: "https://www.linkedin.com/in/cristina-grosu-772b39b7"
-    },
-    {
       name: "Marina Zubcu",
       role: "QA Analyst",
-      company: "Orange Systems", 
+      company: "Orange Systems",
       companyLink: "https://systems.orange.md/",
       bio: "Bug Hunting. How a QA thinks",
       image: "/speakers/Website speaker - Marina Zubcu.png",
@@ -136,7 +127,7 @@ export default function Speakers() {
   // Separate confirmed speakers from TBA speakers
   const confirmedSpeakers = speakers.filter(speaker => speaker.name !== "TBA");
   const tbaSpeakers = speakers.filter(speaker => speaker.name === "TBA");
-  
+
   // Use original order initially to prevent hydration mismatch
   const [finalSpeakers, setFinalSpeakers] = useState([...confirmedSpeakers, ...tbaSpeakers]);
 
@@ -175,9 +166,9 @@ export default function Speakers() {
                 <div className="flex items-center justify-between mb-1">
                   <h3 className="text-xl font-semibold text-white">{speaker.name}</h3>
                   {speaker.linkedinUrl && (
-                    <a 
-                      href={speaker.linkedinUrl} 
-                      target="_blank" 
+                    <a
+                      href={speaker.linkedinUrl}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-400 hover:text-bitconf-primary transition-colors"
                       aria-label={`${speaker.name}'s LinkedIn profile`}
