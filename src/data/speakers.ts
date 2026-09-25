@@ -123,7 +123,7 @@ export const SPEAKERS_2025: Speaker[] = [
 
 /**
  * BitConf 2026 line-up — confirmed speakers only.
- * Roman Fiodorov, Radu Dumbraveanu and Radu Tataru carry over from 2025.
+ * Roman Fiodorov, Radu Dumbraveanu, Radu Tataru and Sergiu Chilat carry over from 2025.
  */
 export const SPEAKERS_2026: Speaker[] = [
   {
@@ -151,5 +151,13 @@ export const SPEAKERS_2026: Speaker[] = [
     companyLink: "https://amdaris.com",
     image: "/speakers/Website speaker - Radu Tataru.png",
     linkedinUrl: "https://www.linkedin.com/in/radu-tataru/"
+  },
+  {
+    name: "Sergiu Chilat",
+    role: "DevOps Engineer & NOC Team Lead",
+    company: "Adtelligent",
+    companyLink: "https://adtelligent.com",
+    image: "/speakers/Website speaker - Sergiu Chilat.png",
+    linkedinUrl: "https://www.linkedin.com/in/sergiu-chilat/"
   }
 ];
