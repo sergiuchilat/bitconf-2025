@@ -1,6 +1,11 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
+import { Edition, ordinal, statsSource } from '@/config/editions';
+
+interface AboutProps {
+  edition: Edition;
+}
 
 // Counter animation hook
 const useCountAnimation = (end: number, duration: number = 2000, isVisible: boolean = false) => {
@@ -32,29 +37,27 @@ const useCountAnimation = (end: number, duration: number = 2000, isVisible: bool
   return count;
 };
 
-export default function About() {
-  const [scrollY, setScrollY] = useState(0);
+export default function About({ edition }: AboutProps) {
   const [isVisible, setIsVisible] = useState({
     title: false,
     cards: false,
     stats: false
   });
-  const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
 
-  // Animated counters
-  const editionCount = useCountAnimation(4, 1500, isVisible.stats);
-  const attendeesCount = useCountAnimation(150, 2000, isVisible.stats);
-  const speakersCount = useCountAnimation(15, 1800, isVisible.stats);
-  const dayCount = useCountAnimation(1, 1000, isVisible.stats);
+  // Figures come from the edition that has actually happened
+  const source = statsSource(edition);
+  const stats = source?.stats;
+  const isOwnStats = source?.year === edition.year;
+
+  const editionCount = useCountAnimation(source?.editionNumber ?? 0, 1500, isVisible.stats);
+  const attendeesCount = useCountAnimation(stats?.attendees ?? 0, 2000, isVisible.stats);
+  const speakersCount = useCountAnimation(stats?.speakers ?? 0, 1800, isVisible.stats);
+  const dayCount = useCountAnimation(stats?.days ?? 0, 1000, isVisible.stats);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -77,16 +80,11 @@ export default function About() {
     if (cardsRef.current) observer.observe(cardsRef.current);
     if (statsRef.current) observer.observe(statsRef.current);
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <section id="about" className="py-20 bg-slate-950 relative overflow-hidden">
+    <section id="about" className="py-20 bg-bitconf-surface-1 relative overflow-hidden">
       {/* Simple Background */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-bitconf-primary/5 rounded-full blur-3xl"></div>
@@ -125,7 +123,7 @@ export default function About() {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-2 text-white transition-colors duration-300 group-hover:text-bitconf-primary">Innovation</h3>
-            <p className="text-gray-300 transition-colors duration-300 group-hover:text-gray-200">Explore cutting-edge technologies and innovative solutions shaping the future of IT</p>
+            <p className="text-gray-300 transition-colors duration-300 group-hover:text-white">Explore cutting-edge technologies and innovative solutions shaping the future of IT</p>
           </div>
 
           <div className={`group text-center transition-all duration-300 ease-out cursor-pointer ${
@@ -137,7 +135,7 @@ export default function About() {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-2 text-white transition-colors duration-300 group-hover:text-bitconf-accent">Community</h3>
-            <p className="text-gray-300 transition-colors duration-300 group-hover:text-gray-200">Connect with like-minded professionals and build lasting relationships in the tech community</p>
+            <p className="text-gray-300 transition-colors duration-300 group-hover:text-white">Connect with like-minded professionals and build lasting relationships in the tech community</p>
           </div>
 
           <div className={`group text-center transition-all duration-300 ease-out cursor-pointer ${
@@ -149,24 +147,29 @@ export default function About() {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-2 text-white transition-colors duration-300 group-hover:text-bitconf-secondary">Learning</h3>
-            <p className="text-gray-300 transition-colors duration-300 group-hover:text-gray-200">Gain insights from industry experts and expand your knowledge through workshops and talks</p>
+            <p className="text-gray-300 transition-colors duration-300 group-hover:text-white">Gain insights from industry experts and expand your knowledge through workshops and talks</p>
           </div>
         </div>
 
         <div
           ref={statsRef}
-          className={`group bg-bitconf-dark/50 rounded-lg p-8 border border-bitconf-primary/20 transition-all duration-300 ease-out cursor-pointer hover:bg-bitconf-dark/70 hover:border-bitconf-primary/30 ${
+          className={`group bg-bitconf-surface-2/70 rounded-lg p-8 border border-bitconf-primary/20 transition-all duration-300 ease-out cursor-pointer hover:bg-bitconf-surface-3/80 hover:border-bitconf-primary/30 ${
             isVisible.stats 
               ? 'opacity-100 translate-y-0 scale-100' 
               : 'opacity-0 translate-y-12 scale-95'
           }`}
         >
+          {!isOwnStats && source && (
+            <div className="text-center text-sm uppercase tracking-wide text-bitconf-text-tertiary mb-6">
+              BitConf {source.year} in numbers
+            </div>
+          )}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             <div className={`transition-all duration-300 ease-out ${
               isVisible.stats ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`} style={{ transitionDelay: isVisible.stats ? '100ms' : '0ms' }}>
               <div className="text-3xl font-bold text-bitconf-primary mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">
-                {editionCount}{editionCount === 4 ? 'th' : ''}
+                {editionCount === source?.editionNumber ? ordinal(editionCount) : editionCount}
               </div>
               <div className="text-gray-300 transition-colors duration-300 group-hover:text-white">Edition</div>
             </div>
@@ -174,7 +177,7 @@ export default function About() {
               isVisible.stats ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`} style={{ transitionDelay: isVisible.stats ? '200ms' : '0ms' }}>
               <div className="text-3xl font-bold text-bitconf-primary mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">
-                {attendeesCount}{attendeesCount === 150 ? '+' : ''}
+                {attendeesCount}{stats && attendeesCount === stats.attendees ? '+' : ''}
               </div>
               <div className="text-gray-300 transition-colors duration-300 group-hover:text-white">Attendees</div>
             </div>

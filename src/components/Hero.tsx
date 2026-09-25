@@ -1,39 +1,30 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { CURRENT_EDITION, Edition, editionLabel } from '@/config/editions';
 
-export default function Hero() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+interface HeroProps {
+  edition: Edition;
+  /** Section the secondary button scrolls to. */
+  secondary: { label: string; targetId: string };
+}
+
+const TBA = 'To be announced';
+
+export default function Hero({ edition, secondary }: HeroProps) {
+  const isArchive = edition.status === 'past';
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    const handleMouseMove = (e: Event) => {
-      const mouseEvent = e as MouseEvent;
-      const rect = document.querySelector('#hero-section')?.getBoundingClientRect();
-      if (rect) {
-        setMousePosition({
-          x: mouseEvent.clientX - rect.left,
-          y: mouseEvent.clientY - rect.top
-        });
-      }
-    };
+    const handleScroll = () => setScrollY(window.scrollY);
 
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    const heroSection = document.querySelector('#hero-section');
-    heroSection?.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      heroSection?.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <section id="hero-section" className="relative min-h-screen bg-gradient-to-br from-bitconf-dark via-gray-900 to-bitconf-dark text-white overflow-hidden">
+    <section id="hero-section" className="relative min-h-screen bg-bitconf-surface-0 text-white overflow-hidden">
       {/* Smooth Animated Background Pattern */}
       <div className="absolute inset-0">
         {/* Smooth Pulsing Gradient Orbs with Parallax */}
@@ -48,12 +39,6 @@ export default function Hero() {
                animation: 'smoothPulse 10s ease-in-out infinite',
                animationDelay: '2s',
                transform: `translateY(${scrollY * -0.2}px) translateX(${scrollY * -0.1}px)`
-             }}></div>
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-bitconf-turquoise rounded-full blur-3xl opacity-12 transition-all duration-1000 ease-in-out"
-             style={{
-               animation: 'smoothPulse 12s ease-in-out infinite',
-               animationDelay: '4s',
-               transform: `translateY(${scrollY * 0.15}px) translateX(${scrollY * -0.05}px) rotate(${scrollY * 0.1}deg)`
              }}></div>
 
         {/* Subtle Tech Grid Pattern */}
@@ -81,18 +66,6 @@ export default function Hero() {
                animationDelay: '3s',
                transform: `translateY(${scrollY * -0.3}px) translateX(${scrollY * -0.15}px) rotate(${45 + scrollY * 0.2}deg)`
              }}></div>
-        <div className="absolute bottom-32 left-1/3 w-2 h-2 bg-bitconf-turquoise rounded-full opacity-50 transition-all duration-1000"
-             style={{
-               animation: 'gentleFloat 18s ease-in-out infinite',
-               animationDelay: '6s',
-               transform: `translateY(${scrollY * 0.25}px) translateX(${scrollY * -0.1}px)`
-             }}></div>
-        <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-bitconf-accent rotate-45 opacity-35 transition-all duration-1000"
-             style={{
-               animation: 'gentlePulse 14s ease-in-out infinite',
-               animationDelay: '2s',
-               transform: `translateY(${scrollY * -0.35}px) translateX(${scrollY * 0.15}px) rotate(${45 + scrollY * -0.15}deg)`
-             }}></div>
 
         {/* Subtle Animated Lines */}
         <div className="absolute top-0 left-0 w-full h-full">
@@ -100,61 +73,9 @@ export default function Hero() {
                style={{animation: 'lineShimmer 25s ease-in-out infinite'}}></div>
           <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-bitconf-secondary/10 to-transparent transform -rotate-6 transition-all duration-1000"
                style={{animation: 'lineShimmer 30s ease-in-out infinite', animationDelay: '10s'}}></div>
-          <div className="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-bitconf-turquoise/12 to-transparent transform rotate-3 transition-all duration-1000"
-               style={{animation: 'lineShimmer 28s ease-in-out infinite', animationDelay: '15s'}}></div>
+
         </div>
 
-        {/* Mouse-Following Animated Elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          {/* Primary follower - close to cursor */}
-          <div
-            className="absolute w-8 h-8 bg-bitconf-primary/20 rounded-full blur-sm transition-all duration-700 ease-out"
-            style={{
-              left: mousePosition.x - 16,
-              top: mousePosition.y - 16,
-              transform: `scale(${mousePosition.x || mousePosition.y ? 1 : 0})`
-            }}
-          ></div>
-
-          {/* Secondary follower - slower, larger */}
-          <div
-            className="absolute w-16 h-16 bg-bitconf-secondary/15 rounded-full blur-md transition-all duration-1200 ease-out"
-            style={{
-              left: mousePosition.x * 0.8 - 32,
-              top: mousePosition.y * 0.8 - 32,
-              transform: `scale(${mousePosition.x || mousePosition.y ? 1 : 0})`
-            }}
-          ></div>
-
-          {/* Tertiary follower - slowest, largest */}
-          <div
-            className="absolute w-24 h-24 bg-bitconf-turquoise/10 rounded-full blur-lg transition-all duration-1800 ease-out"
-            style={{
-              left: mousePosition.x * 0.6 - 48,
-              top: mousePosition.y * 0.6 - 48,
-              transform: `scale(${mousePosition.x || mousePosition.y ? 1 : 0})`
-            }}
-          ></div>
-
-          {/* Accent particles */}
-          <div
-            className="absolute w-2 h-2 bg-bitconf-accent rounded-full transition-all duration-500 ease-out"
-            style={{
-              left: mousePosition.x * 1.1 - 4,
-              top: mousePosition.y * 1.1 - 4,
-              opacity: mousePosition.x || mousePosition.y ? 0.6 : 0
-            }}
-          ></div>
-
-          <div
-            className="absolute w-3 h-3 bg-bitconf-primary/40 rounded-full transition-all duration-900 ease-out"
-            style={{
-              left: mousePosition.x * 0.9 - 6,
-              top: mousePosition.y * 0.9 - 6,
-              opacity: mousePosition.x || mousePosition.y ? 0.4 : 0
-            }}
-          ></div>
-        </div>
       </div>
 
 
@@ -163,60 +84,107 @@ export default function Hero() {
           {/* Main content */}
           <div className="text-center lg:text-left max-w-4xl mx-auto lg:mx-0">
             <div className="mb-8">
-              <h1 className="text-7xl sm:text-8xl lg:text-9xl font-bold tracking-tight mb-4">
-                <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                  BitConf <span className="text-yellow-400">2025</span>
+              {isArchive ? (
+                <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-white/5 border border-white/15 text-sm text-gray-300">
+                  <span className="w-2 h-2 rounded-full bg-gray-400"></span>
+                  Past edition · this event has concluded
+                </div>
+              ) : (
+                <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-bitconf-primary/10 border border-bitconf-primary/30 text-sm text-bitconf-turquoise">
+                  <span className="w-2 h-2 rounded-full bg-bitconf-turquoise animate-pulse"></span>
+                  Coming in {edition.year}
+                </div>
+              )}
+              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-semibold tracking-[-0.03em] mb-4">
+                <span className="text-white">
+                  BitConf <span className="text-bitconf-accent">{edition.year}</span>
                 </span>
               </h1>
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-light text-bitconf-turquoise mb-4">
-                4th Edition
+              <div className="text-xl sm:text-2xl font-medium text-bitconf-mint mb-4">
+                {editionLabel(edition)}
               </div>
             </div>
 
-            <p className="text-xl sm:text-2xl lg:text-3xl font-light mb-8 text-gray-300 max-w-3xl">
+            <p className="text-lg sm:text-xl lg:text-2xl font-normal mb-12 text-gray-300 max-w-2xl leading-relaxed">
               Moldova&apos;s Premier Technology Conference
             </p>
 
             {/* Event details */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-2xl mx-auto lg:mx-0">
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 transition-all duration-500 ease-out hover:bg-white/20 hover:border-white/40 hover:backdrop-blur-md cursor-pointer">
-                <div className="text-bitconf-turquoise font-semibold text-sm uppercase tracking-wide mb-2">Date</div>
-                <div className="text-white font-semibold">November 8, 2025</div>
+              <div className="bg-white/[0.04] backdrop-blur-sm rounded-bc-md p-5 border border-bitconf-hairline transition-colors duration-300 ease-out hover:bg-white/[0.07]">
+                <div className="bc-eyebrow mb-2">Date</div>
+                <div className={`font-semibold ${edition.date ? 'text-white' : 'text-bitconf-text-secondary'}`}>
+                  {edition.date ?? TBA}
+                </div>
               </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 transition-all duration-500 ease-out hover:bg-white/20 hover:border-white/40 hover:backdrop-blur-md cursor-pointer">
-                <div className="text-bitconf-turquoise font-semibold text-sm uppercase tracking-wide mb-2">Location</div>
-                <a href="https://nortek.md/" target="_blank" rel="noopener noreferrer" className="text-white font-semibold hover:text-bitconf-turquoise transition-colors">
-                  Nortek Center, Bălți
-                </a>
+              <div className="bg-white/[0.04] backdrop-blur-sm rounded-bc-md p-5 border border-bitconf-hairline transition-colors duration-300 ease-out hover:bg-white/[0.07]">
+                <div className="bc-eyebrow mb-2">Location</div>
+                {edition.venue ? (
+                  edition.venue.url ? (
+                    <a href={edition.venue.url} target="_blank" rel="noopener noreferrer" className="text-white font-semibold hover:text-bitconf-turquoise transition-colors">
+                      {edition.venue.name}
+                    </a>
+                  ) : (
+                    <div className="text-white font-semibold">{edition.venue.name}</div>
+                  )
+                ) : (
+                  <div className="text-bitconf-text-secondary font-semibold">{TBA}</div>
+                )}
               </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 transition-all duration-500 ease-out hover:bg-white/20 hover:border-white/40 hover:backdrop-blur-md cursor-pointer">
-                <div className="text-bitconf-turquoise font-semibold text-sm uppercase tracking-wide mb-2">Format</div>
-                <div className="text-white font-semibold">1-Day Event</div>
+              <div className="bg-white/[0.04] backdrop-blur-sm rounded-bc-md p-5 border border-bitconf-hairline transition-colors duration-300 ease-out hover:bg-white/[0.07]">
+                <div className="bc-eyebrow mb-2">Format</div>
+                <div className="text-white font-semibold">{edition.format}</div>
               </div>
             </div>
 
             {/* CTA buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <a
-                href="https://www.eventbrite.com/e/bit-conference-2025-tickets-1680101241039?aff=oddtdtcreator"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group bg-bitconf-primary text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-400 ease-out hover:bg-bitconf-primary/80 hover:shadow-lg cursor-pointer text-center"
-              >
-                <span className="flex items-center justify-center gap-2">
-                  Register Now
-                  <svg className="w-5 h-5 transition-transform duration-300 ease-out group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </span>
-              </a>
+              {edition.ticketUrl && !isArchive ? (
+                <a
+                  href={edition.ticketUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group bg-bitconf-primary-deep text-white px-8 py-4 rounded-bc-md font-semibold text-base transition-all duration-300 ease-out hover:bg-bitconf-primary-deep/85 hover:shadow-lg hover:shadow-bitconf-primary/20 text-center"
+                >
+                  <span className="flex items-center justify-center gap-2">
+                    Register Now
+                    <svg className="w-5 h-5 transition-transform duration-300 ease-out group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </span>
+                </a>
+              ) : isArchive ? (
+                <Link
+                  href={CURRENT_EDITION.href}
+                  className="group bg-bitconf-primary-deep text-white px-8 py-4 rounded-bc-md font-semibold text-base transition-all duration-300 ease-out hover:bg-bitconf-primary-deep/85 hover:shadow-lg hover:shadow-bitconf-primary/20 text-center"
+                >
+                  <span className="flex items-center justify-center gap-2">
+                    See BitConf {CURRENT_EDITION.year}
+                    <svg className="w-5 h-5 transition-transform duration-300 ease-out group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </span>
+                </Link>
+              ) : (
+                <button
+                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="group bg-bitconf-primary-deep text-white px-8 py-4 rounded-bc-md font-semibold text-base transition-all duration-300 ease-out hover:bg-bitconf-primary-deep/85 hover:shadow-lg hover:shadow-bitconf-primary/20 text-center"
+                >
+                  <span className="flex items-center justify-center gap-2">
+                    Get notified
+                    <svg className="w-5 h-5 transition-transform duration-300 ease-out group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </span>
+                </button>
+              )}
               <button
-                onClick={() => document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' })}
-                className="group border-2 border-bitconf-accent text-bitconf-accent px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-400 ease-out hover:bg-bitconf-accent hover:text-white hover:shadow-lg cursor-pointer"
+                onClick={() => document.getElementById(secondary.targetId)?.scrollIntoView({ behavior: 'smooth' })}
+                className="group border border-bitconf-hairline bg-white/[0.03] text-white px-8 py-4 rounded-bc-md font-semibold text-base transition-all duration-300 ease-out hover:bg-white/[0.08] hover:border-bitconf-hairline-strong"
               >
                 <span className="flex items-center justify-center gap-2">
-                  View Schedule
-                  <svg className="w-5 h-5 transition-transform duration-300 ease-out group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {secondary.label}
+                  <svg className="w-5 h-5 transition-transform duration-300 ease-out group-hover:translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                   </svg>
                 </span>

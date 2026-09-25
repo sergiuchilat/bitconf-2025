@@ -55,7 +55,7 @@ export default function Partners() {
 
 
   return (
-    <section id="partners" className="py-20 bg-gradient-to-b from-bitconf-dark via-gray-900 to-bitconf-dark relative overflow-hidden">
+    <section id="partners" className="py-20 bg-bitconf-surface-1 relative overflow-hidden">
       {/* Enhanced Parallax Background Abstractions */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Large gradient orbs with complex movement */}
@@ -106,7 +106,7 @@ export default function Partners() {
         >
           <h2 className="text-4xl font-bold text-white mb-4">Our Partners</h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            We are proud to partner with industry leaders who share our vision for innovation and blockchain advancement
+            We are proud to partner with industry leaders who share our vision for innovation and technology in the region
           </p>
         </div>
 
@@ -143,14 +143,14 @@ export default function Partners() {
 
           {/* Call to Action */}
           <div className="text-center mt-16">
-            <div className="bg-gradient-to-r from-bitconf-primary/20 via-bitconf-secondary/20 to-bitconf-accent/20 rounded-2xl p-8 border border-gray-700/50">
+            <div className="bg-gradient-to-r from-bitconf-primary/20 via-bitconf-secondary/20 to-bitconf-accent/20 rounded-2xl p-8 border border-bitconf-hairline">
               <h3 className="text-2xl font-bold text-white mb-4">Become a Partner</h3>
               <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-                Join our community of forward-thinking organizations and help shape the future of blockchain technology
+                Join our community of forward-thinking organizations and help shape the future of technology in Moldova
               </p>
               <a
                 href="mailto:sponsors@bitconf.md"
-                className="inline-flex items-center px-8 py-3 bg-bitconf-primary text-white font-semibold rounded-full transition-all duration-300 ease-out hover:bg-bitconf-primary/80 hover:scale-105 hover:shadow-lg"
+                className="inline-flex items-center px-8 py-3 bg-bitconf-primary-deep text-white font-semibold rounded-full transition-all duration-300 ease-out hover:bg-bitconf-primary/80 hover:scale-105 hover:shadow-lg"
               >
                 <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />

@@ -1,118 +1,20 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { Speaker } from '@/data/speakers';
 
-export default function Speakers() {
-  const speakers = [
-    {
-      name: "Veronica Covali",
-      role: "Entrepreneur, angel investor, and Co-Founder",
-      company: "Stilio.md",
-      companyLink: "https://stilio.md/",
-      bio: "Tech Movers: From Ideas to Startups",
-      image: "/speakers/Website speaker - Veronica Covali.png",
-      linkedinUrl: "https://www.linkedin.com/in/veronicacovali"
-    },
-    {
-      name: "Radu Dumbraveanu",
-      role: "Tech Leader",
-      company: "AmSoft Group",
-      companyLink: "https://amsoft-group.com",
-      bio: "Collected Insights (2024–2025): Docker, Java, Vim, Linux, etc.",
-      image: "/speakers/Website speaker - Radu Dumbraveanu.png",
-      linkedinUrl: "https://www.linkedin.com/in/radudumbraveanu"
-    },
-    {
-      name: "Adrian Romanov",
-      role: "Full-stack Software Engineer",
-      company: "Cegeka",
-      companyLink: "https://cegeka.com/",
-      bio: "From Code to Impact: How to Bring Value Beyond Code",
-      image: "/speakers/Website speaker - Adrian Romanov.png",
-      linkedinUrl: "https://www.linkedin.com/in/romanovadrian/"
-    },
-    {
-      name: "Roman Fiodorov",
-      role: "Founder Filosoft Company, Tech-Lead",
-      company: "Aiomed.com",
-      companyLink: "https://aiomed.com/",
-      bio: "Chasing the AI Hype: A Senior Developer's Perspective",
-      image: "/speakers/Website speaker - Roman Fiodorov.png",
-      linkedinUrl: "https://www.linkedin.com/in/roman-fiodorov-49994057/"
-    },
-    {
-      name: "Diana Lari",
-      role: "Former Product Owner",
-      company: "_",
-      bio: "I Logged Out: What Happens After You Leave IT?",
-      image: "/speakers/Website speaker - Diana Lari.png",
-      linkedinUrl: "https://www.linkedin.com/in/lari-diana-05972315a/"
-    },
-    {
-      name: "Eugen Zagorcea",
-      role: "Principal QA Engineer",
-      company: "flow48.com",
-      companyLink: "https://flow48.com",
-      bio: "How to test an API in the era of AI",
-      image: "/speakers/Website speaker - Eugen Zagorcea.png",
-      linkedinUrl: "https://www.linkedin.com/in/eugeniu-zagorcea/"
-    },
-    {
-      name: "Petru Maleru",
-      role: "General Manager",
-      company: "Association of Recruitment Agencies (ARA)",
-      companyLink: "https://ara.md",
-      bio: "The Recruiter's Playbook: Turning Teams into Innovation Engines",
-      image: "/speakers/Website speaker - Petru Maleru.png",
-      linkedinUrl: "https://www.linkedin.com/in/peter-maler/"
-    },
-    {
-      name: "Radu Tataru",
-      role: "Delivery Director SER Region, Amdaris, Entrepreneur, Commercial mentor and Ironman athlete",
-      company: "Amdaris",
-      companyLink: "https://amdaris.com",
-      bio: "Pitch It. Scope It. Deliver It. How to sell ambitiously and deliver delight by design",
-      image: "/speakers/Website speaker - Radu Tataru.png",
-      linkedinUrl: "https://www.linkedin.com/in/radu-tataru/"
-    },
-    {
-      name: "Sergiu Chilat",
-      role: "DevOps Engineer & NOC Team Lead",
-      company: "Adtelligent",
-      companyLink: "https://adtelligent.com",
-      bio: "Balancing AI and Traditional Methods in IT: From Academia to Industry",
-      image: "/speakers/Website speaker - Sergiu Chilat.png",
-      linkedinUrl: "https://www.linkedin.com/in/sergiu-chilat/"
-    },
-    {
-      name: "Cristina Volontir",
-      role: "Test manager",
-      company: "Orange Systems",
-      companyLink: "https://systems.orange.md/",
-      bio: "Bug Hunting. How a QA thinks",
-      image: "/speakers/Website speaker - Cristina Volontir.png",
-      linkedinUrl: "https://www.linkedin.com/in/cristina-volontir-03335b212"
-    },
-    {
-      name: "Marina Zubcu",
-      role: "QA Analyst",
-      company: "Orange Systems",
-      companyLink: "https://systems.orange.md/",
-      bio: "Bug Hunting. How a QA thinks",
-      image: "/speakers/Website speaker - Marina Zubcu.png",
-      linkedinUrl: "https://www.linkedin.com/in/zubcu-marina-973a561a0"
-    },
-    {
-      name: "Pavel Curcovici",
-      role: "Tekwill Balti Administrator",
-      company: "Tekwill",
-      companyLink: "https://tekwill.md/",
-      bio: "Tech Movers: From Ideas to Startups",
-      image: "/speakers/Website speaker - Pavel Curcovici.png",
-      linkedinUrl: "https://www.linkedin.com/in/curcovici-pavel-461590101"
-    }
+interface SpeakersProps {
+  speakers: Speaker[];
+  /** Copy under the section heading. */
+  subtitle?: string;
+  /** Shown instead of the grid when no speaker is confirmed yet. */
+  emptyMessage?: string;
+}
 
-  ];
+const DEFAULT_SUBTITLE =
+  'Learn from industry leaders and experts who are shaping the future of technology';
+
+export default function Speakers({ speakers, subtitle = DEFAULT_SUBTITLE, emptyMessage }: SpeakersProps) {
 
   // Fisher-Yates shuffle algorithm
   const shuffleArray = <T,>(array: T[]): T[] => {
@@ -125,17 +27,16 @@ export default function Speakers() {
   };
 
   // Separate confirmed speakers from TBA speakers
-  const confirmedSpeakers = speakers.filter(speaker => speaker.name !== "TBA");
-  const tbaSpeakers = speakers.filter(speaker => speaker.name === "TBA");
+  const confirmedSpeakers = useMemo(() => speakers.filter(speaker => speaker.name !== "TBA"), [speakers]);
+  const tbaSpeakers = useMemo(() => speakers.filter(speaker => speaker.name === "TBA"), [speakers]);
 
   // Use original order initially to prevent hydration mismatch
-  const [finalSpeakers, setFinalSpeakers] = useState([...confirmedSpeakers, ...tbaSpeakers]);
+  const [finalSpeakers, setFinalSpeakers] = useState<Speaker[]>([...confirmedSpeakers, ...tbaSpeakers]);
 
   // Shuffle only on client after mount
   useEffect(() => {
-    const shuffledConfirmedSpeakers = shuffleArray(confirmedSpeakers);
-    setFinalSpeakers([...shuffledConfirmedSpeakers, ...tbaSpeakers]);
-  }, []);
+    setFinalSpeakers([...shuffleArray(confirmedSpeakers), ...tbaSpeakers]);
+  }, [confirmedSpeakers, tbaSpeakers]);
 
 
   return (
@@ -143,14 +44,12 @@ export default function Speakers() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">Featured Speakers</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Learn from industry leaders and experts who are shaping the future of technology
-          </p>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">{subtitle}</p>
         </div>
 
         <div className="flex flex-wrap justify-center gap-8">
           {finalSpeakers.map((speaker, index) => (
-            <div key={index} className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)] bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-bitconf-primary/20">
+            <div key={index} className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)] bg-bitconf-surface-2 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-bitconf-primary/20">
               <div className="h-64 bg-gradient-to-br from-bitconf-secondary to-bitconf-primary flex items-center justify-center">
                 {speaker.name === "TBA" ? (
                   <div className="text-center text-white">
@@ -170,7 +69,7 @@ export default function Speakers() {
                       href={speaker.linkedinUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-bitconf-primary transition-colors"
+                      className="text-bitconf-text-secondary hover:text-bitconf-primary transition-colors"
                       aria-label={`${speaker.name}'s LinkedIn profile`}
                     >
                       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -180,14 +79,26 @@ export default function Speakers() {
                   )}
                 </div>
                 <p className="text-bitconf-primary font-medium mb-2">{speaker.role}</p>
-                <p className="text-gray-400 text-sm mb-3">
-                  <a href={speaker.companyLink} target={"_blank"} className={"underline"}>{speaker.company}</a>
+                <p className="text-bitconf-text-secondary text-sm mb-3">
+                  {speaker.companyLink ? (
+                    <a href={speaker.companyLink} target="_blank" rel="noopener noreferrer" className="underline">
+                      {speaker.company}
+                    </a>
+                  ) : (
+                    speaker.company
+                  )}
                 </p>
-                <p className="text-gray-300 text-sm">{speaker.bio}</p>
+                <p className={`text-sm ${speaker.bio ? 'text-gray-300' : 'text-bitconf-text-tertiary italic'}`}>
+                  {speaker.bio ?? 'Talk to be announced'}
+                </p>
               </div>
             </div>
           ))}
         </div>
+
+        {emptyMessage && (
+          <p className="text-center text-bitconf-text-secondary mt-12 max-w-2xl mx-auto">{emptyMessage}</p>
+        )}
       </div>
     </section>
   );
