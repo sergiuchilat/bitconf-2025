@@ -5,16 +5,36 @@ import { Speaker } from '@/data/speakers';
 
 interface SpeakersProps {
   speakers: Speaker[];
+  /**
+   * 'landscape' pre-composed 3:2 cards (the 2025 assets)
+   * 'portrait'  bare head-and-shoulders portraits
+   */
+  frame?: 'landscape' | 'portrait';
   /** Copy under the section heading. */
   subtitle?: string;
   /** Shown instead of the grid when no speaker is confirmed yet. */
   emptyMessage?: string;
 }
 
+/** "Roman Gluck" -> "RG"; used when a speaker has no portrait yet. */
+const initials = (name: string) =>
+  name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0].toUpperCase())
+    .join('');
+
 const DEFAULT_SUBTITLE =
   'Learn from industry leaders and experts who are shaping the future of technology';
 
-export default function Speakers({ speakers, subtitle = DEFAULT_SUBTITLE, emptyMessage }: SpeakersProps) {
+export default function Speakers({
+  speakers,
+  frame = 'landscape',
+  subtitle = DEFAULT_SUBTITLE,
+  emptyMessage,
+}: SpeakersProps) {
+  const frameClass = frame === 'portrait' ? 'aspect-square' : 'h-64';
 
   // Fisher-Yates shuffle algorithm
   const shuffleArray = <T,>(array: T[]): T[] => {
@@ -50,15 +70,22 @@ export default function Speakers({ speakers, subtitle = DEFAULT_SUBTITLE, emptyM
         <div className="flex flex-wrap justify-center gap-8">
           {finalSpeakers.map((speaker, index) => (
             <div key={index} className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)] bg-bitconf-surface-2 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-bitconf-primary/20">
-              <div className="h-64 bg-gradient-to-br from-bitconf-secondary to-bitconf-primary flex items-center justify-center">
+              <div className={`${frameClass} bc-speaker-frame flex items-center justify-center overflow-hidden`}>
                 {speaker.name === "TBA" ? (
                   <div className="text-center text-white">
                     <div className="text-6xl mb-4">🎤</div>
                     <div className="text-xl font-bold">TBA</div>
                     <div className="text-sm opacity-75">Coming Soon</div>
                   </div>
+                ) : speaker.image ? (
+                  <img src={speaker.image} alt={speaker.name} className="h-full w-full object-cover object-top"/>
                 ) : (
-                  <img src={speaker.image} alt={speaker.name}/>
+                  <div
+                    className="text-5xl font-semibold tracking-tight text-white/90 select-none"
+                    aria-hidden="true"
+                  >
+                    {initials(speaker.name)}
+                  </div>
                 )}
               </div>
               <div className="p-6">

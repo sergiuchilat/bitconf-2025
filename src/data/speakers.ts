@@ -5,7 +5,8 @@ export interface Speaker {
   companyLink?: string;
   /** Talk or workshop title; omitted while the programme is still being built. */
   bio?: string;
-  image: string;
+  /** Portrait in /public/speakers; a card without one falls back to initials. */
+  image?: string;
   linkedinUrl?: string;
 }
 
@@ -123,7 +124,11 @@ export const SPEAKERS_2025: Speaker[] = [
 
 /**
  * BitConf 2026 line-up — confirmed speakers only.
- * Roman Fiodorov, Radu Dumbraveanu, Radu Tataru and Sergiu Chilat carry over from 2025.
+ * Roman Fiodorov, Radu Dumbraveanu, Radu Tataru and Sergiu Chilat carry over
+ * from 2025; Roman Gluck is new for 2026.
+ *
+ * 2026 uses bare portraits under /speakers/portraits — the 2025 assets are
+ * composed cards with the name, role and a "Conference 2025" badge baked in.
  */
 export const SPEAKERS_2026: Speaker[] = [
   {
@@ -132,7 +137,7 @@ export const SPEAKERS_2026: Speaker[] = [
     company: "Aiomed.com",
     companyLink: "https://aiomed.com/",
     bio: "Chasing the AI Hype: A Senior Developer's Perspective",
-    image: "/speakers/Website speaker - Roman Fiodorov.png",
+    image: "/speakers/portraits/Roman Fiodorov.png",
     linkedinUrl: "https://www.linkedin.com/in/roman-fiodorov-49994057/"
   },
   {
@@ -141,7 +146,7 @@ export const SPEAKERS_2026: Speaker[] = [
     company: "AmSoft Group",
     companyLink: "https://amsoft-group.com",
     // 2025 talk was "Collected Insights (2024–2025)" — year-specific, so not carried over.
-    image: "/speakers/Website speaker - Radu Dumbraveanu.png",
+    image: "/speakers/portraits/Radu Dumbraveanu.png",
     linkedinUrl: "https://www.linkedin.com/in/radudumbraveanu"
   },
   {
@@ -149,7 +154,7 @@ export const SPEAKERS_2026: Speaker[] = [
     role: "Delivery Director SER Region, Amdaris, Entrepreneur, Commercial mentor and Ironman athlete",
     company: "Amdaris",
     companyLink: "https://amdaris.com",
-    image: "/speakers/Website speaker - Radu Tataru.png",
+    image: "/speakers/portraits/Radu Tataru.png",
     linkedinUrl: "https://www.linkedin.com/in/radu-tataru/"
   },
   {
@@ -157,7 +162,15 @@ export const SPEAKERS_2026: Speaker[] = [
     role: "DevOps Engineer & NOC Team Lead",
     company: "Adtelligent",
     companyLink: "https://adtelligent.com",
-    image: "/speakers/Website speaker - Sergiu Chilat.png",
+    image: "/speakers/portraits/Sergiu Chilat.png",
     linkedinUrl: "https://www.linkedin.com/in/sergiu-chilat/"
+  },
+  {
+    name: "Roman Gluck",
+    role: "Senior Product Manager / Public Speaking and Startup Mentor",
+    company: "Globant",
+    companyLink: "https://www.globant.com",
+    bio: "Self Promotion for Developers - Annoyance or Necessity for a better tomorrow?",
+    image: "/speakers/portraits/Roman Gluck.png"
   }
 ];

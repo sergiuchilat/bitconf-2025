@@ -56,6 +56,7 @@ export default function Home() {
       <About edition={edition} />
       <Speakers
         speakers={SPEAKERS_2026}
+        frame="portrait"
         subtitle={`First names confirmed for BitConf ${edition.year} — more to come`}
         emptyMessage="The rest of the line-up is being finalised. Want to join it? Submit a proposal below."
       />

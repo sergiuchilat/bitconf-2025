@@ -113,6 +113,14 @@ h4 {
   color: var(--bitconf-text-tertiary);
 }
 
+/* Speaker portrait frame — transparent cut-outs sit on a deep indigo field
+   with a soft highlight behind the head. */
+.bc-speaker-frame {
+  background:
+    radial-gradient(70% 55% at 50% 30%, rgb(124 121 245 / 0.22) 0%, transparent 70%),
+    linear-gradient(170deg, #272b4e 0%, #1c1f38 58%, #151829 100%);
+}
+
 .bc-card {
   background: var(--bitconf-surface-2);
   border: 1px solid var(--bitconf-hairline);
