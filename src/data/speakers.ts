@@ -123,7 +123,7 @@ export const SPEAKERS_2025: Speaker[] = [
 
 /**
  * BitConf 2026 line-up — confirmed speakers only.
- * Roman Fiodorov and Radu Dumbraveanu carry over from 2025.
+ * Roman Fiodorov, Radu Dumbraveanu and Radu Tataru carry over from 2025.
  */
 export const SPEAKERS_2026: Speaker[] = [
   {
@@ -143,5 +143,13 @@ export const SPEAKERS_2026: Speaker[] = [
     // 2025 talk was "Collected Insights (2024–2025)" — year-specific, so not carried over.
     image: "/speakers/Website speaker - Radu Dumbraveanu.png",
     linkedinUrl: "https://www.linkedin.com/in/radudumbraveanu"
+  },
+  {
+    name: "Radu Tataru",
+    role: "Delivery Director SER Region, Amdaris, Entrepreneur, Commercial mentor and Ironman athlete",
+    company: "Amdaris",
+    companyLink: "https://amdaris.com",
+    image: "/speakers/Website speaker - Radu Tataru.png",
+    linkedinUrl: "https://www.linkedin.com/in/radu-tataru/"
   }
 ];
