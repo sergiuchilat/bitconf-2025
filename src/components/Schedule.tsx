@@ -179,7 +179,7 @@ export default function Schedule() {
       // Fallback to generic icon
       return (
         <div className="w-12 h-12 rounded-full bg-gray-600 flex items-center justify-center transition-all duration-300 ease-out group-hover:bg-bitconf-secondary/30">
-          <svg className="w-6 h-6 text-gray-400 transition-colors duration-300 group-hover:text-bitconf-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-6 h-6 text-bitconf-text-secondary transition-colors duration-300 group-hover:text-bitconf-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
           </svg>
         </div>
@@ -438,7 +438,7 @@ export default function Schedule() {
   };
 
   return (
-    <section id="schedule" className="py-20 bg-slate-950 relative overflow-hidden">
+    <section id="schedule" className="py-20 bg-bitconf-surface-1 relative overflow-hidden">
       {/* Enhanced Parallax Background Abstractions */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Large gradient orbs with complex movement */}
@@ -523,7 +523,7 @@ export default function Schedule() {
               : 'opacity-0 translate-y-8 scale-95'
           }`}
         >
-          <div className="bg-gradient-to-r from-slate-800/50 to-slate-900/30 border border-gray-700/50 p-8 text-center backdrop-blur-sm">
+          <div className="bg-gradient-to-r from-slate-800/50 to-slate-900/30 border border-bitconf-hairline p-8 text-center backdrop-blur-sm">
             <div className="inline-flex items-center gap-3 mb-3">
               <svg className="w-6 h-6 text-bitconf-turquoise" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -575,7 +575,7 @@ export default function Schedule() {
                         </h4>
                       </div>
                       {slot.events.filter(e => e.track === 'presentations').map((event, eventIndex) => (
-                        <div key={eventIndex} className={`group rounded-xl p-4 border backdrop-blur-sm bg-gray-800/20 ${getEventColor(event.type)} cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/30 hover:border-bitconf-secondary/50 h-40 flex flex-col justify-between`}>
+                        <div key={eventIndex} className={`group rounded-xl p-4 border backdrop-blur-sm bg-bitconf-surface-2/60 ${getEventColor(event.type)} cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/30 hover:border-bitconf-secondary/50 h-40 flex flex-col justify-between`}>
                           <div className="flex items-start gap-4 h-full">
                             <div className="flex-shrink-0">
                               {renderSpeakerAvatars(event.speaker, 'bitconf-secondary')}
@@ -609,7 +609,7 @@ export default function Schedule() {
                         </h4>
                       </div>
                       {slot.events.filter(e => e.track === 'workshops').map((event, eventIndex) => (
-                        <div key={eventIndex} className={`group rounded-xl p-4 border backdrop-blur-sm bg-gray-800/20 ${getEventColor(event.type)} cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/30 hover:border-bitconf-accent/50 h-40 flex flex-col justify-between`}>
+                        <div key={eventIndex} className={`group rounded-xl p-4 border backdrop-blur-sm bg-bitconf-surface-2/60 ${getEventColor(event.type)} cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/30 hover:border-bitconf-accent/50 h-40 flex flex-col justify-between`}>
                           <div className="flex items-start gap-4 h-full">
                             <div className="flex-shrink-0">
                               {renderSpeakerAvatars(event.speaker, 'bitconf-accent')}
@@ -636,7 +636,7 @@ export default function Schedule() {
                   /* Single events - full width */
                   <div className="grid grid-cols-1">
                     {slot.events.map((event, eventIndex) => (
-                      <div key={eventIndex} className={`group rounded-xl p-4 border backdrop-blur-sm bg-gray-800/30 border-gray-700/30 cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/40 hover:border-bitconf-primary/50 h-32 flex items-center`}>
+                      <div key={eventIndex} className={`group rounded-xl p-4 border backdrop-blur-sm bg-bitconf-surface-2/70 border-bitconf-hairline cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/40 hover:border-bitconf-primary/50 h-32 flex items-center`}>
                         <div className="flex items-start gap-4">
                           {/* Icon or Speaker Photo */}
                           <div className="flex-shrink-0">

@@ -94,7 +94,7 @@ export default function Sponsors() {
                 {tier.sponsors.map((sponsor, sponsorIndex) => (
                   <div
                     key={sponsorIndex}
-                    className="bg-gray-800 rounded-lg p-8 flex items-center justify-center min-h-32 hover:shadow-md transition-shadow border border-bitconf-primary/20"
+                    className="bg-bitconf-surface-2 rounded-lg p-8 flex items-center justify-center min-h-32 hover:shadow-md transition-shadow border border-bitconf-primary/20"
                   >
                     <div className="text-center">
                       <div className="w-16 h-16 bg-gray-300 rounded-lg mx-auto mb-4 flex items-center justify-center">
@@ -112,7 +112,7 @@ export default function Sponsors() {
         </div>
 
         {/* Sponsorship Opportunities */}
-        <div className="bg-bitconf-dark/50 rounded-lg p-8 border border-bitconf-primary/20">
+        <div className="bg-bitconf-surface-2/70 rounded-lg p-8 border border-bitconf-primary/20">
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold text-white mb-4">Become a Sponsor</h3>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -122,7 +122,7 @@ export default function Sponsors() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             {sponsorshipPackages.map((package_, index) => (
-              <div key={index} className="bg-gray-800 rounded-lg shadow-md overflow-hidden border border-bitconf-primary/20">
+              <div key={index} className="bg-bitconf-surface-2 rounded-lg shadow-md overflow-hidden border border-bitconf-primary/20">
                 <div className={`bg-gradient-to-r ${package_.color} p-6 text-white text-center`}>
                   <h4 className="text-2xl font-bold mb-2">{package_.tier}</h4>
                   <div className="text-3xl font-bold">${package_.price}</div>
@@ -149,7 +149,7 @@ export default function Sponsors() {
               Interested in sponsoring BitConf 4th Edition?
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-bitconf-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-bitconf-primary/80 transition-colors">
+              <button className="bg-bitconf-primary-deep text-white px-8 py-3 rounded-full font-semibold hover:bg-bitconf-primary/80 transition-colors">
                 Download Sponsorship Kit
               </button>
               <button className="border-2 border-bitconf-accent text-bitconf-accent px-8 py-3 rounded-full font-semibold hover:bg-bitconf-accent hover:text-white transition-colors">
@@ -160,7 +160,7 @@ export default function Sponsors() {
         </div>
 
         <div className="mt-8 text-center text-sm text-gray-600">
-          <p className="text-gray-400">Custom sponsorship packages available. Contact us to discuss your specific needs.</p>
+          <p className="text-bitconf-text-secondary">Custom sponsorship packages available. Contact us to discuss your specific needs.</p>
         </div>
       </div>
     </section>

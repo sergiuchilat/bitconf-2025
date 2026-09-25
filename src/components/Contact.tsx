@@ -1,8 +1,14 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
+import { Edition } from '@/config/editions';
 
-export default function Contact() {
+interface ContactProps {
+  edition: Edition;
+}
+
+export default function Contact({ edition }: ContactProps) {
+  const venue = edition.venue;
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState({
     title: false,
@@ -156,8 +162,15 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold text-white mb-2 transition-colors duration-300 group-hover:text-bitconf-secondary">Venue</h4>
-                  <p className="text-gray-300 transition-colors duration-300 group-hover:text-gray-100">Strada Pușkin 38</p>
-                  <p className="text-gray-300 transition-colors duration-300 group-hover:text-gray-100">Balti, Moldova</p>
+                  {venue ? (
+                    (venue.address ?? [venue.name]).map((line) => (
+                      <p key={line} className="text-gray-300 transition-colors duration-300 group-hover:text-gray-100">
+                        {line}
+                      </p>
+                    ))
+                  ) : (
+                    <p className="text-bitconf-text-secondary">To be announced</p>
+                  )}
                 </div>
               </div>
 
@@ -169,41 +182,48 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold text-white mb-2 transition-colors duration-300 group-hover:text-bitconf-accent">Date</h4>
-                  <p className="text-gray-300 transition-colors duration-300 group-hover:text-gray-100">November 8, 2025</p>
+                  <p className={`transition-colors duration-300 group-hover:text-gray-100 ${edition.date ? 'text-gray-300' : 'text-bitconf-text-secondary'}`}>
+                    {edition.date ?? 'To be announced'}
+                  </p>
                   <p className="text-gray-300 transition-colors duration-300 group-hover:text-gray-100">Follow us for updates!</p>
                 </div>
               </div>
             </div>
 
             {/* Google Maps */}
-            <div className="mt-16">
-              <h4 className="text-lg font-semibold text-white mb-6 text-center">Find Us</h4>
-            </div>
+            {venue?.mapEmbedUrl && (
+              <div className="mt-16">
+                <h4 className="text-lg font-semibold text-white mb-6 text-center">Find Us</h4>
+              </div>
+            )}
           </div>
         </div>
       </div>
       
       {/* Full-width Google Maps */}
-      <div className="mt-16">
-        <div className="relative w-full overflow-hidden shadow-2xl border-y border-gray-700/50 bg-gray-800/30">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2719.8267891829755!2d27.928666576871344!3d47.765306471978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40cb1d2e8e3e3e3e%3A0x1e2e3e4e5e6e7e8e!2sStrada%20Pu%C8%99kin%2038%2C%20Balti%2C%20Moldova!5e0!3m2!1sen!2sus!4v1635456789012!5m2!1sen!2sus"
-            width="100%"
-            height="450"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
-          <div className="absolute inset-0 bg-gradient-to-t from-bitconf-dark/20 via-transparent to-transparent pointer-events-none"></div>
+      {venue?.mapEmbedUrl && (
+        <div className="mt-16">
+          <div className="relative w-full overflow-hidden shadow-2xl border-y border-bitconf-hairline bg-bitconf-surface-2/70">
+            <iframe
+              src={venue.mapEmbedUrl}
+              title={`Map of ${venue.name}`}
+              width="100%"
+              height="450"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+            <div className="absolute inset-0 bg-gradient-to-t from-bitconf-dark/20 via-transparent to-transparent pointer-events-none"></div>
+          </div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p className="text-center text-bitconf-text-secondary text-sm">
+              BitConf {edition.year} location — {(venue.address ?? [venue.name]).join(', ')}
+            </p>
+          </div>
         </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <p className="text-center text-gray-400 text-sm">
-            BitConf Conference Location - Strada Pușkin 38, Balti, Moldova
-          </p>
-        </div>
-      </div>
-      
+      )}
+
       {/* Social Media */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center">
@@ -213,7 +233,7 @@ export default function Contact() {
               href="https://www.facebook.com/bitconf.md"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-bitconf-primary text-white p-4 rounded-full transition-all duration-300 ease-out hover:bg-bitconf-primary/80 hover:scale-110"
+              className="bg-bitconf-primary-deep text-white p-4 rounded-full transition-all duration-300 ease-out hover:bg-bitconf-primary/80 hover:scale-110"
             >
               <svg className="w-6 h-6 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />

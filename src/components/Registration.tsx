@@ -1,6 +1,12 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
+import Link from 'next/link';
+import { CURRENT_EDITION, Edition, statsSource } from '@/config/editions';
+
+interface RegistrationProps {
+  edition: Edition;
+}
 
 // Counter animation hook
 const useCountAnimation = (end: number, duration: number = 2000, isVisible: boolean = false) => {
@@ -32,7 +38,9 @@ const useCountAnimation = (end: number, duration: number = 2000, isVisible: bool
   return count;
 };
 
-export default function Registration() {
+export default function Registration({ edition }: RegistrationProps) {
+  const isArchive = edition.status === 'past';
+  const isOpen = Boolean(edition.ticketUrl) && !isArchive;
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState({
     title: false,
@@ -44,9 +52,13 @@ export default function Registration() {
   const statsRef = useRef<HTMLDivElement>(null);
 
   // Animated counters
-  const attendeesCount = useCountAnimation(150, 2000, isVisible.stats);
-  const speakersCount = useCountAnimation(20, 1800, isVisible.stats);
-  const hoursCount = useCountAnimation(6, 1500, isVisible.stats);
+  const source = statsSource(edition);
+  const stats = source?.stats;
+  const isOwnStats = source?.year === edition.year;
+
+  const attendeesCount = useCountAnimation(stats?.attendees ?? 0, 2000, isVisible.stats);
+  const speakersCount = useCountAnimation(stats?.speakers ?? 0, 1800, isVisible.stats);
+  const hoursCount = useCountAnimation(stats?.hours ?? 0, 1500, isVisible.stats);
   const freeCount = useCountAnimation(100, 1600, isVisible.stats);
 
   useEffect(() => {
@@ -92,7 +104,7 @@ export default function Registration() {
         </svg>
       ),
       title: "Expert Speakers",
-      description: "Learn from industry leaders and blockchain pioneers"
+      description: "Learn from industry leaders and engineers building at the edge"
     },
     {
       icon: (
@@ -124,7 +136,7 @@ export default function Registration() {
   ];
 
   return (
-    <section id="registration" className="py-20 bg-gradient-to-b from-bitconf-dark via-gray-900 to-bitconf-dark relative overflow-hidden">
+    <section id="registration" className="py-20 bg-bitconf-surface-1 relative overflow-hidden">
       {/* Enhanced Parallax Background Abstractions */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Large gradient orbs with complex movement */}
@@ -158,16 +170,16 @@ export default function Registration() {
           }`}
         >
           <div className="inline-flex items-center px-4 py-2 bg-bitconf-primary/10 border border-bitconf-primary/20 rounded-full mb-6">
-            <span className="text-bitconf-primary text-sm font-semibold">LIMITED SEATS AVAILABLE</span>
+            <span className="text-bitconf-primary text-sm font-semibold">
+              {isOpen ? 'LIMITED SEATS AVAILABLE' : isArchive ? 'THIS EDITION HAS CONCLUDED' : 'REGISTRATION OPENS SOON'}
+            </span>
           </div>
           <h2 className="text-5xl font-bold text-white mb-6">
-            Join BitConf 2025
-            <span className="block text-transparent bg-gradient-to-r from-bitconf-primary to-bitconf-accent bg-clip-text">
-              Completely Free
-            </span>
+            {isArchive ? `BitConf ${edition.year}` : `Join BitConf ${edition.year}`}
+            <span className="block text-bitconf-primary-soft">Completely Free</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Experience Moldova&apos;s premier blockchain conference. Network with industry leaders, learn from experts, and shape the future of decentralized technology.
+            Experience Moldova&apos;s premier technology conference. Network with industry leaders, learn from experts, and shape the future of tech in the region.
           </p>
         </div>
 
@@ -181,7 +193,7 @@ export default function Registration() {
         >
           {/* Main Registration Card */}
           <div className="max-w-5xl mx-auto mb-16">
-            <div className="relative bg-gradient-to-br from-gray-800/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl overflow-hidden border border-bitconf-primary/20 shadow-2xl">
+            <div className="relative bg-bitconf-surface-2/90 backdrop-blur-sm rounded-3xl overflow-hidden border border-bitconf-primary/20 shadow-2xl">
               {/* Floating Elements */}
               <div className="absolute -top-10 -right-10 w-32 h-32 bg-bitconf-primary/10 rounded-full blur-xl"></div>
               <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-bitconf-accent/10 rounded-full blur-xl"></div>
@@ -199,38 +211,76 @@ export default function Registration() {
                       Everything Included
                     </h3>
                     <div className="flex items-center justify-center mb-6">
-                      <span className="text-6xl font-black text-transparent bg-gradient-to-r from-bitconf-primary to-bitconf-accent bg-clip-text">
-                        FREE
-                      </span>
+                      <span className="text-6xl font-semibold tracking-tight text-white">FREE</span>
                       <div className="ml-6 text-left">
-                        <div className="text-gray-400 text-lg line-through">€50 Value</div>
+                        <div className="text-bitconf-text-secondary text-lg line-through">€50 Value</div>
                         <div className="text-bitconf-accent font-semibold">100% Sponsored</div>
                       </div>
                     </div>
                     <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-                      Thanks to our amazing sponsors, we&apos;re making this world-class blockchain conference accessible to everyone.
+                      Thanks to our amazing sponsors, we&apos;re making this world-class technology conference accessible to everyone.
                     </p>
                   </div>
 
                   {/* CTA Button */}
                   <div className="space-y-4 mb-12">
-                    <a
-                      href="https://www.eventbrite.com/e/bit-conference-2025-tickets-1680101241039?aff=oddtdtcreator"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group inline-block bg-gradient-to-r from-bitconf-primary to-bitconf-secondary text-white py-4 px-12 rounded-2xl font-bold text-xl transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-bitconf-primary/25 relative overflow-hidden"
-                    >
-                      <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out"></div>
-                      <span className="relative flex items-center justify-center">
-                        🚀 Reserve Your Spot Now
-                        <svg className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                        </svg>
-                      </span>
-                    </a>
-                    <p className="text-gray-400 text-sm">
-                      No hidden fees • Instant confirmation • Limited to 150 attendees
-                    </p>
+                    {isOpen ? (
+                      <>
+                        <a
+                          href={edition.ticketUrl!}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group inline-block bg-gradient-to-r from-bitconf-primary-deep to-bitconf-secondary text-white py-4 px-12 rounded-2xl font-bold text-xl transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-bitconf-primary/25 relative overflow-hidden"
+                        >
+                          <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out"></div>
+                          <span className="relative flex items-center justify-center">
+                            🚀 Reserve Your Spot Now
+                            <svg className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                          </span>
+                        </a>
+                        <p className="text-bitconf-text-secondary text-sm">
+                          No hidden fees • Instant confirmation • Limited to 150 attendees
+                        </p>
+                      </>
+                    ) : isArchive ? (
+                      <>
+                        <Link
+                          href={CURRENT_EDITION.href}
+                          className="group inline-block bg-gradient-to-r from-bitconf-primary-deep to-bitconf-secondary text-white py-4 px-12 rounded-2xl font-bold text-xl transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-bitconf-primary/25 relative overflow-hidden"
+                        >
+                          <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out"></div>
+                          <span className="relative flex items-center justify-center">
+                            See BitConf {CURRENT_EDITION.year}
+                            <svg className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                          </span>
+                        </Link>
+                        <p className="text-bitconf-text-secondary text-sm">
+                          Registration for BitConf {edition.year} is closed — the event took place on {edition.date}.
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <a
+                          href="mailto:info@bitconf.md?subject=Notify%20me%20about%20BitConf%20tickets"
+                          className="group inline-block bg-gradient-to-r from-bitconf-primary-deep to-bitconf-secondary text-white py-4 px-12 rounded-2xl font-bold text-xl transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-bitconf-primary/25 relative overflow-hidden"
+                        >
+                          <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out"></div>
+                          <span className="relative flex items-center justify-center">
+                            🔔 Notify me when tickets open
+                            <svg className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                          </span>
+                        </a>
+                        <p className="text-bitconf-text-secondary text-sm">
+                          Free admission • Seats are limited • We&apos;ll email you the moment registration opens
+                        </p>
+                      </>
+                    )}
                   </div>
 
                   {/* Features Grid */}
@@ -238,14 +288,14 @@ export default function Registration() {
                     {features.map((feature, index) => (
                       <div
                         key={index}
-                        className="flex flex-col items-center space-y-2 p-4 bg-gray-800/20 rounded-xl border border-gray-700/30"
+                        className="flex flex-col items-center space-y-2 p-4 bg-bitconf-surface-2/60 rounded-xl border border-bitconf-hairline"
                       >
                         <div className="text-bitconf-primary text-2xl">
                           {feature.icon}
                         </div>
                         <div className="text-center">
                           <div className="text-white font-semibold text-sm mb-1">{feature.title}</div>
-                          <div className="text-gray-400 text-xs">{feature.description}</div>
+                          <div className="text-bitconf-text-secondary text-xs">{feature.description}</div>
                         </div>
                       </div>
                     ))}
@@ -265,41 +315,46 @@ export default function Registration() {
               : 'opacity-0 translate-y-8'
           }`}
         >
+          {!isOwnStats && source && (
+            <div className="text-center text-sm uppercase tracking-wide text-bitconf-text-tertiary mb-6">
+              BitConf {source.year} in numbers
+            </div>
+          )}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-            <div className="text-center p-6 bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700/30">
+            <div className="text-center p-6 bg-bitconf-surface-2/70 backdrop-blur-sm rounded-2xl border border-bitconf-hairline">
               <div className="text-3xl mb-2">👥</div>
-              <div className="text-3xl font-bold text-transparent bg-gradient-to-r from-bitconf-primary to-bitconf-accent bg-clip-text mb-1">
-                {attendeesCount}{attendeesCount === 150 ? '+' : ''}
+              <div className="text-3xl font-semibold tracking-tight text-white mb-1">
+                {attendeesCount}{stats && attendeesCount === stats.attendees ? '+' : ''}
               </div>
-              <div className="text-gray-400 text-sm font-medium">Attendees</div>
+              <div className="text-bitconf-text-secondary text-sm font-medium">Attendees</div>
             </div>
-            <div className="text-center p-6 bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700/30">
+            <div className="text-center p-6 bg-bitconf-surface-2/70 backdrop-blur-sm rounded-2xl border border-bitconf-hairline">
               <div className="text-3xl mb-2">🎤</div>
-              <div className="text-3xl font-bold text-transparent bg-gradient-to-r from-bitconf-primary to-bitconf-accent bg-clip-text mb-1">
-                {speakersCount}{speakersCount === 20 ? '+' : ''}
+              <div className="text-3xl font-semibold tracking-tight text-white mb-1">
+                {speakersCount}
               </div>
-              <div className="text-gray-400 text-sm font-medium">Speakers</div>
+              <div className="text-bitconf-text-secondary text-sm font-medium">Speakers</div>
             </div>
-            <div className="text-center p-6 bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700/30">
+            <div className="text-center p-6 bg-bitconf-surface-2/70 backdrop-blur-sm rounded-2xl border border-bitconf-hairline">
               <div className="text-3xl mb-2">⏰</div>
-              <div className="text-3xl font-bold text-transparent bg-gradient-to-r from-bitconf-primary to-bitconf-accent bg-clip-text mb-1">
+              <div className="text-3xl font-semibold tracking-tight text-white mb-1">
                 {hoursCount}
               </div>
-              <div className="text-gray-400 text-sm font-medium">Hours</div>
+              <div className="text-bitconf-text-secondary text-sm font-medium">Hours</div>
             </div>
-            <div className="text-center p-6 bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700/30">
+            <div className="text-center p-6 bg-bitconf-surface-2/70 backdrop-blur-sm rounded-2xl border border-bitconf-hairline">
               <div className="text-3xl mb-2">🎁</div>
-              <div className="text-3xl font-bold text-transparent bg-gradient-to-r from-bitconf-primary to-bitconf-accent bg-clip-text mb-1">
+              <div className="text-3xl font-semibold tracking-tight text-white mb-1">
                 {freeCount}{freeCount === 100 ? '%' : ''}
               </div>
-              <div className="text-gray-400 text-sm font-medium">Free</div>
+              <div className="text-bitconf-text-secondary text-sm font-medium">Free</div>
             </div>
           </div>
         </div>
 
         {/* Contact Info */}
         <div className="text-center mt-16">
-          <div className="bg-gray-800/20 backdrop-blur-sm border border-gray-700/30 rounded-2xl p-6 max-w-2xl mx-auto">
+          <div className="bg-bitconf-surface-2/60 backdrop-blur-sm border border-bitconf-hairline rounded-2xl p-6 max-w-2xl mx-auto">
             <p className="text-gray-300 mb-2">Questions about registration?</p>
             <a href="mailto:info@bitconf.md" className="text-bitconf-primary hover:text-bitconf-accent transition-colors duration-300 font-semibold">
               📧 info@bitconf.md

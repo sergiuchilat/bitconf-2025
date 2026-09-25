@@ -1,8 +1,30 @@
 @import "tailwindcss";
 
+/* ============================================================
+   BitConf design tokens
+   One accent (indigo) carries the brand; blue supports it; mint
+   and amber are reserved for small moments. Everything else is
+   a neutral on a cool-tinted near-black ramp.
+   ============================================================ */
+
 :root {
-  --background: #0d1028;
-  --foreground: #ffffff;
+  /* Surfaces, darkest to lightest — use in this order for depth */
+  --bitconf-surface-0: #0a0b12; /* page background */
+  --bitconf-surface-1: #0f1119; /* alternating sections */
+  --bitconf-surface-2: #161927; /* cards */
+  --bitconf-surface-3: #1e2133; /* raised / hover */
+
+  /* Hairlines and scrims */
+  --bitconf-hairline: rgb(255 255 255 / 0.08);
+  --bitconf-hairline-strong: rgb(255 255 255 / 0.14);
+
+  /* Text ramp */
+  --bitconf-text-primary: #f5f5f7;
+  --bitconf-text-secondary: #a1a1a6;
+  --bitconf-text-tertiary: #8e8e93;
+
+  --background: var(--bitconf-surface-0);
+  --foreground: var(--bitconf-text-primary);
 }
 
 @theme inline {
@@ -10,93 +32,167 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  
-  /* BitConf Brand Colors */
-  --color-bitconf-primary: #7C79FE;
-  --color-bitconf-secondary: #2AACEE;
-  --color-bitconf-dark: #0d1028;
-  --color-bitconf-accent: #EFA506;
-  --color-bitconf-turquoise: #00ecd8;
-  --color-bitconf-yellow: #efa506;
-  --color-bitconf-text: #707070;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* --- Brand -------------------------------------------------
+     primary   the one accent: buttons, links, active states
+     secondary supporting cool tone, gradients only
+     mint      confirmation / "live" moments, used sparingly
+     accent    amber; attention only (archive notices, badges)
+     ---------------------------------------------------------- */
+  /* Two roles, because one tone cannot do both accessibly:
+     primary      accent TEXT on dark surfaces (>=4.9:1)
+     primary-deep BUTTON FILL behind white labels (5.4:1)  */
+  --color-bitconf-primary: #7c79f5;
+  --color-bitconf-primary-deep: #5b57e0;
+  --color-bitconf-primary-soft: #a5a2f8;
+  --color-bitconf-secondary: #3aa8e6;
+  --color-bitconf-mint: #66d4cf;
+  --color-bitconf-accent: #ff9f0a;
+
+  /* Kept so existing markup keeps resolving; both map to the calm mint */
+  --color-bitconf-turquoise: var(--color-bitconf-mint);
+  --color-bitconf-yellow: var(--color-bitconf-accent);
+
+  /* Surfaces exposed to utilities: bg-bitconf-surface-2 etc. */
+  --color-bitconf-dark: var(--bitconf-surface-0);
+  --color-bitconf-surface-0: var(--bitconf-surface-0);
+  --color-bitconf-surface-1: var(--bitconf-surface-1);
+  --color-bitconf-surface-2: var(--bitconf-surface-2);
+  --color-bitconf-surface-3: var(--bitconf-surface-3);
+  --color-bitconf-hairline: var(--bitconf-hairline);
+  --color-bitconf-hairline-strong: var(--bitconf-hairline-strong);
+
+  --color-bitconf-text: var(--bitconf-text-secondary);
+  --color-bitconf-text-secondary: var(--bitconf-text-secondary);
+  --color-bitconf-text-tertiary: var(--bitconf-text-tertiary);
+
+  /* Radii — four steps, no improvising */
+  --radius-bc-sm: 0.5rem;
+  --radius-bc-md: 0.875rem;
+  --radius-bc-lg: 1.25rem;
+  --radius-bc-xl: 1.75rem;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Geist is loaded in layout.tsx; this is what actually lets it through */
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* BitConf Hero Animations */
+/* Display type reads better optically tightened as it grows. */
+h1,
+h2 {
+  letter-spacing: -0.022em;
+}
+
+h3,
+h4 {
+  letter-spacing: -0.014em;
+}
+
+/* Consistent focus ring for keyboard users, on every interactive element. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-bitconf-primary);
+  outline-offset: 3px;
+  border-radius: var(--radius-bc-sm);
+}
+
+/* ============================================================
+   Section rhythm helpers
+   ============================================================ */
+
+.bc-eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bitconf-text-tertiary);
+}
+
+.bc-card {
+  background: var(--bitconf-surface-2);
+  border: 1px solid var(--bitconf-hairline);
+  border-radius: var(--radius-bc-lg);
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.bc-card:hover {
+  background: var(--bitconf-surface-3);
+  border-color: var(--bitconf-hairline-strong);
+}
+
+/* ============================================================
+   Motion — calm by default, and off entirely on request
+   ============================================================ */
+
 @keyframes smoothPulse {
-  0%, 100% { 
-    opacity: 0.05; 
-    transform: scale(0.95); 
+  0%, 100% {
+    opacity: 0.06;
+    transform: scale(0.96);
   }
-  50% { 
-    opacity: 0.15; 
-    transform: scale(1.05); 
+  50% {
+    opacity: 0.13;
+    transform: scale(1.04);
   }
 }
 
 @keyframes gentleFloat {
-  0%, 100% { 
-    transform: translateY(0) translateX(0); 
-    opacity: 0.2; 
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.2;
   }
-  25% { 
-    transform: translateY(-10px) translateX(5px); 
-    opacity: 0.4; 
-  }
-  50% { 
-    transform: translateY(-5px) translateX(-3px); 
-    opacity: 0.6; 
-  }
-  75% { 
-    transform: translateY(-15px) translateX(8px); 
-    opacity: 0.3; 
+  50% {
+    transform: translateY(-10px) translateX(-3px);
+    opacity: 0.45;
   }
 }
 
 @keyframes gentleRotate {
-  from { 
-    transform: rotate(0deg) scale(0.9); 
-    opacity: 0.2; 
+  from {
+    transform: rotate(0deg) scale(0.9);
+    opacity: 0.18;
   }
-  50% { 
-    opacity: 0.4; 
-    transform: rotate(180deg) scale(1.1); 
+  50% {
+    opacity: 0.32;
+    transform: rotate(180deg) scale(1.08);
   }
-  to { 
-    transform: rotate(360deg) scale(0.9); 
-    opacity: 0.2; 
+  to {
+    transform: rotate(360deg) scale(0.9);
+    opacity: 0.18;
   }
 }
 
 @keyframes gentlePulse {
-  0%, 100% { 
-    opacity: 0.2; 
-    transform: scale(0.8); 
+  0%, 100% {
+    opacity: 0.18;
+    transform: scale(0.85);
   }
-  50% { 
-    opacity: 0.5; 
-    transform: scale(1.2); 
+  50% {
+    opacity: 0.4;
+    transform: scale(1.15);
   }
 }
 
 @keyframes lineShimmer {
-  0%, 100% { 
-    opacity: 0.05; 
+  0%, 100% {
+    opacity: 0.04;
   }
-  50% { 
-    opacity: 0.2; 
+  50% {
+    opacity: 0.16;
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

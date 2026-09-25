@@ -1182,7 +1182,7 @@ export default function Gallery2024() {
                     className="min-w-full px-2"
                     onClick={() => setSelectedImage(photo.src)}
                   >
-                    <div className="aspect-square bg-gray-800 overflow-hidden rounded-lg border border-bitconf-primary/30">
+                    <div className="aspect-square bg-bitconf-surface-2 overflow-hidden rounded-lg border border-bitconf-primary/30">
                       <img
                         src={photo.src}
                         alt={photo.alt}
@@ -1236,7 +1236,7 @@ export default function Gallery2024() {
               className="group relative overflow-hidden rounded-lg cursor-pointer transition-all duration-400 ease-out hover:opacity-90"
               onClick={() => setSelectedImage(photo.src)}
             >
-              <div className="aspect-square bg-gray-800 overflow-hidden rounded-lg border border-transparent group-hover:border-bitconf-primary/50 transition-all duration-500">
+              <div className="aspect-square bg-bitconf-surface-2 overflow-hidden rounded-lg border border-transparent group-hover:border-bitconf-primary/50 transition-all duration-500">
                 <img
                   src={photo.src}
                   alt={photo.alt}
@@ -1271,7 +1271,7 @@ export default function Gallery2024() {
             {photosToShow < displayedPhotos.length && (
               <button
                 onClick={photosToShow + 16 >= displayedPhotos.length ? showAllPhotos : showMorePhotos}
-                className="hidden md:flex group bg-bitconf-primary text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 ease-out hover:bg-bitconf-primary/80 items-center gap-2"
+                className="hidden md:flex group bg-bitconf-primary-deep text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 ease-out hover:bg-bitconf-primary/80 items-center gap-2"
               >
                 <svg className="w-5 h-5 transition-transform duration-300 ease-out group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -1302,7 +1302,7 @@ export default function Gallery2024() {
         {/* Stats Section */}
         <div 
           ref={statsRef}
-          className={`group bg-bitconf-dark/50 rounded-lg p-8 border border-bitconf-primary/20 transition-all duration-300 ease-out cursor-pointer hover:bg-bitconf-dark/70 hover:border-bitconf-primary/30 ${
+          className={`group bg-bitconf-surface-2/70 rounded-lg p-8 border border-bitconf-primary/20 transition-all duration-300 ease-out cursor-pointer hover:bg-bitconf-surface-3/80 hover:border-bitconf-primary/30 ${
             isVisible.stats 
               ? 'opacity-100 translate-y-0 scale-100' 
               : 'opacity-0 translate-y-8 scale-95'
