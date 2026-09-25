@@ -170,7 +170,6 @@ export const SPEAKERS_2026: Speaker[] = [
     role: "Senior Product Manager / Public Speaking and Startup Mentor",
     company: "Globant",
     companyLink: "https://www.globant.com",
-    bio: "Self Promotion for Developers - Annoyance or Necessity for a better tomorrow?",
     image: "/speakers/portraits/Roman Gluck.png"
   }
 ];
