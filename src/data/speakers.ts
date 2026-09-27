@@ -170,6 +170,7 @@ export const SPEAKERS_2026: Speaker[] = [
     role: "Senior Product Manager / Public Speaking and Startup Mentor",
     company: "Globant",
     companyLink: "https://www.globant.com",
-    image: "/speakers/portraits/Roman Gluck.png"
+    image: "/speakers/portraits/Roman Gluck.png",
+    linkedinUrl: "https://www.linkedin.com/in/roman-gluck/"
   }
 ];
