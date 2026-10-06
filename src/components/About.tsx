@@ -5,6 +5,11 @@ import { Edition, ordinal, statsSource } from '@/config/editions';
 
 interface AboutProps {
   edition: Edition;
+  /**
+   * Confirmed speakers for an upcoming edition. Passed in rather than stored
+   * on the edition so the tile tracks the line-up as it grows.
+   */
+  speakerCount?: number;
 }
 
 // Counter animation hook
@@ -37,7 +42,7 @@ const useCountAnimation = (end: number, duration: number = 2000, isVisible: bool
   return count;
 };
 
-export default function About({ edition }: AboutProps) {
+export default function About({ edition, speakerCount }: AboutProps) {
   const [isVisible, setIsVisible] = useState({
     title: false,
     cards: false,
@@ -47,14 +52,16 @@ export default function About({ edition }: AboutProps) {
   const cardsRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
 
-  // Figures come from the edition that has actually happened
+  // Figures come from the edition that has figures of its own
   const source = statsSource(edition);
   const stats = source?.stats;
   const isOwnStats = source?.year === edition.year;
+  // An upcoming edition counts its confirmed line-up; a past one reports what it drew.
+  const speakerTotal = stats?.speakers ?? (isOwnStats ? speakerCount ?? 0 : 0);
 
   const editionCount = useCountAnimation(source?.editionNumber ?? 0, 1500, isVisible.stats);
   const attendeesCount = useCountAnimation(stats?.attendees ?? 0, 2000, isVisible.stats);
-  const speakersCount = useCountAnimation(stats?.speakers ?? 0, 1800, isVisible.stats);
+  const speakersCount = useCountAnimation(speakerTotal, 1800, isVisible.stats);
   const dayCount = useCountAnimation(stats?.days ?? 0, 1000, isVisible.stats);
 
   useEffect(() => {
@@ -159,7 +166,7 @@ export default function About({ edition }: AboutProps) {
               : 'opacity-0 translate-y-12 scale-95'
           }`}
         >
-          {!isOwnStats && source && (
+          {source && (
             <div className="text-center text-sm uppercase tracking-wide text-bitconf-text-tertiary mb-6">
               BitConf {source.year} in numbers
             </div>
@@ -179,7 +186,9 @@ export default function About({ edition }: AboutProps) {
               <div className="text-3xl font-bold text-bitconf-primary mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">
                 {attendeesCount}{stats && attendeesCount === stats.attendees ? '+' : ''}
               </div>
-              <div className="text-gray-300 transition-colors duration-300 group-hover:text-white">Attendees</div>
+              <div className="text-gray-300 transition-colors duration-300 group-hover:text-white">
+                {stats?.projected ? 'Expected attendees' : 'Attendees'}
+              </div>
             </div>
             <div className={`transition-all duration-300 ease-out ${
               isVisible.stats ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
@@ -187,7 +196,9 @@ export default function About({ edition }: AboutProps) {
               <div className="text-3xl font-bold text-bitconf-primary mb-2 transition-colors duration-300 group-hover:text-bitconf-turquoise">
                 {speakersCount}
               </div>
-              <div className="text-gray-300 transition-colors duration-300 group-hover:text-white">Speakers</div>
+              <div className="text-gray-300 transition-colors duration-300 group-hover:text-white">
+                {stats?.projected ? 'Speakers confirmed' : 'Speakers'}
+              </div>
             </div>
             <div className={`transition-all duration-300 ease-out ${
               isVisible.stats ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'

@@ -179,6 +179,7 @@ export const SPEAKERS_2026: Speaker[] = [
     company: "Adtelligent",
     companyLink: "https://adtelligent.com",
     bio: "Inside the Recruiter's Mind: How to Ace Your Interview",
-    image: "/speakers/portraits/Inesa Maidanik.png"
+    image: "/speakers/portraits/Inesa Maidanik.png",
+    linkedinUrl: "https://www.linkedin.com/in/inesa-maidanik-3084531a3/"
   }
 ];

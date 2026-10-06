@@ -10,9 +10,15 @@ export interface EditionVenue {
 /** Headline figures for an edition, shown in the animated stat blocks. */
 export interface EditionStats {
   attendees: number;
-  speakers: number;
+  /**
+   * Omitted for an upcoming edition, where the count comes live from the
+   * line-up instead of being restated here every time a speaker is added.
+   */
+  speakers?: number;
   hours: number;
   days: number;
+  /** Figures are targets, not results: the edition has not happened yet. */
+  projected?: boolean;
 }
 
 export interface Edition {
@@ -91,7 +97,14 @@ export const EDITION_2026: Edition = {
   format: '1-Day Event',
   ticketUrl: null,
   status: 'upcoming',
-  stats: null,
+  // Targets, not results. `speakers` is left out on purpose — the homepage
+  // counts the confirmed line-up so the tile never goes stale.
+  stats: {
+    attendees: 150,
+    hours: 6,
+    days: 1,
+    projected: true,
+  },
 };
 
 /** The edition the homepage promotes. */
@@ -104,7 +117,7 @@ export const ALL_EDITIONS: Edition[] = [CURRENT_EDITION, ...PAST_EDITIONS];
 
 /**
  * The edition whose figures a stat block should show: its own once it has
- * happened, otherwise the most recent edition that did.
+ * figures of its own, otherwise the most recent edition that does.
  */
 export function statsSource(edition: Edition): Edition | null {
   if (edition.stats) return edition;
