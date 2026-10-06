@@ -49,8 +49,7 @@ export default function Partners() {
     { name: 'USARB', logo: '/partners/Partner - USARB.png', website: 'https://usarb.md' },
     { name: 'Sweden', logo: '/partners/Partner - Sweden.png', website: 'https://swedenabroad.se/en/embassies/moldova-chisinau/' },
     { name: 'UK', logo: '/partners/Partner - UK.png', website: 'https://www.gov.uk/world/organisations/british-embassy-chisinau' },
-    { name: 'Nortek', logo: '/partners/Partner - Nortek.png', website: 'https://nortek.md' },
-    { name: 'HumanSoft', logo: '/partners/Partner - HumanSoft.png', website: 'https://humansoft.md' }
+    { name: 'Nortek', logo: '/partners/Partner - Nortek.png', website: 'https://nortek.md' }
   ];
 
 
