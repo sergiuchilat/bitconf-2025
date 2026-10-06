@@ -125,7 +125,7 @@ export const SPEAKERS_2025: Speaker[] = [
 /**
  * BitConf 2026 line-up — confirmed speakers only.
  * Roman Fiodorov, Radu Dumbraveanu, Radu Tataru and Sergiu Chilat carry over
- * from 2025; Roman Gluck is new for 2026.
+ * from 2025; Roman Gluck and Inesa Maidanik are new for 2026.
  *
  * 2026 uses bare portraits under /speakers/portraits — the 2025 assets are
  * composed cards with the name, role and a "Conference 2025" badge baked in.
@@ -172,5 +172,13 @@ export const SPEAKERS_2026: Speaker[] = [
     companyLink: "https://www.globant.com",
     image: "/speakers/portraits/Roman Gluck.png",
     linkedinUrl: "https://www.linkedin.com/in/roman-gluck/"
+  },
+  {
+    name: "Inesa Maidanik",
+    role: "Recruiter / Researcher",
+    company: "Adtelligent",
+    companyLink: "https://adtelligent.com",
+    bio: "Inside the Recruiter's Mind: How to Ace Your Interview",
+    image: "/speakers/portraits/Inesa Maidanik.png"
   }
 ];
