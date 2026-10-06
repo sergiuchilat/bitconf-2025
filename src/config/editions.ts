@@ -79,8 +79,8 @@ export const EDITION_2026: Edition = {
   year: 2026,
   editionNumber: 5,
   href: '/',
-  date: 'November 16, 2026',
-  dateISO: '2026-11-16',
+  date: 'November 14, 2026',
+  dateISO: '2026-11-14',
   venue: {
     name: 'Nortek Center, Bălți',
     url: 'https://nortek.md/',
