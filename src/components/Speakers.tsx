@@ -105,7 +105,9 @@ export default function Speakers({
                     </a>
                   )}
                 </div>
-                <p className="text-bitconf-primary font-medium mb-2">{speaker.role}</p>
+                {speaker.role && (
+                  <p className="text-bitconf-primary font-medium mb-2">{speaker.role}</p>
+                )}
                 <p className="text-bitconf-text-secondary text-sm mb-3">
                   {speaker.companyLink ? (
                     <a href={speaker.companyLink} target="_blank" rel="noopener noreferrer" className="underline">

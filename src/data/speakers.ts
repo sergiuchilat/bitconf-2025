@@ -1,6 +1,7 @@
 export interface Speaker {
   name: string;
-  role: string;
+  /** Job title; omitted when we only have the affiliation. */
+  role?: string;
   company: string;
   companyLink?: string;
   /** Talk or workshop title; omitted while the programme is still being built. */
@@ -125,7 +126,8 @@ export const SPEAKERS_2025: Speaker[] = [
 /**
  * BitConf 2026 line-up — confirmed speakers only.
  * Roman Fiodorov, Radu Dumbraveanu, Radu Tataru and Sergiu Chilat carry over
- * from 2025; Roman Gluck and Inesa Maidanik are new for 2026.
+ * from 2025; Roman Gluck, Inesa Maidanik, Ecaterina Niculcea and Roman
+ * Voinitchi are new for 2026.
  *
  * 2026 uses bare portraits under /speakers/portraits — the 2025 assets are
  * composed cards with the name, role and a "Conference 2025" badge baked in.
@@ -181,5 +183,19 @@ export const SPEAKERS_2026: Speaker[] = [
     bio: "Inside the Recruiter's Mind: How to Ace Your Interview",
     image: "/speakers/portraits/Inesa Maidanik.png",
     linkedinUrl: "https://www.linkedin.com/in/inesa-maidanik-3084531a3/"
+  },
+  // Ecaterina and Roman present this talk together, so they share a bio.
+  {
+    name: "Ecaterina Niculcea",
+    company: "Alecu Russo Balti State University",
+    companyLink: "https://usarb.md",
+    bio: "Making an Educational App Feel Native on Mobile",
+    image: "/speakers/portraits/Ecaterina Niculcea.png"
+  },
+  {
+    name: "Roman Voinitchi",
+    company: "Freelancer",
+    bio: "Making an Educational App Feel Native on Mobile",
+    image: "/speakers/portraits/Roman Voinitchi.png"
   }
 ];
