@@ -196,6 +196,7 @@ export const SPEAKERS_2026: Speaker[] = [
     name: "Roman Voinitchi",
     company: "Freelancer",
     bio: "Making an Educational App Feel Native on Mobile",
-    image: "/speakers/portraits/Roman Voinitchi.png"
+    image: "/speakers/portraits/Roman Voinitchi.png",
+    linkedinUrl: "https://www.linkedin.com/in/roman-voinitchi/"
   }
 ];
