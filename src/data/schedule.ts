@@ -266,7 +266,7 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     events: [
       {
         title: 'Talk to be announced',
-        speaker: 'Sergiu Chilat (DevOps Engineer & NOC Team Lead at Adtelligent)',
+        speaker: 'Speaker to be announced',
         type: 'talk',
         track: 'presentations',
         duration: '30 min'
@@ -286,12 +286,13 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
       }
     ]
   },
+  // Sergiu closes out the speaker line-up, right before the closing remarks.
   {
     time: '16:15 - 16:45',
     events: [
       {
         title: 'Talk to be announced',
-        speaker: 'Speaker to be announced',
+        speaker: 'Sergiu Chilat (DevOps Engineer & NOC Team Lead at Adtelligent)',
         type: 'talk',
         track: 'presentations',
         duration: '30 min'
