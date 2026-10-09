@@ -169,7 +169,7 @@ export const AVATARS_2026: ScheduleAvatars = {
  */
 export const SCHEDULE_2026: ScheduleSlot[] = [
   { time: '9:45 - 10:15', events: [{ title: 'Registration & Coffee', speaker: '', type: 'break', duration: '30 min' }] },
-  { time: '10:15 - 10:30', events: [{ title: 'Opening Remarks', speaker: '', type: 'keynote', duration: '15 min' }] },
+  { time: '10:15 - 10:30', events: [{ title: 'Opening Remarks', speaker: 'Natalia Gaşiţoi, Alecu Russo Balti State University, Rector. Ina Ciobanu, SREM Faculty Dean', type: 'keynote', duration: '15 min' }] },
   {
     time: '10:30 - 11:00 / 10:30 - 12:30',
     events: [
