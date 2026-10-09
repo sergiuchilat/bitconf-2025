@@ -273,6 +273,31 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
       }
     ]
   },
-  { time: '15:45 - 16:00', events: [{ title: 'Closing Remarks', speaker: '', type: 'keynote', duration: '15 min' }] },
-  { time: '16:00 - 17:00', events: [{ title: 'Conference Ends', speaker: 'Networking', type: 'networking', duration: '1 hour' }] }
+  // Open slots — kept on the timeline so the day's capacity is visible; filled as speakers confirm.
+  {
+    time: '15:45 - 16:15',
+    events: [
+      {
+        title: 'Talk to be announced',
+        speaker: 'Speaker to be announced',
+        type: 'talk',
+        track: 'presentations',
+        duration: '30 min'
+      }
+    ]
+  },
+  {
+    time: '16:15 - 16:45',
+    events: [
+      {
+        title: 'Talk to be announced',
+        speaker: 'Speaker to be announced',
+        type: 'talk',
+        track: 'presentations',
+        duration: '30 min'
+      }
+    ]
+  },
+  { time: '16:45 - 17:00', events: [{ title: 'Closing Remarks', speaker: '', type: 'keynote', duration: '15 min' }] },
+  { time: '17:00 - 17:45', events: [{ title: 'Conference Ends', speaker: 'Networking', type: 'networking', duration: '45 min' }] }
 ];
