@@ -125,9 +125,9 @@ export const SPEAKERS_2025: Speaker[] = [
 
 /**
  * BitConf 2026 line-up — confirmed speakers only.
- * Roman Fiodorov, Radu Dumbraveanu, Radu Tataru and Sergiu Chilat carry over
- * from 2025; Roman Gluck, Inesa Maidanik, Ecaterina Niculcea and Roman
- * Voinitchi are new for 2026.
+ * Roman Fiodorov, Radu Dumbraveanu, Radu Tataru, Sergiu Chilat and Diana Lari
+ * carry over from 2025; Roman Gluck, Inesa Maidanik, Ecaterina Niculcea and
+ * Roman Voinitchi are new for 2026.
  *
  * 2026 uses bare portraits under /speakers/portraits — the 2025 assets are
  * composed cards with the name, role and a "Conference 2025" badge baked in.
@@ -198,5 +198,12 @@ export const SPEAKERS_2026: Speaker[] = [
     bio: "Making an Educational App Feel Native on Mobile",
     image: "/speakers/portraits/Roman Voinitchi.png",
     linkedinUrl: "https://www.linkedin.com/in/roman-voinitchi/"
+  },
+  {
+    name: "Diana Lari",
+    role: "Technical Product Owner",
+    company: "_",
+    image: "/speakers/portraits/Diana Lari.png",
+    linkedinUrl: "https://www.linkedin.com/in/lari-diana-05972315a/"
   }
 ];
