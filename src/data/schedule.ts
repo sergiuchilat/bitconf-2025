@@ -243,7 +243,7 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     events: [
       {
         title: 'Business Panel',
-        speaker: 'Speakers to be announced',
+        speaker: 'Moderated by Corina Negara (Nortek Administrator). Panelists to be announced',
         type: 'panel',
         duration: '1 hour'
       }
