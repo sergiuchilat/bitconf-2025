@@ -25,7 +25,7 @@ const cards = [
     id: 'schedule',
     title: 'Schedule',
     description:
-      'A full day of talks and hands-on workshops across parallel tracks. The programme lands once speakers are confirmed.',
+      'A first draft of the programme is up — a full day of talks, a parallel workshop and a business panel. Times may still shift.',
     accent: 'text-bitconf-secondary',
     ring: 'border-bitconf-secondary/20 hover:border-bitconf-secondary/40',
     icon: (

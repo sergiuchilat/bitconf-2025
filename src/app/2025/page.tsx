@@ -12,6 +12,7 @@ import Footer from '@/components/Footer';
 import PastEditionBanner from '@/components/PastEditionBanner';
 import { EDITION_2025, editionLabel } from '@/config/editions';
 import { SPEAKERS_2025 } from '@/data/speakers';
+import { SCHEDULE_2025, AVATARS_2025 } from '@/data/schedule';
 
 const edition = EDITION_2025;
 
@@ -54,7 +55,7 @@ export default function Edition2025Page() {
       <Hero edition={edition} secondary={{ label: 'View Schedule', targetId: 'schedule' }} />
       <About edition={edition} />
       <Speakers speakers={SPEAKERS_2025} />
-      <Schedule />
+      <Schedule edition={edition} slots={SCHEDULE_2025} avatars={AVATARS_2025} />
       <Gallery2024 />
       <Partners />
       <Registration edition={edition} />

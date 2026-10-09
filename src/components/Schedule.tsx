@@ -1,21 +1,16 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { Edition } from '@/config/editions';
+import { ScheduleAvatars, ScheduleEvent, ScheduleSlot } from '@/data/schedule';
 
-interface ScheduleEvent {
-  title: string;
-  speaker: string;
-  type: string;
-  track?: string;
-  duration?: string;
+interface ScheduleProps {
+  edition: Edition;
+  slots: ScheduleSlot[];
+  avatars: ScheduleAvatars;
 }
 
-interface ScheduleSlot {
-  time: string;
-  events: ScheduleEvent[];
-}
-
-export default function Schedule() {
+export default function Schedule({ edition, slots: scheduleSlots, avatars }: ScheduleProps) {
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState({
     title: false,
@@ -34,7 +29,7 @@ export default function Schedule() {
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>BIT Conference 2025 - Schedule</title>
+  <title>BIT Conference ${edition.year} - Schedule</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: Arial, sans-serif; padding: 8px 12px; background: white; color: #000; font-size: 12px; }
@@ -60,8 +55,8 @@ export default function Schedule() {
 </head>
 <body>
   <div class="header">
-    <h1>BIT Conference 2025</h1>
-    <div class="date">November 8, 2025 | Nortek Center, Bălți</div>
+    <h1>BIT Conference ${edition.year}</h1>
+    <div class="date">${edition.date ?? 'Date to be announced'}${edition.venue ? ` | ${edition.venue.name}` : ''}</div>
   </div>
   <div class="schedule">`;
 
@@ -128,47 +123,9 @@ export default function Schedule() {
   // Function to get speaker avatars based on speaker name(s)
   const getSpeakerAvatars = (speaker: string): string[] => {
     const speakerName = speaker.toLowerCase();
-    const avatars: string[] = [];
-
-    // Map speaker names to their avatar files
-    if (speakerName.includes('adrian romanov')) {
-      avatars.push('/schedule/Schedule photo - Adrian Romanov.png');
-    }
-    if (speakerName.includes('diana lari')) {
-      avatars.push('/schedule/Schedule photo - Diana Lari.png');
-    }
-    if (speakerName.includes('eugen zagorcea')) {
-      avatars.push('/schedule/Schedule photo - Eugen Zagorcea.png');
-    }
-    if (speakerName.includes('petru maleru')) {
-      avatars.push('/schedule/Schedule photo - Petru Maleru.png');
-    }
-    if (speakerName.includes('radu dumbraveanu')) {
-      avatars.push('/schedule/Schedule photo - Radu Dumbraveanu.png');
-    }
-    if (speakerName.includes('radu tataru')) {
-      avatars.push('/schedule/Schedule photo - Radu Tataru.png');
-    }
-    if (speakerName.includes('roman fiodorov')) {
-      avatars.push('/schedule/Schedule photo - Roman Fiodorov.png');
-    }
-    if (speakerName.includes('sergiu chilat')) {
-      avatars.push('/schedule/Schedule photo - Sergiu Chilat.png');
-    }
-    if (speakerName.includes('veronica covali')) {
-      avatars.push('/schedule/Schedule photo - Veronica Covali.png');
-    }
-    if (speakerName.includes('cristina volontir')) {
-      avatars.push('/schedule/Schedule photo - Cristina Volontir.png');
-    }
-    if (speakerName.includes('marina zubcu')) {
-      avatars.push('/schedule/Schedule photo - Marina Zubcu.png');
-    }
-    if (speakerName.includes('pavel curcovici')) {
-      avatars.push('/schedule/Schedule photo - Pavel Curcovici.png');
-    }
-
-    return avatars;
+    return Object.entries(avatars)
+      .filter(([name]) => speakerName.includes(name))
+      .map(([, avatar]) => avatar);
   };
 
   // Function to render speaker avatars (single or multiple)
@@ -253,121 +210,6 @@ export default function Schedule() {
       observer.disconnect();
     };
   }, []);
-  // Create a structured schedule with parallel sessions grouped together
-  const scheduleSlots: ScheduleSlot[] = [
-    { time: '9:45 - 10:15', events: [{ title: 'Registration & Coffee', speaker: '', type: 'break', duration: '30 min' }] },
-    { time: '10:15 - 10:30', events: [{ title: 'Opening Remarks', speaker: 'Natalia Gaşiţoi, Alecu Russo Balti State University, Rector. Ina Ciobanu, SREM Faculty Dean', type: 'keynote', duration: '15 min' }] },
-    {
-      time: '10:30 - 11:00 / 10:30 - 12:30',
-      events: [
-        {
-          title: 'Chasing the AI Hype: A Senior Developer’s Perspective.',
-          speaker: 'Roman Fiodorov(Founder Filosoft Company, Tech-Lead at Aiomed.com)',
-          type: 'talk',
-          track: 'presentations',
-          duration: '30 min'
-        },
-        {
-          title: 'Bug Hunting – how a QA thinks',
-          speaker: 'Cristina Volontir, Marina Zubcu(Orange Systems)',
-          type: 'workshop',
-          track: 'workshops',
-          duration: '2 hours'
-        }
-      ]
-    },
-    {
-      time: '11:00 - 11:30',
-      events: [
-        {
-          title: 'Pitch It. Scope It. Deliver It. How to sell ambitiously and deliver delight by design',
-          speaker: 'Radu Tataru (Delivery Director SER Region, Amdaris)',
-          type: 'talk',
-          track: 'presentations',
-          duration: '30 min'
-        }
-      ]
-    },
-    {
-      time: '11:30 - 12:00',
-      events: [
-        {
-          title: 'Collected Insights (2024–2025): Docker, Java, Vim, Linux, etc.',
-          speaker: 'Radu Dumbraveanu (Tech Leader at AmSoft)',
-          type: 'talk',
-          track: 'presentations',
-          duration: '30 min'
-        }
-      ]
-    },
-    {
-      time: '12:00 - 12:30',
-      events: [
-        {
-          title: 'I Logged Out: What Happens After You Leave IT?',
-          speaker: 'Diana Lari (Former Product Owner)',
-          type: 'talk',
-          track: 'presentations',
-          duration: '30 min'
-        }
-      ]
-    },
-    {
-      time: '12:30 - 13:00',
-      events: [
-        {
-          title: 'How to test an API in the era of AI',
-          speaker: 'Eugen Zagorcea (Principal QA Engineer, flow48.com)',
-          type: 'talk',
-          track: 'presentations',
-          duration: '30 min'
-        }
-      ]
-    },
-    { time: '13:00 - 13:45', events: [{ title: 'Lunch', speaker: '', type: 'break', duration: '45 min' }] },
-    {
-      time: '13:45 - 15:00',
-      events: [
-        {
-          title: 'Tech Movers: From Ideas to Startups',
-          speaker: 'Petru Maleru (General Manager at ARA), Veronica Covali (Co-Founder at stilio.md), Pavel Curcovici(Tekwill Balti Administrator)',
-          type: 'talk',
-          track: 'presentations',
-          duration: '30 min'
-        }
-      ]
-    },
-    {
-      time: '15:00 - 15:30',
-      events: [
-        {
-          title: 'From Code to Impact: How to Bring Value Beyond Code',
-          speaker: 'Adrian Romanov (Full-stack Software Engineer at Cegeka)',
-          type: 'talk',
-          track: 'presentations',
-          duration: '30 min'
-        }
-      ]
-    },
-    {
-      time: '15:30 - 16:00',
-      events: [
-        {
-          title: 'Balancing AI and Traditional Methods in IT: From Academia to Industry',
-          speaker: 'Sergiu Chilat(DevOps at Adteligent)',
-          type: 'presentation',
-          duration: '30 min'
-        }
-      ]
-    },
-    {
-      time: '16:00 - 16:15',
-      events: [{
-        title: 'Closing Keynote / Panel Discussion.', speaker: 'Negara Corina, Nortek Administrator. Vitalie Ticau, Head of Math and Computer Science department', type: 'keynote', duration: '15 min' }]
-    },
-    { time: '16:15 - 17:00', events: [{ title: 'Conference Ends', speaker: 'Networking', type: 'networking', duration: '45 min' }] }
-  ];
-
 
   const getEventIcon = (type: string) => {
     const iconClass = "w-5 h-5 text-bitconf-accent";
@@ -528,14 +370,14 @@ export default function Schedule() {
               <svg className="w-6 h-6 text-bitconf-turquoise" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              <h3 className="text-3xl font-bold text-white">November 8, 2025</h3>
+              <h3 className="text-3xl font-bold text-white">{edition.date ?? 'Date to be announced'}</h3>
               <svg className="w-6 h-6 text-bitconf-turquoise" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
             </div>
             <p className="text-gray-300 text-lg">
-              <span className="text-bitconf-turquoise font-semibold">Nortek Center, Bălți</span> • Full Day Event
+              <span className="text-bitconf-turquoise font-semibold">{edition.venue?.name ?? 'Venue to be announced'}</span> • Full Day Event
             </p>
           </div>
         </div>

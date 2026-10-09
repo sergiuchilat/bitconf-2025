@@ -3,6 +3,7 @@ import Header, { NavItem } from '@/components/Header';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Speakers from '@/components/Speakers';
+import Schedule from '@/components/Schedule';
 import ComingSoon from '@/components/ComingSoon';
 import PastEditions from '@/components/PastEditions';
 import Partners from '@/components/Partners';
@@ -11,12 +12,14 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import { CURRENT_EDITION, editionLabel } from '@/config/editions';
 import { SPEAKERS_2026 } from '@/data/speakers';
+import { SCHEDULE_2026, AVATARS_2026 } from '@/data/schedule';
 
 const edition = CURRENT_EDITION;
 
 const navItems: NavItem[] = [
   { href: '#about', label: 'About' },
   { href: '#speakers', label: 'Speakers' },
+  { href: '#schedule', label: 'Schedule' },
   { href: '#coming-soon', label: "What's coming" },
   { href: '#past-editions', label: 'Past editions' },
   { href: '#partners', label: 'Partners' },
@@ -60,6 +63,7 @@ export default function Home() {
         subtitle={`First names confirmed for BitConf ${edition.year} — more to come`}
         emptyMessage="The rest of the line-up is being finalised. Want to join it? Submit a proposal below."
       />
+      <Schedule edition={edition} slots={SCHEDULE_2026} avatars={AVATARS_2026} />
       <ComingSoon edition={edition} />
       <PastEditions />
       <Partners />
