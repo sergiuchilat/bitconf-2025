@@ -203,6 +203,7 @@ export const SPEAKERS_2026: Speaker[] = [
     name: "Diana Lari",
     role: "Technical Product Owner",
     company: "_",
+    bio: "The Grass Is Greener? Notes from the Other Side of IT",
     image: "/speakers/portraits/Diana Lari.png",
     linkedinUrl: "https://www.linkedin.com/in/lari-diana-05972315a/"
   }
