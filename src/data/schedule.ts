@@ -324,6 +324,6 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
       }
     ]
   },
-  { time: '16:45 - 17:00', events: [{ title: 'Closing Remarks', speaker: '', type: 'keynote', duration: '15 min' }] },
+  { time: '16:45 - 17:00', events: [{ title: 'Closing Remarks', speaker: 'Vitalie Ticau, Head of Math and Computer Science department', type: 'keynote', duration: '15 min' }] },
   { time: '17:00 - 17:45', events: [{ title: 'Conference Ends', speaker: 'Networking', type: 'networking', duration: '45 min' }] }
 ];
