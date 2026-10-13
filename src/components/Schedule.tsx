@@ -105,6 +105,9 @@ export default function Schedule({ edition, slots: scheduleSlots, avatars }: Sch
       if (prefix) content += `<strong>${prefix}</strong> - `;
       content += event.title;
       if (event.speaker) content += ` - <strong>${event.speaker}</strong>`;
+      if (event.panelists) {
+        content += ` - Panelists: ${event.panelists.map((p) => (p.name === 'TBA' ? 'TBA' : p.detail ? `${p.name} (${p.detail})` : p.name)).join(', ')}`;
+      }
 
       return `<div class="${eventClass}"><div class="event-content">${content}</div></div>`;
     };
@@ -510,11 +513,35 @@ export default function Schedule({ edition, slots: scheduleSlots, avatars }: Sch
                 {/* Single events - full width */}
                   <div className="grid grid-cols-1">
                     {group.slots[0].events.map((event, eventIndex) => (
-                      <div key={eventIndex} className={`group rounded-xl p-4 border backdrop-blur-sm bg-bitconf-surface-2/70 border-bitconf-hairline cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/40 hover:border-bitconf-primary/50 h-32 flex items-center`}>
+                      <div key={eventIndex} className={`group rounded-xl p-4 border backdrop-blur-sm bg-bitconf-surface-2/70 border-bitconf-hairline cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/40 hover:border-bitconf-primary/50 min-h-32 flex items-center`}>
                         <div className="flex items-start gap-4">
                           {/* Icon or Speaker Photo */}
                           <div className="flex-shrink-0">
-                            {getSpeakerAvatars(event.speaker).length > 0 ? (
+                            {event.panelists ? (
+                              /* Overlapping panelist avatars, like the 2025 panel; generic head until a portrait lands */
+                              <div className="flex -space-x-2">
+                                {event.panelists.map((panelist, panelistIndex) => (
+                                  <div
+                                    key={panelistIndex}
+                                    className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-600 bg-gray-600 flex items-center justify-center transition-all duration-300 ease-out group-hover:border-bitconf-primary/50"
+                                    style={{ zIndex: event.panelists!.length - panelistIndex }}
+                                    title={panelist.name}
+                                  >
+                                    {avatars[panelist.name.toLowerCase()] ? (
+                                      <img
+                                        src={avatars[panelist.name.toLowerCase()]}
+                                        alt={panelist.name}
+                                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                      />
+                                    ) : (
+                                      <svg className="w-5 h-5 text-bitconf-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                      </svg>
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            ) : getSpeakerAvatars(event.speaker).length > 0 ? (
                               renderSpeakerAvatars(event.speaker, 'bitconf-primary')
                             ) : (
                               <div className={`w-12 h-12 rounded-full flex items-center justify-center ${getEventColor(event.type)} transition-all duration-300 ease-out`}>
@@ -529,6 +556,11 @@ export default function Schedule({ edition, slots: scheduleSlots, avatars }: Sch
                             <h4 className="text-lg font-semibold text-white leading-tight mb-2 transition-colors duration-300 group-hover:text-bitconf-primary">{event.title}</h4>
                             {event.speaker && (
                               <p className="text-bitconf-accent text-sm transition-colors duration-300 group-hover:text-white group-hover:font-medium">{event.speaker}</p>
+                            )}
+                            {event.panelists && (
+                              <p className="text-bitconf-accent text-sm mt-1 transition-colors duration-300 group-hover:text-white group-hover:font-medium">
+                                Panelists: {event.panelists.map((p) => (p.name === 'TBA' ? 'TBA' : p.detail ? `${p.name} (${p.detail})` : p.name)).join(', ')}
+                              </p>
                             )}
                             {event.duration && (
                               <div className="mt-2">

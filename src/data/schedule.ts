@@ -9,6 +9,11 @@ export interface ScheduleEvent {
    * to, starting from its own. The card is drawn spanning all of them.
    */
   spanSlots?: number;
+  /**
+   * Panel members, each shown with an avatar (from the avatar map, generic
+   * icon otherwise) and name. "TBA" marks a seat not yet filled.
+   */
+  panelists?: { name: string; detail?: string }[];
 }
 
 export interface ScheduleSlot {
@@ -250,9 +255,14 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     events: [
       {
         title: 'Business Panel',
-        speaker: 'Moderated by Corina Negara (Nortek Administrator). Panelists: Anton Perkin (CEO at FusionWorks, MDC.md Organizer) and 2 more to be announced',
+        speaker: 'Moderated by Corina Negara (Nortek Administrator)',
         type: 'panel',
-        duration: '1 hour'
+        duration: '1 hour',
+        panelists: [
+          { name: 'Anton Perkin', detail: 'CEO at FusionWorks, MDC.md Organizer' },
+          { name: 'TBA', detail: 'Panelist to be announced' },
+          { name: 'TBA', detail: 'Panelist to be announced' }
+        ]
       }
     ]
   },
