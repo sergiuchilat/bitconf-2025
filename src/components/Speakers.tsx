@@ -69,7 +69,7 @@ export default function Speakers({
 
         <div className="flex flex-wrap justify-center gap-8">
           {finalSpeakers.map((speaker, index) => (
-            <div key={index} className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)] bg-bitconf-surface-2 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-bitconf-primary/20">
+            <div key={index} className="group w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)] bg-bitconf-surface-2 rounded-lg shadow-md overflow-hidden border border-bitconf-primary/20 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-bitconf-primary/15 hover:border-bitconf-primary/50">
               <div className={`${frameClass} bc-speaker-frame flex items-center justify-center overflow-hidden`}>
                 {speaker.name === "TBA" ? (
                   <div className="text-center text-white">
@@ -78,7 +78,7 @@ export default function Speakers({
                     <div className="text-sm opacity-75">Coming Soon</div>
                   </div>
                 ) : speaker.image ? (
-                  <img src={speaker.image} alt={speaker.name} className="h-full w-full object-cover object-top"/>
+                  <img src={speaker.image} alt={speaker.name} className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"/>
                 ) : (
                   <div
                     className="text-5xl font-semibold tracking-tight text-white/90 select-none"
@@ -90,7 +90,7 @@ export default function Speakers({
               </div>
               <div className="p-6">
                 <div className="flex items-center justify-between mb-1">
-                  <h3 className="text-xl font-semibold text-white">{speaker.name}</h3>
+                  <h3 className="text-xl font-semibold text-white transition-colors duration-300 group-hover:text-bitconf-primary">{speaker.name}</h3>
                   {speaker.linkedinUrl && (
                     <a
                       href={speaker.linkedinUrl}

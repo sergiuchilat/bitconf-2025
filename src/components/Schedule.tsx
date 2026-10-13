@@ -436,7 +436,7 @@ export default function Schedule({ edition, slots: scheduleSlots, avatars }: Sch
                         </div>
                         <div className="space-y-4">
                           {slot.events.filter(e => e.track !== 'workshops').map((event, eventIndex) => (
-                            <div key={eventIndex} className={`group rounded-xl p-4 border backdrop-blur-sm bg-bitconf-surface-2/60 ${getEventColor(event.type)} cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/30 hover:border-bitconf-secondary/50 h-40 flex flex-col justify-between`}>
+                            <div key={eventIndex} className={`group rounded-xl p-4 border backdrop-blur-sm bg-bitconf-surface-2/60 ${getEventColor(event.type)} cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/30 hover:border-bitconf-secondary/50 hover:-translate-y-1 hover:shadow-lg hover:shadow-bitconf-secondary/10 h-40 flex flex-col justify-between`}>
                               <div className="flex items-start gap-4 h-full">
                                 <div className="flex-shrink-0">
                                   {renderSpeakerAvatars(event.speaker, 'bitconf-secondary')}
@@ -478,7 +478,7 @@ export default function Schedule({ edition, slots: scheduleSlots, avatars }: Sch
                       </div>
                       <div className="flex-grow h-px bg-gradient-to-r from-bitconf-primary/40 to-transparent"></div>
                     </div>
-                    <div className={`group rounded-xl p-4 border backdrop-blur-sm bg-bitconf-surface-2/60 ${getEventColor(group.workshop.type)} cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/30 hover:border-bitconf-accent/50 flex-grow flex flex-col justify-between`}>
+                    <div className={`group rounded-xl p-4 border backdrop-blur-sm bg-bitconf-surface-2/60 ${getEventColor(group.workshop.type)} cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/30 hover:border-bitconf-accent/50 hover:-translate-y-1 hover:shadow-lg hover:shadow-bitconf-accent/10 flex-grow flex flex-col justify-between`}>
                       <div className="flex items-start gap-4 h-full">
                         <div className="flex-shrink-0">
                           {renderSpeakerAvatars(group.workshop.speaker, 'bitconf-accent')}
@@ -513,7 +513,7 @@ export default function Schedule({ edition, slots: scheduleSlots, avatars }: Sch
                 {/* Single events - full width */}
                   <div className="grid grid-cols-1">
                     {group.slots[0].events.map((event, eventIndex) => (
-                      <div key={eventIndex} className={`group rounded-xl p-4 border backdrop-blur-sm bg-bitconf-surface-2/70 border-bitconf-hairline cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/40 hover:border-bitconf-primary/50 min-h-32 flex items-center`}>
+                      <div key={eventIndex} className={`group rounded-xl p-4 border backdrop-blur-sm bg-bitconf-surface-2/70 border-bitconf-hairline cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/40 hover:border-bitconf-primary/50 hover:-translate-y-1 hover:shadow-lg hover:shadow-bitconf-primary/10 min-h-32 flex items-center`}>
                         <div className="flex items-start gap-4">
                           {/* Icon or Speaker Photo */}
                           <div className="flex-shrink-0">
