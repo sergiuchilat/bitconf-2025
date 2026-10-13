@@ -265,6 +265,15 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
         type: 'talk',
         track: 'presentations',
         duration: '30 min'
+      },
+      // Afternoon workshop slot, held open until a workshop is confirmed.
+      {
+        title: 'Workshop to be announced',
+        speaker: 'Speaker to be announced',
+        type: 'workshop',
+        track: 'workshops',
+        duration: '2 hours',
+        spanSlots: 4
       }
     ]
   },
