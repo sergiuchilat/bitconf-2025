@@ -127,7 +127,8 @@ export const SPEAKERS_2025: Speaker[] = [
  * BitConf 2026 line-up — confirmed speakers only.
  * Roman Fiodorov, Radu Dumbraveanu, Radu Tataru, Sergiu Chilat and Diana Lari
  * carry over from 2025; Roman Gluck, Inesa Maidanik, Ecaterina Niculcea,
- * Roman Voinitchi and Anton Perkin are new for 2026.
+ * Roman Voinitchi, Anton Perkin, Vitalie Jicol and Cristian Brînză are new
+ * for 2026.
  *
  * 2026 uses bare portraits under /speakers/portraits — the 2025 assets are
  * composed cards with the name, role and a "Conference 2025" badge baked in.
@@ -213,10 +214,20 @@ export const SPEAKERS_2026: Speaker[] = [
     company: "FusionWorks",
     companyLink: "https://fusion.works"
   },
+  {
+    name: "Vitalie Jicol",
+    role: "DevOps Engineer",
+    company: "_",
+    bio: "Drumul către primul job începe cu un CV bine realizat"
+  },
+  {
+    name: "Cristian Brînză",
+    role: "UX/UI Designer",
+    company: "_",
+    bio: "Principii euristice pentru decizii simple în design (și viața de zi cu zi)"
+  },
   // Placeholders for speakers still being confirmed; the card renders a
   // "Coming Soon" tile for name === "TBA".
-  { name: "TBA", company: "" },
-  { name: "TBA", company: "" },
   { name: "TBA", company: "" },
   { name: "TBA", company: "" }
 ];

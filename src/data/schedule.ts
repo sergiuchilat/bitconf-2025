@@ -281,21 +281,20 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     time: '15:15 - 15:45',
     events: [
       {
-        title: 'Talk to be announced',
-        speaker: 'Speaker to be announced',
+        title: 'Drumul către primul job începe cu un CV bine realizat',
+        speaker: 'Vitalie Jicol (DevOps Engineer)',
         type: 'talk',
         track: 'presentations',
         duration: '30 min'
       }
     ]
   },
-  // Open slots — kept on the timeline so the day's capacity is visible; filled as speakers confirm.
   {
     time: '15:45 - 16:15',
     events: [
       {
-        title: 'Talk to be announced',
-        speaker: 'Speaker to be announced',
+        title: 'Principii euristice pentru decizii simple în design (și viața de zi cu zi)',
+        speaker: 'Cristian Brînză (UX/UI Designer)',
         type: 'talk',
         track: 'presentations',
         duration: '30 min'
