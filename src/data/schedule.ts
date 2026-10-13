@@ -291,7 +291,7 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     time: '15:15 - 15:45',
     events: [
       {
-        title: 'Drumul către primul job începe cu un CV bine realizat',
+        title: 'The Road to Your First Job Starts with a Well-Crafted CV',
         speaker: 'Vitalie Jicol (DevOps Engineer)',
         type: 'talk',
         track: 'presentations',
@@ -303,7 +303,7 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     time: '15:45 - 16:15',
     events: [
       {
-        title: 'Principii euristice pentru decizii simple în design (și viața de zi cu zi)',
+        title: 'Heuristic Principles for Simple Decisions in Design (and Everyday Life)',
         speaker: 'Cristian Brînză (UX/UI Designer)',
         type: 'talk',
         track: 'presentations',

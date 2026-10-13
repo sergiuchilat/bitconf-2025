@@ -218,13 +218,13 @@ export const SPEAKERS_2026: Speaker[] = [
     name: "Vitalie Jicol",
     role: "DevOps Engineer",
     company: "_",
-    bio: "Drumul către primul job începe cu un CV bine realizat"
+    bio: "The Road to Your First Job Starts with a Well-Crafted CV"
   },
   {
     name: "Cristian Brînză",
     role: "UX/UI Designer",
     company: "_",
-    bio: "Principii euristice pentru decizii simple în design (și viața de zi cu zi)"
+    bio: "Heuristic Principles for Simple Decisions in Design (and Everyday Life)"
   },
   // Placeholders for speakers still being confirmed; the card renders a
   // "Coming Soon" tile for name === "TBA".
