@@ -250,7 +250,7 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     events: [
       {
         title: 'Business Panel',
-        speaker: 'Moderated by Corina Negara (Nortek Administrator). Panelists to be announced',
+        speaker: 'Moderated by Corina Negara (Nortek Administrator). Panelists: Anton Perkin (CEO at FusionWorks, MDC.md Organizer) and 2 more to be announced',
         type: 'panel',
         duration: '1 hour'
       }
