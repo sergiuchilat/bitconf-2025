@@ -4,6 +4,11 @@ export interface ScheduleEvent {
   type: string;
   track?: string;
   duration?: string;
+  /**
+   * For a workshops-track event: how many main-track slots it runs parallel
+   * to, starting from its own. The card is drawn spanning all of them.
+   */
+  spanSlots?: number;
 }
 
 export interface ScheduleSlot {
@@ -38,7 +43,7 @@ export const SCHEDULE_2025: ScheduleSlot[] = [
   { time: '9:45 - 10:15', events: [{ title: 'Registration & Coffee', speaker: '', type: 'break', duration: '30 min' }] },
   { time: '10:15 - 10:30', events: [{ title: 'Opening Remarks', speaker: 'Natalia Gaşiţoi, Alecu Russo Balti State University, Rector. Ina Ciobanu, SREM Faculty Dean', type: 'keynote', duration: '15 min' }] },
   {
-    time: '10:30 - 11:00 / 10:30 - 12:30',
+    time: '10:30 - 11:00',
     events: [
       {
         title: 'Chasing the AI Hype: A Senior Developer’s Perspective.',
@@ -52,7 +57,8 @@ export const SCHEDULE_2025: ScheduleSlot[] = [
         speaker: 'Cristina Volontir, Marina Zubcu(Orange Systems)',
         type: 'workshop',
         track: 'workshops',
-        duration: '2 hours'
+        duration: '2 hours',
+        spanSlots: 4
       }
     ]
   },
@@ -171,7 +177,7 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
   { time: '9:45 - 10:15', events: [{ title: 'Registration & Coffee', speaker: '', type: 'break', duration: '30 min' }] },
   { time: '10:15 - 10:30', events: [{ title: 'Opening Remarks', speaker: 'Natalia Gaşiţoi, Alecu Russo Balti State University, Rector. Ina Ciobanu, SREM Faculty Dean', type: 'keynote', duration: '15 min' }] },
   {
-    time: '10:30 - 11:00 / 10:30 - 12:30',
+    time: '10:30 - 11:00',
     events: [
       {
         title: 'Chasing the AI Hype: A Senior Developer’s Perspective',
@@ -185,7 +191,8 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
         speaker: 'Inesa Maidanik (Recruiter / Researcher at Adtelligent)',
         type: 'workshop',
         track: 'workshops',
-        duration: '2 hours'
+        duration: '2 hours',
+        spanSlots: 4
       }
     ]
   },

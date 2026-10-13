@@ -260,6 +260,23 @@ export default function Schedule({ edition, slots: scheduleSlots, avatars }: Sch
     }
   };
 
+  // A workshop with spanSlots runs parallel to that many main-track slots; those
+  // slots render as one two-column group so the workshop card spans them visually.
+  const slotGroups: { slots: ScheduleSlot[]; workshop?: ScheduleEvent }[] = [];
+  for (let i = 0; i < scheduleSlots.length; ) {
+    const workshop = scheduleSlots[i].events.find((e) => e.track === 'workshops');
+    const span = workshop ? Math.max(workshop.spanSlots ?? 1, 1) : 1;
+    slotGroups.push({ slots: scheduleSlots.slice(i, i + span), workshop });
+    i += span;
+  }
+
+  // "10:30 - 11:00" ... "12:00 - 12:30" -> "10:30 - 12:30"
+  const groupTimeRange = (slots: ScheduleSlot[]) => {
+    const start = slots[0].time.split(' - ')[0];
+    const end = slots[slots.length - 1].time.split(' - ').pop();
+    return `${start} - ${end}`;
+  };
+
   const getEventColor = (type: string) => {
     switch (type) {
       case 'keynote':
@@ -392,92 +409,107 @@ export default function Schedule({ edition, slots: scheduleSlots, avatars }: Sch
           }`}
         >
           <div className="max-w-5xl mx-auto">
-            {scheduleSlots.map((slot, timeIndex) => (
-              <div key={slot.time} className="mb-8">
+            {slotGroups.map((group) => (
+              group.workshop ? (
+                /* Parallel window: the workshop card spans every main-track slot it runs against */
+                <div key={group.slots[0].time} className="mb-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Presentations column - covered slots keep their own time markers */}
+                  <div>
+                    <div className="text-center mb-4">
+                      <h4 className="text-lg font-bold text-bitconf-secondary flex items-center justify-center gap-2">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2v-6a2 2 0 012-2h8V4a2 2 0 012 2v2z" />
+                        </svg>
+                        Presentations Track
+                      </h4>
+                    </div>
+                    {group.slots.map((slot) => (
+                      <div key={slot.time} className="mb-8 last:mb-0">
+                        <div className="flex items-center mb-4">
+                          <div className="text-bitconf-primary font-bold text-xl mr-4">
+                            {slot.time}
+                          </div>
+                          <div className="flex-grow h-px bg-gradient-to-r from-bitconf-primary/40 to-transparent"></div>
+                        </div>
+                        <div className="space-y-4">
+                          {slot.events.filter(e => e.track !== 'workshops').map((event, eventIndex) => (
+                            <div key={eventIndex} className={`group rounded-xl p-4 border backdrop-blur-sm bg-bitconf-surface-2/60 ${getEventColor(event.type)} cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/30 hover:border-bitconf-secondary/50 h-40 flex flex-col justify-between`}>
+                              <div className="flex items-start gap-4 h-full">
+                                <div className="flex-shrink-0">
+                                  {renderSpeakerAvatars(event.speaker, 'bitconf-secondary')}
+                                </div>
+                                <div className="flex-grow flex flex-col justify-between h-full">
+                                  <div>
+                                    <h4 className="text-lg font-semibold text-white leading-tight mb-2 transition-colors duration-300 group-hover:text-bitconf-secondary">{event.title}</h4>
+                                    {event.speaker && (
+                                      <p className="text-bitconf-accent text-sm mb-2 transition-colors duration-300 group-hover:text-white group-hover:font-medium">{event.speaker}</p>
+                                    )}
+                                  </div>
+                                  <div className="flex items-center gap-2 mt-auto">
+                                    <span className="px-2 py-1 rounded-full text-xs font-medium bg-bitconf-secondary/20 text-bitconf-secondary transition-all duration-300 group-hover:bg-bitconf-secondary/30 group-hover:text-white">
+                                      {event.duration}
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Workshops column - one card stretched across the whole window */}
+                  <div className="flex flex-col">
+                    <div className="text-center mb-4">
+                      <h4 className="text-lg font-bold text-bitconf-accent flex items-center justify-center gap-2">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a1 1 0 01-1-1v-3a1 1 0 011-1h1a2 2 0 100-4H4a1 1 0 01-1-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+                        </svg>
+                        Workshops Track
+                      </h4>
+                    </div>
+                    <div className="flex items-center mb-4">
+                      <div className="text-bitconf-primary font-bold text-xl mr-4">
+                        {groupTimeRange(group.slots)}
+                      </div>
+                      <div className="flex-grow h-px bg-gradient-to-r from-bitconf-primary/40 to-transparent"></div>
+                    </div>
+                    <div className={`group rounded-xl p-4 border backdrop-blur-sm bg-bitconf-surface-2/60 ${getEventColor(group.workshop.type)} cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/30 hover:border-bitconf-accent/50 flex-grow flex flex-col justify-between`}>
+                      <div className="flex items-start gap-4 h-full">
+                        <div className="flex-shrink-0">
+                          {renderSpeakerAvatars(group.workshop.speaker, 'bitconf-accent')}
+                        </div>
+                        <div className="flex-grow flex flex-col justify-between h-full">
+                          <div>
+                            <h4 className="text-lg font-semibold text-white leading-tight mb-2 transition-colors duration-300 group-hover:text-bitconf-accent">{group.workshop.title}</h4>
+                            {group.workshop.speaker && (
+                              <p className="text-bitconf-accent text-sm mb-2 transition-colors duration-300 group-hover:text-white group-hover:font-medium">{group.workshop.speaker}</p>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-2 mt-auto">
+                            <span className="px-2 py-1 rounded-full text-xs font-medium bg-bitconf-accent/20 text-bitconf-accent transition-all duration-300 group-hover:bg-bitconf-accent/30 group-hover:text-white">
+                              {group.workshop.duration}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+              <div key={group.slots[0].time} className="mb-8">
                 {/* Time marker */}
                 <div className="flex items-center mb-4">
                   <div className="text-bitconf-primary font-bold text-xl mr-4">
-                    {slot.time}
+                    {group.slots[0].time}
                   </div>
                   <div className="flex-grow h-px bg-gradient-to-r from-bitconf-primary/40 to-transparent"></div>
                 </div>
 
-                {/* Events at this time */}
-                {slot.events.some(e => e.track === 'presentations') && slot.events.some(e => e.track === 'workshops') ? (
-                  /* Parallel sessions - always 2 columns for presentations and workshops */
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {/* Presentations column */}
-                    <div className="space-y-4">
-                      <div className="text-center mb-4">
-                        <h4 className="text-lg font-bold text-bitconf-secondary flex items-center justify-center gap-2">
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2v-6a2 2 0 012-2h8V4a2 2 0 012 2v2z" />
-                          </svg>
-                          Presentations Track
-                        </h4>
-                      </div>
-                      {slot.events.filter(e => e.track === 'presentations').map((event, eventIndex) => (
-                        <div key={eventIndex} className={`group rounded-xl p-4 border backdrop-blur-sm bg-bitconf-surface-2/60 ${getEventColor(event.type)} cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/30 hover:border-bitconf-secondary/50 h-40 flex flex-col justify-between`}>
-                          <div className="flex items-start gap-4 h-full">
-                            <div className="flex-shrink-0">
-                              {renderSpeakerAvatars(event.speaker, 'bitconf-secondary')}
-                            </div>
-                            <div className="flex-grow flex flex-col justify-between h-full">
-                              <div>
-                                <h4 className="text-lg font-semibold text-white leading-tight mb-2 transition-colors duration-300 group-hover:text-bitconf-secondary">{event.title}</h4>
-                                {event.speaker && (
-                                  <p className="text-bitconf-accent text-sm mb-2 transition-colors duration-300 group-hover:text-white group-hover:font-medium">{event.speaker}</p>
-                                )}
-                              </div>
-                              <div className="flex items-center gap-2 mt-auto">
-                                <span className="px-2 py-1 rounded-full text-xs font-medium bg-bitconf-secondary/20 text-bitconf-secondary transition-all duration-300 group-hover:bg-bitconf-secondary/30 group-hover:text-white">
-                                  {event.duration}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Workshops column */}
-                    <div className="space-y-4">
-                      <div className="text-center mb-4">
-                        <h4 className="text-lg font-bold text-bitconf-accent flex items-center justify-center gap-2">
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a1 1 0 01-1-1v-3a1 1 0 011-1h1a2 2 0 100-4H4a1 1 0 01-1-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
-                          </svg>
-                          Workshops Track
-                        </h4>
-                      </div>
-                      {slot.events.filter(e => e.track === 'workshops').map((event, eventIndex) => (
-                        <div key={eventIndex} className={`group rounded-xl p-4 border backdrop-blur-sm bg-bitconf-surface-2/60 ${getEventColor(event.type)} cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/30 hover:border-bitconf-accent/50 h-40 flex flex-col justify-between`}>
-                          <div className="flex items-start gap-4 h-full">
-                            <div className="flex-shrink-0">
-                              {renderSpeakerAvatars(event.speaker, 'bitconf-accent')}
-                            </div>
-                            <div className="flex-grow flex flex-col justify-between h-full">
-                              <div>
-                                <h4 className="text-lg font-semibold text-white leading-tight mb-2 transition-colors duration-300 group-hover:text-bitconf-accent">{event.title}</h4>
-                                {event.speaker && (
-                                  <p className="text-bitconf-accent text-sm mb-2 transition-colors duration-300 group-hover:text-white group-hover:font-medium">{event.speaker}</p>
-                                )}
-                              </div>
-                              <div className="flex items-center gap-2 mt-auto">
-                                <span className="px-2 py-1 rounded-full text-xs font-medium bg-bitconf-accent/20 text-bitconf-accent transition-all duration-300 group-hover:bg-bitconf-accent/30 group-hover:text-white">
-                                  {event.duration}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  /* Single events - full width */
+                {/* Single events - full width */}
                   <div className="grid grid-cols-1">
-                    {slot.events.map((event, eventIndex) => (
+                    {group.slots[0].events.map((event, eventIndex) => (
                       <div key={eventIndex} className={`group rounded-xl p-4 border backdrop-blur-sm bg-bitconf-surface-2/70 border-bitconf-hairline cursor-pointer transition-all duration-300 ease-out hover:bg-gray-700/40 hover:border-bitconf-primary/50 h-32 flex items-center`}>
                         <div className="flex items-start gap-4">
                           {/* Icon or Speaker Photo */}
@@ -510,8 +542,8 @@ export default function Schedule({ edition, slots: scheduleSlots, avatars }: Sch
                       </div>
                     ))}
                   </div>
-                )}
               </div>
+              )
             ))}
           </div>
         </div>
