@@ -191,8 +191,8 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
         speaker: 'Inesa Maidanik (Recruiter / Researcher at Adtelligent)',
         type: 'workshop',
         track: 'workshops',
-        duration: '2 hours',
-        spanSlots: 4
+        duration: '1.5 hours',
+        spanSlots: 3
       }
     ]
   },
@@ -272,8 +272,8 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
         speaker: 'Speaker to be announced',
         type: 'workshop',
         track: 'workshops',
-        duration: '2 hours',
-        spanSlots: 4
+        duration: '1.5 hours',
+        spanSlots: 3
       }
     ]
   },
