@@ -199,7 +199,9 @@ export default function Schedule({ edition, slots: scheduleSlots, avatars }: Sch
           }
         });
       },
-      { threshold: 0.2, rootMargin: '0px 0px -100px 0px' }
+      // Low threshold: on mobile the stacked timeline is taller than the
+      // viewport, so a 20% ratio is never reached and it would stay hidden.
+      { threshold: 0.05, rootMargin: '0px 0px -100px 0px' }
     );
 
     if (titleRef.current) observer.observe(titleRef.current);
