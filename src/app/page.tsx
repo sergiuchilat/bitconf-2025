@@ -56,7 +56,7 @@ export default function Home() {
     <div className="min-h-screen">
       <Header edition={edition} navItems={navItems} />
       <Hero edition={edition} secondary={{ label: "What's coming", targetId: 'coming-soon' }} />
-      <About edition={edition} speakerCount={SPEAKERS_2026.length} />
+      <About edition={edition} speakerCount={SPEAKERS_2026.filter((s) => s.name !== 'TBA').length} />
       <Speakers
         speakers={SPEAKERS_2026}
         frame="portrait"

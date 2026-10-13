@@ -206,5 +206,12 @@ export const SPEAKERS_2026: Speaker[] = [
     bio: "The Grass Is Greener? Notes from the Other Side of IT",
     image: "/speakers/portraits/Diana Lari.png",
     linkedinUrl: "https://www.linkedin.com/in/lari-diana-05972315a/"
-  }
+  },
+  // Placeholders for speakers still being confirmed; the card renders a
+  // "Coming Soon" tile for name === "TBA".
+  { name: "TBA", company: "" },
+  { name: "TBA", company: "" },
+  { name: "TBA", company: "" },
+  { name: "TBA", company: "" },
+  { name: "TBA", company: "" }
 ];
