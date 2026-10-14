@@ -169,6 +169,7 @@ export const AVATARS_2026: ScheduleAvatars = {
   'ecaterina niculcea': '/speakers/portraits/Ecaterina Niculcea.png',
   'roman voinitchi': '/speakers/portraits/Roman Voinitchi.png',
   'diana lari': '/speakers/portraits/Diana Lari.png',
+  'anton perkin': '/speakers/portraits/Anton Perkin.png',
 };
 
 /**

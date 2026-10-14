@@ -212,7 +212,8 @@ export const SPEAKERS_2026: Speaker[] = [
     name: "Anton Perkin",
     role: "CEO, MDC.md Organizer",
     company: "FusionWorks",
-    companyLink: "https://fusion.works"
+    companyLink: "https://fusion.works",
+    image: "/speakers/portraits/Anton Perkin.png"
   },
   {
     name: "Vitalie Jicol",
