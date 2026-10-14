@@ -1,0 +1,40 @@
+<!doctype html>
+<!--
+  Telegram group/channel avatar, 640x640. Telegram crops it to a circle, so everything sits
+  inside the centre ~70%. ?v=mark (the "01" box only, reads best at small sizes) or ?v=full.
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; overflow: hidden; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+    background: radial-gradient(circle at 70% 25%, #3b3794 0%, #1a1b3a 38%, #0a0b12 75%);
+    display: flex; align-items: center; justify-content: center; -webkit-font-smoothing: antialiased;
+  }
+  .glow { position: absolute; width: 60%; height: 60%; border-radius: 50%;
+          background: #66d4cf; opacity: .10; filter: blur(80px); }
+  .wrap { position: relative; display: flex; flex-direction: column; align-items: center; }
+  .mark { width: 390px; display: block; filter: drop-shadow(0 0 24px rgb(0 236 216 / .35)); }
+  .full { width: 400px; display: block; }
+  .year { font-weight: 800; letter-spacing: -0.03em; color: #ff9f0a; line-height: 1; }
+  body.mark-v .year { font-size: 118px; margin-top: 20px; }
+  body.full-v .year { font-size: 92px; margin-top: 18px; }
+</style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="wrap">
+    <img class="mark" src="logo-mark-crop.svg" alt="">
+    <img class="full" src="../../public/logo_bit_conference.svg" alt="">
+    <div class="year">2026</div>
+  </div>
+<script>
+  const v = new URLSearchParams(location.search).get('v') || 'mark';
+  document.body.classList.add(v + '-v');
+  document.querySelector(v === 'mark' ? '.full' : '.mark').remove();
+</script>
+</body>
+</html>

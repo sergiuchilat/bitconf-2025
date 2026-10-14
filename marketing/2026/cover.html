@@ -1,0 +1,154 @@
+<!doctype html>
+<!--
+  Page cover images for BitConf 2026. No countdown number: covers stay up for the whole campaign.
+  ?format=fb          Facebook page cover   820x312 (rendered @2x). Mobile crops to the centre ~555px,
+                      so all content sits in that band.
+  ?format=li          LinkedIn company page 1128x191. The page logo covers the bottom-left, so content
+                      starts right of it.
+  ?format=li-personal LinkedIn profile      1584x396. The profile photo covers the bottom-left.
+  Colours mirror src/app/globals.css.
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --surface-0: #0a0b12;
+    --hairline: rgb(255 255 255 / 0.12);
+    --text: #f5f5f7;
+    --text-2: #a1a1a6;
+    --primary: #7c79f5;
+    --primary-deep: #5b57e0;
+    --primary-soft: #a5a2f8;
+    --secondary: #3aa8e6;
+    --mint: #66d4cf;
+    --amber: #ff9f0a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+    background: var(--surface-0); color: var(--text); overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  .canvas { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+  .grid {
+    position: absolute; inset: 0; opacity: 0.07;
+    background-image:
+      linear-gradient(to right, #fff 1px, transparent 1px),
+      linear-gradient(to bottom, #fff 1px, transparent 1px);
+    background-size: var(--cell) var(--cell);
+    mask-image: radial-gradient(ellipse at 50% 50%, #000 25%, transparent 75%);
+  }
+  .orb { position: absolute; border-radius: 50%; filter: blur(80px); }
+  .orb.a { background: var(--primary-deep); opacity: .45; }
+  .orb.b { background: var(--secondary); opacity: .22; }
+  .line { position: absolute; left: -10%; width: 120%; height: 1px;
+          background: linear-gradient(90deg, transparent, rgb(124 121 245 / .4), transparent); }
+
+  .content { position: absolute; display: flex; align-items: center; }
+  .logo { height: var(--logo-h); display: block; }
+  .divider { width: 1px; align-self: stretch; background: var(--hairline); }
+  .title { font-weight: 800; letter-spacing: -0.04em; line-height: 1; font-size: var(--title-fs); white-space: nowrap; }
+  .title em { font-style: normal; color: var(--amber); }
+  .meta { display: flex; align-items: center; gap: var(--meta-gap); font-size: var(--meta-fs);
+          font-weight: 600; color: var(--text); white-space: nowrap; }
+  .meta .sep { width: 5px; height: 5px; border-radius: 50%; background: var(--primary); }
+  .meta .muted { color: var(--text-2); font-weight: 500; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+    padding: var(--pill-pad); border-radius: 999px;
+    background: rgb(124 121 245 / .14); border: 1px solid rgb(124 121 245 / .38);
+    color: var(--mint); font-weight: 600; font-size: var(--pill-fs);
+  }
+  .pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 8px var(--mint); }
+  .btn {
+    background: var(--primary-deep); color: #fff; font-weight: 700; font-size: var(--btn-fs);
+    padding: var(--btn-pad); border-radius: 10px; white-space: nowrap;
+    box-shadow: 0 8px 28px rgb(91 87 224 / .45);
+  }
+  .url { color: var(--mint); }
+  .stack { display: flex; flex-direction: column; }
+
+  /* ---------- Facebook page cover 820x312 ---------- */
+  body.fb { --cell: 40px; --logo-h: 64px; --title-fs: 54px; --meta-fs: 17px; --meta-gap: 12px;
+            --pill-fs: 12px; --pill-pad: 5px 12px; --btn-fs: 15px; --btn-pad: 10px 18px; }
+  body.fb .orb.a { width: 420px; height: 420px; top: -200px; right: -60px; }
+  body.fb .orb.b { width: 360px; height: 360px; bottom: -220px; left: -40px; }
+  body.fb .content { inset: 0; flex-direction: column; justify-content: center; gap: 16px; }
+  body.fb .head { display: flex; align-items: center; gap: 18px; }
+  body.fb .foot { display: flex; align-items: center; gap: 16px; margin-top: 4px; }
+
+  /* ---------- LinkedIn company cover 1128x191 ---------- */
+  body.li { --cell: 32px; --logo-h: 58px; --title-fs: 46px; --meta-fs: 16px; --meta-gap: 11px;
+            --pill-fs: 12px; --pill-pad: 5px 12px; --btn-fs: 15px; --btn-pad: 10px 18px; }
+  body.li .orb.a { width: 380px; height: 380px; top: -220px; right: 120px; }
+  body.li .orb.b { width: 300px; height: 300px; bottom: -220px; left: 240px; }
+  body.li .content { top: 0; bottom: 0; left: 240px; right: 48px; justify-content: space-between; gap: 28px; }
+  body.li .left { display: flex; align-items: center; gap: 26px; }
+  body.li .stack { gap: 12px; }
+  body.li .right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+
+  /* ---------- LinkedIn profile cover 1584x396 ---------- */
+  body.li-personal { --cell: 44px; --logo-h: 86px; --title-fs: 72px; --meta-fs: 22px; --meta-gap: 14px;
+            --pill-fs: 15px; --pill-pad: 7px 16px; --btn-fs: 20px; --btn-pad: 14px 26px; }
+  body.li-personal .orb.a { width: 620px; height: 620px; top: -320px; right: 120px; }
+  body.li-personal .orb.b { width: 480px; height: 480px; bottom: -340px; left: 380px; }
+  body.li-personal .content { top: 0; bottom: 0; left: 520px; right: 80px; justify-content: space-between; gap: 40px; }
+  body.li-personal .left { display: flex; align-items: center; gap: 36px; }
+  body.li-personal .stack { gap: 18px; }
+  body.li-personal .right { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="grid"></div>
+  <div class="orb a"></div>
+  <div class="orb b"></div>
+  <div class="line" style="top:28%; transform:rotate(-5deg)"></div>
+  <div class="line" style="top:78%; transform:rotate(3deg); opacity:.6"></div>
+
+  <!-- Facebook: everything centred inside the mobile-safe band -->
+  <div class="content fb-only">
+    <div class="head">
+      <img class="logo" src="../../public/logo_bit_conference.svg" alt="BitConf">
+      <div class="divider"></div>
+      <div class="title">BitConf <em>2026</em></div>
+    </div>
+    <div class="meta">
+      <span>Sat, 14 November</span><span class="sep"></span>
+      <span>Nortek Center, Bălți</span>
+    </div>
+    <div class="foot">
+      <div class="pill"><span class="dot"></span>5th Edition</div>
+      <div class="btn">Tickets · bitconf.md</div>
+    </div>
+  </div>
+
+  <!-- LinkedIn: single row, starting right of the page logo / profile photo -->
+  <div class="content li-only">
+    <div class="left">
+      <img class="logo" src="../../public/logo_bit_conference.svg" alt="BitConf">
+      <div class="divider"></div>
+      <div class="stack">
+        <div class="title">BitConf <em>2026</em></div>
+        <div class="meta">
+          <span>Sat, 14 November</span><span class="sep"></span>
+          <span>Nortek Center, Bălți</span>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="pill"><span class="dot"></span>5th Edition</div>
+      <div class="btn">Tickets · bitconf.md</div>
+    </div>
+  </div>
+</div>
+<script>
+  const format = new URLSearchParams(location.search).get('format') || 'fb';
+  document.body.classList.add(format);
+  const keep = format === 'fb' ? '.fb-only' : '.li-only';
+  document.querySelectorAll('.fb-only, .li-only').forEach((el) => { if (!el.matches(keep)) el.remove(); });
+</script>
+</body>
+</html>

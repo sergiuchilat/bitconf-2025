@@ -1,0 +1,214 @@
+<!doctype html>
+<!--
+  "One month to go" announcement banner for BitConf 2026.
+  Render: ./render.sh  (square 1080x1080 for FB/IG/Telegram, wide 1200x630 for link previews / FB event cover)
+  Colours mirror the site's tokens in src/app/globals.css.
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --surface-0: #0a0b12;
+    --surface-2: #161927;
+    --hairline: rgb(255 255 255 / 0.10);
+    --text: #f5f5f7;
+    --text-2: #a1a1a6;
+    --primary: #7c79f5;
+    --primary-deep: #5b57e0;
+    --primary-soft: #a5a2f8;
+    --secondary: #3aa8e6;
+    --mint: #66d4cf;
+    --amber: #ff9f0a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+    background: var(--surface-0);
+    color: var(--text);
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  .canvas { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+
+  /* Background: grid + two soft orbs, as on the site hero */
+  .grid {
+    position: absolute; inset: 0; opacity: 0.06;
+    background-image:
+      linear-gradient(to right, #fff 1px, transparent 1px),
+      linear-gradient(to bottom, #fff 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at 60% 40%, #000 30%, transparent 80%);
+  }
+  .orb { position: absolute; border-radius: 50%; filter: blur(110px); }
+  .orb.a { width: 620px; height: 620px; background: var(--primary-deep); opacity: .38; top: -160px; right: -140px; }
+  .orb.b { width: 520px; height: 520px; background: var(--secondary); opacity: .20; bottom: -180px; left: -160px; }
+  .line { position: absolute; left: -10%; width: 120%; height: 1px;
+          background: linear-gradient(90deg, transparent, rgb(124 121 245 / .35), transparent); }
+
+  .content { position: relative; height: 100%; display: flex; flex-direction: column; }
+
+  .top { display: flex; align-items: center; justify-content: space-between; }
+  .logo { height: var(--logo-h); }
+  .pill {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 10px 20px; border-radius: 999px;
+    background: rgb(124 121 245 / .12); border: 1px solid rgb(124 121 245 / .35);
+    color: var(--mint); font-weight: 600; font-size: var(--pill-fs); letter-spacing: .02em;
+  }
+  .pill .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 12px var(--mint); }
+
+  .eyebrow { text-transform: uppercase; letter-spacing: .22em; font-weight: 600; color: var(--primary-soft); font-size: var(--eyebrow-fs); }
+  .count { display: flex; align-items: baseline; gap: var(--count-gap); line-height: .85; }
+  .num {
+    font-size: var(--num-fs); font-weight: 800; letter-spacing: -0.06em;
+    background: linear-gradient(135deg, #fff 10%, var(--primary-soft) 45%, var(--secondary) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    padding-right: .06em; /* background-clip:text crops the last glyph's overhang otherwise */
+  }
+  .unit { font-size: var(--unit-fs); font-weight: 700; letter-spacing: -0.03em; line-height: 1.02; }
+  .unit span { display: block; color: var(--text-2); font-weight: 500; }
+  .title { font-size: var(--title-fs); font-weight: 700; letter-spacing: -0.03em; }
+  .title em { font-style: normal; color: var(--amber); }
+
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+  .fact {
+    background: rgb(255 255 255 / .045); border: 1px solid var(--hairline);
+    border-radius: 18px; padding: var(--fact-pad);
+  }
+  .fact .k { text-transform: uppercase; letter-spacing: .16em; font-size: var(--k-fs); color: var(--text-2); font-weight: 600; margin-bottom: 8px; }
+  .fact .v { font-size: var(--v-fs); font-weight: 650; line-height: 1.2; }
+
+  .speakers { display: flex; align-items: center; gap: 22px; }
+  .faces { display: flex; }
+  .face {
+    width: var(--face); height: var(--face); border-radius: 50%;
+    margin-left: calc(var(--face) * -0.3);
+    background: radial-gradient(circle at 50% 35%, #c9c7ff, #8e8bf3);
+    border: 3px solid var(--surface-0); overflow: hidden;
+  }
+  .face:first-child { margin-left: 0; }
+  .face img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.35) translateY(8%); }
+  .face.more { display: flex; align-items: center; justify-content: center;
+    background: var(--primary-deep); color: #fff; font-weight: 800; font-size: calc(var(--face) * .34); }
+  .speakers .lbl { font-size: var(--lbl-fs); color: var(--text-2); line-height: 1.35; white-space: nowrap; }
+  .speakers .lbl b { color: var(--text); font-weight: 650; }
+
+  /* Teaser: faces hidden behind "?" until the speaker reveal */
+  body.teaser .face:not(.more) { display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(circle at 50% 35%, #2a2d4a, #1a1c2e); border-color: var(--surface-0);
+    box-shadow: inset 0 0 0 1px rgb(124 121 245 / .35); }
+  body.teaser .face img { display: none; }
+  body.teaser .face:not(.more)::after { content: "?"; font-weight: 800; font-size: calc(var(--face) * .48); color: var(--primary-soft); }
+  body.teaser .face:not(.more):nth-child(3n+2)::after { color: var(--mint); }
+  body.teaser .face:not(.more):nth-child(3n)::after { color: var(--secondary); }
+
+  .cta { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .btn {
+    background: var(--primary-deep); color: #fff; font-weight: 700; font-size: var(--btn-fs);
+    padding: var(--btn-pad); border-radius: 14px; display: inline-flex; align-items: center; gap: 12px;
+    box-shadow: 0 12px 40px rgb(91 87 224 / .45);
+  }
+  .url { font-size: var(--url-fs); font-weight: 600; color: var(--text); letter-spacing: .01em; }
+  .url span { color: var(--mint); }
+
+  /* ---------- Square 1080x1080 ---------- */
+  body.square {
+    --logo-h: 92px; --pill-fs: 22px; --eyebrow-fs: 22px;
+    --num-fs: 270px; --unit-fs: 60px; --count-gap: 30px; --title-fs: 50px;
+    --gap: 16px; --fact-pad: 22px 24px; --k-fs: 15px; --v-fs: 25px;
+    --face: 74px; --lbl-fs: 22px; --btn-fs: 27px; --btn-pad: 20px 32px; --url-fs: 30px;
+  }
+  body.square .content { padding: 64px 72px 64px; justify-content: space-between; }
+  body.square .hero { margin-top: 10px; }
+  body.square .eyebrow { margin-bottom: 18px; }
+  body.square .title { margin-top: 22px; }
+  body.square .mid { display: flex; flex-direction: column; gap: 44px; }
+  body.square .right { display: flex; flex-direction: column; gap: 32px; }
+
+  /* ---------- Wide 1200x630 ---------- */
+  body.wide {
+    --logo-h: 62px; --pill-fs: 16px; --eyebrow-fs: 15px;
+    --num-fs: 230px; --unit-fs: 46px; --count-gap: 22px; --title-fs: 34px;
+    --gap: 12px; --fact-pad: 14px 18px; --k-fs: 11px; --v-fs: 19px;
+    --face: 62px; --lbl-fs: 16px; --btn-fs: 20px; --btn-pad: 14px 24px; --url-fs: 22px;
+  }
+  body.wide .content { padding: 44px 56px; justify-content: space-between; }
+  body.wide .mid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 44px; align-items: center; }
+  body.wide .facts { grid-template-columns: 1fr; }
+  body.wide .eyebrow { margin-bottom: 12px; }
+  body.wide .title { margin-top: 18px; }
+  body.wide .right { display: flex; flex-direction: column; gap: 18px; }
+  body.wide .speakers { flex-direction: column-reverse; align-items: flex-start; gap: 10px; }
+  body.wide .speakers .lbl br { display: none; }
+  body.wide .speakers .lbl b::after { content: " · "; }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="grid"></div>
+  <div class="orb a"></div>
+  <div class="orb b"></div>
+  <div class="line" style="top:30%; transform:rotate(-8deg)"></div>
+  <div class="line" style="top:72%; transform:rotate(5deg); opacity:.6"></div>
+
+  <div class="content">
+    <div class="top">
+      <img class="logo" src="../../public/logo_bit_conference.svg" alt="BitConf">
+      <div class="pill"><span class="dot"></span>5th Edition</div>
+    </div>
+
+    <div class="mid">
+      <div class="hero">
+        <div class="eyebrow">Countdown has started</div>
+        <div class="count">
+          <div class="num">30</div>
+          <div class="unit">days<span>to go</span></div>
+        </div>
+        <div class="title">BitConf <em>2026</em> · Bălți</div>
+      </div>
+
+      <div class="right">
+        <div class="facts">
+          <div class="fact"><div class="k">Date</div><div class="v">Sat, 14 November</div></div>
+          <div class="fact"><div class="k">Venue</div><div class="v">Nortek Center, Bălți</div></div>
+          <div class="fact"><div class="k">Format</div><div class="v">Talks · Workshops · Panel</div></div>
+        </div>
+        <div class="speakers">
+          <div class="faces">
+            <div class="face"><img src="../../public/speakers/portraits/Roman Fiodorov.png"></div>
+            <div class="face"><img src="../../public/speakers/portraits/Diana Lari.png"></div>
+            <div class="face"><img src="../../public/speakers/portraits/Roman Gluck.png"></div>
+            <div class="face"><img src="../../public/speakers/portraits/Inesa Maidanik.png"></div>
+            <div class="face"><img src="../../public/speakers/portraits/Anton Perkin.png"></div>
+            <div class="face"><img src="../../public/speakers/portraits/Radu Tataru.png"></div>
+            <div class="face"><img src="../../public/speakers/portraits/Ecaterina Niculcea.png"></div>
+            <div class="face"><img src="../../public/speakers/portraits/Radu Dumbraveanu.png"></div>
+            <div class="face"><img src="../../public/speakers/portraits/Roman Voinitchi.png"></div>
+            <div class="face"><img src="../../public/speakers/portraits/Sergiu Chilat.png"></div>
+            <div class="face more">+5</div>
+          </div>
+          <div class="lbl"><b>15 speakers</b><br>from tech, product &amp; business</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <div class="btn">Get your ticket →</div>
+      <div class="url">bitconf<span>.md</span></div>
+    </div>
+  </div>
+</div>
+<script>
+  // ?format=square|wide picks the layout; the square one stacks facts and faces vertically.
+  // ?variant=teaser hides the speaker faces for the pre-reveal post.
+  const params = new URLSearchParams(location.search);
+  document.body.classList.add(params.get('format') || 'square');
+  if (params.get('variant') === 'teaser') {
+    document.body.classList.add('teaser');
+    document.querySelector('.speakers .lbl').innerHTML = '<b>15 speakers</b><br>Reveal starts this week';
+  }
+</script>
+</body>
+</html>
