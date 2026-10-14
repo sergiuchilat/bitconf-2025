@@ -95,7 +95,7 @@ export const EDITION_2026: Edition = {
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2719.8267891829755!2d27.928666576871344!3d47.765306471978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40cb1d2e8e3e3e3e%3A0x1e2e3e4e5e6e7e8e!2sStrada%20Pu%C8%99kin%2038%2C%20Balti%2C%20Moldova!5e0!3m2!1sen!2sus!4v1635456789012!5m2!1sen!2sus',
   },
   format: '1-Day Event',
-  ticketUrl: null,
+  ticketUrl: 'https://www.eventbrite.com/e/bit-conference-2026-tickets-2003401413558',
   status: 'upcoming',
   // Targets, not results. `speakers` is left out on purpose — the homepage
   // counts the confirmed line-up so the tile never goes stale.
