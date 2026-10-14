@@ -191,14 +191,6 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
         type: 'talk',
         track: 'presentations',
         duration: '30 min'
-      },
-      {
-        title: 'Inside the Recruiter’s Mind: How to Ace Your Interview',
-        speaker: 'Inesa Maidanik (Recruiter / Researcher at Adtelligent)',
-        type: 'workshop',
-        track: 'workshops',
-        duration: '1.5 hours',
-        spanSlots: 3
       }
     ]
   },
@@ -211,6 +203,14 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
         type: 'talk',
         track: 'presentations',
         duration: '30 min'
+      },
+      {
+        title: 'Inside the Recruiter’s Mind: How to Ace Your Interview',
+        speaker: 'Inesa Maidanik (Recruiter / Researcher at Adtelligent)',
+        type: 'workshop',
+        track: 'workshops',
+        duration: '1.5 hours',
+        spanSlots: 3
       }
     ]
   },
