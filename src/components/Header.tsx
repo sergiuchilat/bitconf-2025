@@ -79,7 +79,7 @@ export default function Header({ edition, navItems }: HeaderProps) {
     'flex items-center gap-1.5 whitespace-nowrap text-bitconf-text-secondary hover:text-bitconf-mint transition-colors duration-300';
 
   const ctaClassName =
-    'bg-gradient-to-r from-bitconf-primary-deep to-bitconf-secondary text-white px-6 py-2 rounded-full font-semibold transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-bitconf-primary/25 relative overflow-hidden group';
+    'bg-gradient-to-r from-bitconf-primary-deep to-bitconf-secondary text-white px-5 py-2 rounded-full font-semibold transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-bitconf-primary/25 relative overflow-hidden group';
 
   const arrowIcon = (
     <svg
@@ -163,7 +163,7 @@ export default function Header({ edition, navItems }: HeaderProps) {
           </div>
 
           {/* xl, not lg: with the schedule link and the ticket CTA the row overflows a 1024px viewport */}
-          <nav className="hidden xl:flex items-center gap-7 text-[0.9375rem]">
+          <nav className="hidden xl:flex items-center gap-5 text-sm">
             {navItems.map((item) => (
               <Link key={item.href} href={item.href} className={`whitespace-nowrap ${getLinkClassName(item.href)}`}>
                 {item.label}
@@ -171,7 +171,7 @@ export default function Header({ edition, navItems }: HeaderProps) {
             ))}
 
             {editionLinks.length > 0 && (
-              <span className="flex items-center gap-5 border-l border-bitconf-hairline pl-6">
+              <span className="flex items-center gap-4 border-l border-bitconf-hairline pl-4">
                 {editionLinks.map((item) => (
                   <Link key={item.href} href={item.href} className={editionLinkClassName}>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -188,7 +188,7 @@ export default function Header({ edition, navItems }: HeaderProps) {
               </span>
             )}
 
-            <span className="ml-1">{renderCta('whitespace-nowrap')}</span>
+            {renderCta('whitespace-nowrap')}
           </nav>
 
           <button
