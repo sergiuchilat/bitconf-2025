@@ -162,7 +162,8 @@ export default function Header({ edition, navItems }: HeaderProps) {
             </Link>
           </div>
 
-          <nav className="hidden lg:flex items-center gap-7 text-[0.9375rem]">
+          {/* xl, not lg: with the schedule link and the ticket CTA the row overflows a 1024px viewport */}
+          <nav className="hidden xl:flex items-center gap-7 text-[0.9375rem]">
             {navItems.map((item) => (
               <Link key={item.href} href={item.href} className={`whitespace-nowrap ${getLinkClassName(item.href)}`}>
                 {item.label}
@@ -191,7 +192,7 @@ export default function Header({ edition, navItems }: HeaderProps) {
           </nav>
 
           <button
-            className="lg:hidden"
+            className="xl:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isMenuOpen}
@@ -203,7 +204,7 @@ export default function Header({ edition, navItems }: HeaderProps) {
         </div>
 
         {isMenuOpen && (
-          <nav className="lg:hidden py-4 border-t border-bitconf-hairline">
+          <nav className="xl:hidden py-4 border-t border-bitconf-hairline">
             <div className="flex flex-col space-y-2">
               {navItems.map((item) => (
                 <Link
