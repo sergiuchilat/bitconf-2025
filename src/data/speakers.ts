@@ -139,7 +139,7 @@ export const SPEAKERS_2026: Speaker[] = [
     role: "Founder Filosoft Company, Tech-Lead",
     company: "Aiomed.com",
     companyLink: "https://aiomed.com/",
-    bio: "Chasing the AI Hype: A Senior Developer's Perspective",
+    bio: "What to Learn in the Era of AI",
     image: "/speakers/portraits/Roman Fiodorov.png",
     linkedinUrl: "https://www.linkedin.com/in/roman-fiodorov-49994057/"
   },

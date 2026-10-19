@@ -186,7 +186,7 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     time: '10:30 - 11:00',
     events: [
       {
-        title: 'Chasing the AI Hype: A Senior Developer’s Perspective',
+        title: 'What to Learn in the Era of AI',
         speaker: 'Roman Fiodorov (Founder Filosoft Company, Tech-Lead at Aiomed.com)',
         type: 'talk',
         track: 'presentations',
