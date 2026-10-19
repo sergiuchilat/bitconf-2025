@@ -175,7 +175,8 @@ export const AVATARS_2026: ScheduleAvatars = {
 /**
  * BitConf 2026 programme (tentative).
  * Mirrors the 2025 shape: one main presentations track, with Inesa Maidanik's
- * workshop running in parallel to it, like the 2025 QA workshop did.
+ * morning workshop and Cristian Brînză's afternoon workshop running in
+ * parallel to it, like the 2025 QA workshop did.
  * Ecaterina Niculcea and Roman Voinitchi co-present and share one 30-minute
  * slot. The business panel is confirmed but its speakers are not yet.
  */
@@ -277,10 +278,9 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
         track: 'presentations',
         duration: '30 min'
       },
-      // Afternoon workshop slot, held open until a workshop is confirmed.
       {
-        title: 'Workshop to be announced',
-        speaker: 'Speaker to be announced',
+        title: 'Heuristic Principles for Simple Decisions in Design (and Everyday Life)',
+        speaker: 'Cristian Brînză (UX/UI Designer)',
         type: 'workshop',
         track: 'workshops',
         duration: '1.5 hours',
@@ -300,21 +300,9 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
       }
     ]
   },
-  {
-    time: '15:45 - 16:15',
-    events: [
-      {
-        title: 'Heuristic Principles for Simple Decisions in Design (and Everyday Life)',
-        speaker: 'Cristian Brînză (UX/UI Designer)',
-        type: 'talk',
-        track: 'presentations',
-        duration: '30 min'
-      }
-    ]
-  },
   // Sergiu closes out the speaker line-up, right before the closing remarks.
   {
-    time: '16:15 - 16:45',
+    time: '15:45 - 16:15',
     events: [
       {
         title: 'Talk to be announced',
@@ -325,6 +313,6 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
       }
     ]
   },
-  { time: '16:45 - 17:00', events: [{ title: 'Closing Remarks', speaker: 'Vitalie Ticau, Head of Math and Computer Science department', type: 'keynote', duration: '15 min' }] },
-  { time: '17:00 - 17:45', events: [{ title: 'Conference Ends', speaker: 'Networking', type: 'networking', duration: '45 min' }] }
+  { time: '16:15 - 16:30', events: [{ title: 'Closing Remarks', speaker: 'Vitalie Ticau, Head of Math and Computer Science department', type: 'keynote', duration: '15 min' }] },
+  { time: '16:30 - 17:15', events: [{ title: 'Conference Ends', speaker: 'Networking', type: 'networking', duration: '45 min' }] }
 ];
