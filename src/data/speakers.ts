@@ -219,7 +219,8 @@ export const SPEAKERS_2026: Speaker[] = [
     name: "Vitalie Jicol",
     role: "DevOps Engineer",
     company: "_",
-    bio: "The Road to Your First Job Starts with a Well-Crafted CV"
+    bio: "The Road to Your First Job Starts with a Well-Crafted CV",
+    linkedinUrl: "https://www.linkedin.com/in/vitalie-jicol/"
   },
   {
     name: "Cristian Brînză",
