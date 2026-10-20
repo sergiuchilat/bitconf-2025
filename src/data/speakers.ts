@@ -228,7 +228,9 @@ export const SPEAKERS_2026: Speaker[] = [
     name: "Cristian Brînză",
     role: "UX/UI Designer",
     company: "_",
-    bio: "Heuristic Principles for Simple Decisions in Design (and Everyday Life)"
+    bio: "Heuristic Principles for Simple Decisions in Design (and Everyday Life)",
+    image: "/speakers/portraits/Cristian Brinza.png",
+    linkedinUrl: "https://www.linkedin.com/in/cristi-br%C3%AEnz%C4%83-59029722b/"
   },
   // Placeholders for speakers still being confirmed; the card renders a
   // "Coming Soon" tile for name === "TBA".
