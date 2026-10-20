@@ -170,6 +170,7 @@ export const AVATARS_2026: ScheduleAvatars = {
   'roman voinitchi': '/speakers/portraits/Roman Voinitchi.png',
   'diana lari': '/speakers/portraits/Diana Lari.png',
   'anton perkin': '/speakers/portraits/Anton Perkin.png',
+  'vitalie jicol': '/speakers/portraits/Vitalie Jicol.png',
 };
 
 /**

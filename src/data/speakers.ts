@@ -220,6 +220,7 @@ export const SPEAKERS_2026: Speaker[] = [
     role: "DevOps Engineer",
     company: "_",
     bio: "The Road to Your First Job Starts with a Well-Crafted CV",
+    image: "/speakers/portraits/Vitalie Jicol.png",
     linkedinUrl: "https://www.linkedin.com/in/vitalie-jicol/"
   },
   {
