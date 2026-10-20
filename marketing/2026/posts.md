@@ -162,7 +162,7 @@ Every post links to the tickets. Speaker posts reuse the portraits in
 | Wed 21 Oct | T-24 | Speaker: Diana Lari | "The Grass Is Greener? Notes from the Other Side of IT" |
 | Fri 23 Oct | T-22 | Speakers: Ecaterina Niculcea & Roman Voinitchi | "Making an Educational App Feel Native on Mobile" |
 | Mon 26 Oct | T-19 | Business panel | Anton Perkin (FusionWorks, MDC.md) and other panelists; moderator Corina Negara |
-| Wed 28 Oct | T-17 | Speakers: Vitalie Jicol + Cristian Brînză | CV talk + "Heuristic Principles for Simple Decisions in Design" |
+| Wed 28 Oct | T-17 | Speakers: Vitalie Jicol + Cristian Brînză | CV talk + "Creative Confidence Exercise" (workshop) |
 | Sat 31 Oct | T-14 | **Two weeks to go** + full schedule | Schedule image/PDF (`npm run generate-schedule-pdf`) |
 | Mon 2 Nov | T-12 | Throwback to 2025 | 2025 gallery photos, 150 attendees |
 | Wed 4 Nov | T-10 | Last speakers reveal | Fill the TBA slots (Radu Dumbraveanu, Radu Tataru, Roman Gluck, Sergiu Chilat talks) |

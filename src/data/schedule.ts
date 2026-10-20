@@ -281,7 +281,7 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
         duration: '30 min'
       },
       {
-        title: 'Heuristic Principles for Simple Decisions in Design (and Everyday Life)',
+        title: 'Creative Confidence Exercise',
         speaker: 'Cristian Brînză (UX/UI Designer)',
         type: 'workshop',
         track: 'workshops',
