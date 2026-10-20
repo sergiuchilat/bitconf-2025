@@ -145,7 +145,7 @@ export const SPEAKERS_2026: Speaker[] = [
   },
   {
     name: "Radu Dumbraveanu",
-    role: "Tech Leader",
+    role: "Former Tech Leader",
     company: "AmSoft Group",
     companyLink: "https://amsoft-group.com",
     // 2025 talk was "Collected Insights (2024–2025)" — year-specific, so not carried over.

@@ -222,7 +222,7 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     events: [
       {
         title: 'Talk to be announced',
-        speaker: 'Radu Dumbraveanu (Tech Leader at AmSoft Group)',
+        speaker: 'Radu Dumbraveanu (Former Tech Leader at AmSoft Group)',
         type: 'talk',
         track: 'presentations',
         duration: '30 min'
