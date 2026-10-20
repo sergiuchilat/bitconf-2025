@@ -294,7 +294,7 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     events: [
       {
         title: 'The Road to Your First Job Starts with a Well-Crafted CV',
-        speaker: 'Vitalie Jicol (DevOps Engineer)',
+        speaker: 'Vitalie Jicol (DevOps Engineer at Cegeka)',
         type: 'talk',
         track: 'presentations',
         duration: '30 min'
