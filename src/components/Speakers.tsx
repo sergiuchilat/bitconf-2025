@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
-import { Speaker } from '@/data/speakers';
+import Link from 'next/link';
+import { Speaker, speakerSlug } from '@/data/speakers';
 
 interface SpeakersProps {
   speakers: Speaker[];
@@ -14,6 +15,8 @@ interface SpeakersProps {
   subtitle?: string;
   /** Shown instead of the grid when no speaker is confirmed yet. */
   emptyMessage?: string;
+  /** Link each card to its /speakers/[slug] page (current edition only). */
+  linkProfiles?: boolean;
 }
 
 /** "Roman Gluck" -> "RG"; used when a speaker has no portrait yet. */
@@ -33,6 +36,7 @@ export default function Speakers({
   frame = 'landscape',
   subtitle = DEFAULT_SUBTITLE,
   emptyMessage,
+  linkProfiles = false,
 }: SpeakersProps) {
   const frameClass = frame === 'portrait' ? 'aspect-square' : 'h-64';
 
@@ -78,7 +82,13 @@ export default function Speakers({
                     <div className="text-sm opacity-75">Coming Soon</div>
                   </div>
                 ) : speaker.image ? (
-                  <img src={speaker.image} alt={speaker.name} className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"/>
+                  linkProfiles ? (
+                    <Link href={`/speakers/${speakerSlug(speaker.name)}`} className="h-full w-full" tabIndex={-1}>
+                      <img src={speaker.image} alt={speaker.name} className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"/>
+                    </Link>
+                  ) : (
+                    <img src={speaker.image} alt={speaker.name} className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"/>
+                  )
                 ) : (
                   <div
                     className="text-5xl font-semibold tracking-tight text-white/90 select-none"
@@ -90,7 +100,13 @@ export default function Speakers({
               </div>
               <div className="p-6">
                 <div className="flex items-center justify-between mb-1">
-                  <h3 className="text-xl font-semibold text-white transition-colors duration-300 group-hover:text-bitconf-primary">{speaker.name}</h3>
+                  <h3 className="text-xl font-semibold text-white transition-colors duration-300 group-hover:text-bitconf-primary">
+                    {linkProfiles && speaker.name !== "TBA" ? (
+                      <Link href={`/speakers/${speakerSlug(speaker.name)}`}>{speaker.name}</Link>
+                    ) : (
+                      speaker.name
+                    )}
+                  </h3>
                   {speaker.linkedinUrl && (
                     <a
                       href={speaker.linkedinUrl}
@@ -120,6 +136,14 @@ export default function Speakers({
                 <p className={`text-sm ${speaker.bio ? 'text-gray-300' : 'text-bitconf-text-tertiary italic'}`}>
                   {speaker.bio ?? 'Talk to be announced'}
                 </p>
+                {linkProfiles && speaker.name !== "TBA" && (
+                  <Link
+                    href={`/speakers/${speakerSlug(speaker.name)}`}
+                    className="inline-block mt-4 text-sm font-medium text-bitconf-primary-soft hover:text-white transition-colors"
+                  >
+                    About the speaker →
+                  </Link>
+                )}
               </div>
             </div>
           ))}

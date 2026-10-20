@@ -318,3 +318,24 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
   { time: '16:15 - 16:30', events: [{ title: 'Closing Remarks', speaker: 'Vitalie Ticau, Head of Math and Computer Science department', type: 'keynote', duration: '15 min' }] },
   { time: '16:30 - 17:15', events: [{ title: 'Conference Ends', speaker: 'Networking', type: 'networking', duration: '45 min' }] }
 ];
+
+/** A speaker's session, as shown on their own page. */
+export interface SpeakerSession {
+  /** Start time of the slot, e.g. "14:45". */
+  start: string;
+  event: ScheduleEvent;
+}
+
+/** Every session in `slots` a speaker presents or sits on the panel of. */
+export function sessionsFor(name: string, slots: ScheduleSlot[]): SpeakerSession[] {
+  const key = name.toLowerCase();
+  return slots.flatMap((slot) =>
+    slot.events
+      .filter(
+        (event) =>
+          event.speaker.toLowerCase().includes(key) ||
+          event.panelists?.some((p) => p.name.toLowerCase() === key)
+      )
+      .map((event) => ({ start: slot.time.split(' - ')[0], event }))
+  );
+}
