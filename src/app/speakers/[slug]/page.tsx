@@ -153,6 +153,18 @@ export default async function SpeakerPage({ params }: Props) {
                         )}
                       </div>
                       <p className="text-lg text-white font-medium">{event.title}</p>
+                      <div className="mt-4 border-t border-bitconf-hairline pt-4">
+                        <h3 className="text-xs uppercase tracking-wider text-bitconf-text-tertiary mb-2">Abstract</h3>
+                        {event.abstract ? (
+                          <div className="space-y-3 text-gray-300 leading-relaxed">
+                            {event.abstract.map((paragraph) => (
+                              <p key={paragraph}>{paragraph}</p>
+                            ))}
+                          </div>
+                        ) : (
+                          <p className="text-bitconf-text-tertiary italic">The abstract will be published soon.</p>
+                        )}
+                      </div>
                     </li>
                   ))}
                 </ul>

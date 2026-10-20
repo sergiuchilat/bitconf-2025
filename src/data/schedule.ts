@@ -14,6 +14,8 @@ export interface ScheduleEvent {
    * icon otherwise) and name. "TBA" marks a seat not yet filled.
    */
   panelists?: { name: string; detail?: string }[];
+  /** Session abstract for the speaker pages, one string per paragraph. */
+  abstract?: string[];
 }
 
 export interface ScheduleSlot {
