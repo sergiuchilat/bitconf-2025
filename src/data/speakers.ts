@@ -227,7 +227,8 @@ export const SPEAKERS_2026: Speaker[] = [
   {
     name: "Cristian Brînză",
     role: "UX/UI Designer",
-    company: "_",
+    company: "Cegeka",
+    companyLink: "https://www.cegeka.com/",
     bio: "Creative Confidence Exercise",
     image: "/speakers/portraits/Cristian Brinza.png",
     linkedinUrl: "https://www.linkedin.com/in/cristi-br%C3%AEnz%C4%83-59029722b/"

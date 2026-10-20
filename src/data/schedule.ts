@@ -282,7 +282,7 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
       },
       {
         title: 'Creative Confidence Exercise',
-        speaker: 'Cristian Brînză (UX/UI Designer)',
+        speaker: 'Cristian Brînză (UX/UI Designer at Cegeka)',
         type: 'workshop',
         track: 'workshops',
         duration: '1.5 hours',
