@@ -304,9 +304,21 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
       }
     ]
   },
-  // Sergiu closes out the speaker line-up, right before the closing remarks.
   {
     time: '15:45 - 16:15',
+    events: [
+      {
+        title: 'SDLC Is Dead, Long Live the New SDLC',
+        speaker: 'Mihail Pecari',
+        type: 'talk',
+        track: 'presentations',
+        duration: '30 min'
+      }
+    ]
+  },
+  // Sergiu closes out the speaker line-up, right before the closing remarks.
+  {
+    time: '16:15 - 16:45',
     events: [
       {
         title: 'Talk to be announced',
@@ -317,8 +329,8 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
       }
     ]
   },
-  { time: '16:15 - 16:30', events: [{ title: 'Closing Remarks', speaker: 'Vitalie Ticau, Head of Math and Computer Science department', type: 'keynote', duration: '15 min' }] },
-  { time: '16:30 - 17:15', events: [{ title: 'Conference Ends', speaker: 'Networking', type: 'networking', duration: '45 min' }] }
+  { time: '16:45 - 17:00', events: [{ title: 'Closing Remarks', speaker: 'Vitalie Ticau, Head of Math and Computer Science department', type: 'keynote', duration: '15 min' }] },
+  { time: '17:00 - 17:45', events: [{ title: 'Conference Ends', speaker: 'Networking', type: 'networking', duration: '45 min' }] }
 ];
 
 /** A speaker's session, as shown on their own page. */

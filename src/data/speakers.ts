@@ -298,7 +298,14 @@ export const SPEAKERS_2026: Speaker[] = [
     company: "Janu Education",
     bio: "Business Panel"
   },
-  // Placeholders for speakers still being confirmed; the card renders a
-  // "Coming Soon" tile for name === "TBA".
-  { name: "TBA", company: "" }
+  // Role and portrait to follow.
+  {
+    name: "Mihail Pecari",
+    company: "_",
+    bio: "SDLC Is Dead, Long Live the New SDLC",
+    linkedinUrl: "https://www.linkedin.com/in/mihail-pecari/",
+    about: [
+      "Mihail joins BitConf 2026 with a talk on how the way we build software is changing: \"SDLC Is Dead, Long Live the New SDLC\"."
+    ]
+  }
 ];
