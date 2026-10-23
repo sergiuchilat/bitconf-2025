@@ -296,7 +296,8 @@ export const SPEAKERS_2026: Speaker[] = [
     name: "Natalia Janu",
     role: "Founder, Business Panel Speaker",
     company: "Janu Education",
-    bio: "Business Panel"
+    bio: "Business Panel",
+    image: "/speakers/portraits/Natalia Janu.png"
   },
   // Role and portrait to follow.
   {
