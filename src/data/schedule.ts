@@ -266,7 +266,7 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
         duration: '1 hour',
         panelists: [
           { name: 'Anton Perkin', detail: 'CEO at FusionWorks, MDC.md Organizer' },
-          { name: 'TBA', detail: 'Panelist to be announced' },
+          { name: 'Natalia Janu', detail: 'Founder of Janu Education' },
           { name: 'TBA', detail: 'Panelist to be announced' }
         ]
       }

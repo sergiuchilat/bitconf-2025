@@ -292,8 +292,13 @@ export const SPEAKERS_2026: Speaker[] = [
       "For a first BitConf, Cristian brings a 1.5-hour hands-on workshop, \"Creative Confidence Exercise\". Come ready to try things out and leave a little braver about your ideas."
     ]
   },
+  {
+    name: "Natalia Janu",
+    role: "Founder, Business Panel Speaker",
+    company: "Janu Education",
+    bio: "Business Panel"
+  },
   // Placeholders for speakers still being confirmed; the card renders a
   // "Coming Soon" tile for name === "TBA".
-  { name: "TBA", company: "" },
   { name: "TBA", company: "" }
 ];
