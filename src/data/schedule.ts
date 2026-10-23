@@ -175,6 +175,7 @@ export const AVATARS_2026: ScheduleAvatars = {
   'vitalie jicol': '/speakers/portraits/Vitalie Jicol.png',
   'cristian brînză': '/speakers/portraits/Cristian Brinza.png',
   'natalia janu': '/speakers/portraits/Natalia Janu.png',
+  'mihail pecari': '/speakers/portraits/Mihail Pecari.png',
 };
 
 /**

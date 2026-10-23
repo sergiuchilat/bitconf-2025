@@ -299,11 +299,12 @@ export const SPEAKERS_2026: Speaker[] = [
     bio: "Business Panel",
     image: "/speakers/portraits/Natalia Janu.png"
   },
-  // Role and portrait to follow.
+  // Role to follow.
   {
     name: "Mihail Pecari",
     company: "_",
     bio: "SDLC Is Dead, Long Live the New SDLC",
+    image: "/speakers/portraits/Mihail Pecari.png",
     linkedinUrl: "https://www.linkedin.com/in/mihail-pecari/",
     about: [
       "Mihail is back! After speaking at BitConf in 2022 and 2023, Mihail returns for a third time in 2026.",
