@@ -305,7 +305,8 @@ export const SPEAKERS_2026: Speaker[] = [
     bio: "SDLC Is Dead, Long Live the New SDLC",
     linkedinUrl: "https://www.linkedin.com/in/mihail-pecari/",
     about: [
-      "Mihail joins BitConf 2026 with a talk on how the way we build software is changing: \"SDLC Is Dead, Long Live the New SDLC\"."
+      "Mihail is back! After speaking at BitConf in 2022 and 2023, Mihail returns for a third time in 2026.",
+      "This year's talk, \"SDLC Is Dead, Long Live the New SDLC\", looks at how the way we build software is changing."
     ]
   }
 ];
