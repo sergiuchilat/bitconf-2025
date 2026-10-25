@@ -297,7 +297,8 @@ export const SPEAKERS_2026: Speaker[] = [
     role: "Founder, Business Panel Speaker",
     company: "Janu Education",
     bio: "Business Panel",
-    image: "/speakers/portraits/Natalia Janu.png"
+    image: "/speakers/portraits/Natalia Janu.png",
+    linkedinUrl: "https://www.linkedin.com/in/natalia-janu-01b658446/"
   },
   // Role to follow.
   {
