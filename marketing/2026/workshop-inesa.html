@@ -1,0 +1,248 @@
+<!doctype html>
+<!--
+  Workshop poster: Inesa Maidanik — "Inside the Recruiter's Mind: How to Ace Your Interview".
+  Render: ./render.sh  (square 1080x1080 for FB/IG/Telegram, wide 1200x630 for link previews / LinkedIn)
+  Colours mirror the site's tokens in src/app/globals.css, as in banner-1-month.html.
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --surface-0: #0a0b12;
+    --surface-2: #161927;
+    --hairline: rgb(255 255 255 / 0.10);
+    --text: #f5f5f7;
+    --text-2: #a1a1a6;
+    --primary: #7c79f5;
+    --primary-deep: #5b57e0;
+    --primary-soft: #a5a2f8;
+    --secondary: #3aa8e6;
+    --mint: #66d4cf;
+    --amber: #ff9f0a;
+    --emerald: #10b981;
+    --linkedin: #0a66c2;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+    background: var(--surface-0);
+    color: var(--text);
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  .canvas { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+
+  /* Background: grid + soft orbs, as on the site hero */
+  .grid {
+    position: absolute; inset: 0; opacity: 0.06;
+    background-image:
+      linear-gradient(to right, #fff 1px, transparent 1px),
+      linear-gradient(to bottom, #fff 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at 60% 40%, #000 30%, transparent 80%);
+  }
+  .orb { position: absolute; border-radius: 50%; filter: blur(110px); }
+  .orb.a { width: 620px; height: 620px; background: var(--primary-deep); opacity: .38; top: -160px; right: -140px; }
+  .orb.b { width: 520px; height: 520px; background: var(--emerald); opacity: .14; bottom: -200px; left: -160px; }
+  .line { position: absolute; left: -10%; width: 120%; height: 1px;
+          background: linear-gradient(90deg, transparent, rgb(124 121 245 / .35), transparent); }
+
+  /* Portrait: cutout on a glowing disc, anchored bottom-right */
+  .portrait { position: absolute; right: var(--p-right); bottom: 0; width: var(--p-size); height: var(--p-size); }
+  .portrait .disc {
+    position: absolute; left: 50%; bottom: 8%; transform: translateX(-50%);
+    width: 78%; aspect-ratio: 1; border-radius: 50%;
+    background: radial-gradient(circle at 50% 40%, rgb(124 121 245 / .55), rgb(91 87 224 / .18) 60%, transparent 72%);
+    box-shadow: inset 0 0 0 2px rgb(165 162 248 / .25);
+  }
+  .portrait img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: bottom;
+    filter: drop-shadow(0 20px 50px rgb(0 0 0 / .5));
+    mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+  }
+
+  /* Floating cards around the portrait: CV, interview chat, LinkedIn */
+  .float {
+    position: absolute; z-index: 3;
+    background: rgb(22 25 39 / .82); backdrop-filter: blur(12px);
+    border: 1px solid var(--hairline); border-radius: 18px;
+    box-shadow: 0 18px 50px rgb(0 0 0 / .45);
+  }
+  .cv { width: var(--cv-w); padding: var(--cv-pad); transform: rotate(-6deg); }
+  .cv .head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .cv .avatar { width: var(--cv-av); height: var(--cv-av); border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-soft), var(--secondary)); }
+  .cv .tag { font-weight: 800; font-size: var(--cv-tag); letter-spacing: .04em; color: var(--text); }
+  .cv .bar { height: var(--cv-bar); border-radius: 99px; background: rgb(255 255 255 / .14); margin-top: var(--cv-gap); }
+  .cv .row { display: flex; align-items: center; gap: 10px; margin-top: var(--cv-gap); }
+  .cv .row .bar { margin-top: 0; flex: 1; }
+  .cv .tick { width: var(--cv-tick); height: var(--cv-tick); border-radius: 50%; flex: none;
+    background: var(--emerald); display: flex; align-items: center; justify-content: center; }
+  .cv .tick svg { width: 62%; height: 62%; }
+
+  .chat { padding: var(--chat-pad); max-width: var(--chat-w); }
+  .chat .who { font-size: var(--chat-who); text-transform: uppercase; letter-spacing: .14em; color: var(--mint); font-weight: 700; margin-bottom: 6px; }
+  .chat .q { font-size: var(--chat-fs); font-weight: 650; line-height: 1.25; }
+  .chat::after { content: ""; position: absolute; left: 28px; bottom: -9px; width: 18px; height: 18px;
+    background: inherit; border-right: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
+    transform: rotate(45deg); }
+
+  .li { display: flex; align-items: center; gap: 12px; padding: var(--li-pad); border-radius: 14px; }
+  .li .logo-in { width: var(--li-ic); height: var(--li-ic); flex: none; }
+  .li .t { font-size: var(--li-fs); font-weight: 650; line-height: 1.2; }
+  .li .t span { display: block; color: var(--text-2); font-weight: 500; font-size: .8em; }
+
+  .content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; }
+  .top { display: flex; align-items: center; justify-content: space-between; }
+  .logo { height: var(--logo-h); }
+  .pill {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 10px 20px; border-radius: 999px;
+    background: rgb(16 185 129 / .12); border: 1px solid rgb(16 185 129 / .4);
+    color: var(--emerald); font-weight: 650; font-size: var(--pill-fs); letter-spacing: .02em;
+  }
+  .pill .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 12px var(--emerald); }
+
+  .text { max-width: var(--text-w); }
+  .eyebrow { text-transform: uppercase; letter-spacing: .22em; font-weight: 600; color: var(--primary-soft); font-size: var(--eyebrow-fs); }
+  .title { font-size: var(--title-fs); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02; }
+  .title .grad {
+    background: linear-gradient(135deg, #fff 10%, var(--primary-soft) 50%, var(--secondary) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .sub { font-size: var(--sub-fs); color: var(--text-2); line-height: 1.4; }
+  .sub b { color: var(--text); font-weight: 650; }
+  .speaker .name { font-size: var(--name-fs); font-weight: 750; letter-spacing: -0.02em; }
+  .speaker .role { font-size: var(--role-fs); color: var(--text-2); margin-top: 4px; }
+  .speaker .role b { color: var(--amber); font-weight: 650; }
+
+  .facts { display: flex; gap: var(--gap); flex-wrap: wrap; }
+  .fact {
+    background: rgb(255 255 255 / .045); border: 1px solid var(--hairline);
+    border-radius: 16px; padding: var(--fact-pad);
+  }
+  .fact .k { text-transform: uppercase; letter-spacing: .16em; font-size: var(--k-fs); color: var(--text-2); font-weight: 600; margin-bottom: 6px; }
+  .fact .v { font-size: var(--v-fs); font-weight: 650; line-height: 1.2; white-space: nowrap; }
+
+  .cta { display: flex; align-items: center; gap: 28px; }
+  .btn {
+    background: var(--primary-deep); color: #fff; font-weight: 700; font-size: var(--btn-fs);
+    padding: var(--btn-pad); border-radius: 14px; display: inline-flex; align-items: center; gap: 12px;
+    box-shadow: 0 12px 40px rgb(91 87 224 / .45);
+  }
+  .url { font-size: var(--url-fs); font-weight: 600; color: var(--text); letter-spacing: .01em; }
+  .url span { color: var(--mint); }
+
+  /* ---------- Square 1080x1080 ---------- */
+  body.square {
+    --logo-h: 84px; --pill-fs: 21px; --eyebrow-fs: 19px; --text-w: 600px;
+    --title-fs: 66px; --sub-fs: 23px; --name-fs: 36px; --role-fs: 21px;
+    --gap: 14px; --fact-pad: 16px 20px; --k-fs: 13px; --v-fs: 22px;
+    --btn-fs: 26px; --btn-pad: 20px 30px; --url-fs: 28px;
+    --p-size: 640px; --p-right: -70px;
+    --cv-w: 210px; --cv-pad: 20px; --cv-av: 38px; --cv-tag: 22px; --cv-bar: 9px; --cv-gap: 11px; --cv-tick: 20px;
+    --chat-pad: 16px 20px; --chat-w: 290px; --chat-who: 12px; --chat-fs: 21px;
+    --li-pad: 14px 18px; --li-ic: 44px; --li-fs: 19px;
+  }
+  body.square .content { padding: 64px 72px; justify-content: space-between; }
+  body.square .text { display: flex; flex-direction: column; gap: 22px; margin-top: -10px; }
+  body.square .speaker { margin-top: 6px; }
+  body.square .bottom { display: flex; flex-direction: column; gap: 30px; max-width: 640px; }
+  body.square .cv   { right: 52px; top: 230px; }
+  body.square .chat { right: 300px; top: 150px; }
+  body.square .li   { right: 40px; bottom: 150px; }
+
+  /* ---------- Wide 1200x630 ---------- */
+  body.wide {
+    --logo-h: 56px; --pill-fs: 15px; --eyebrow-fs: 14px; --text-w: 640px;
+    --title-fs: 50px; --sub-fs: 17px; --name-fs: 26px; --role-fs: 16px;
+    --gap: 10px; --fact-pad: 11px 15px; --k-fs: 10px; --v-fs: 17px;
+    --btn-fs: 19px; --btn-pad: 14px 22px; --url-fs: 21px;
+    --p-size: 520px; --p-right: 10px;
+    --cv-w: 150px; --cv-pad: 14px; --cv-av: 28px; --cv-tag: 16px; --cv-bar: 7px; --cv-gap: 8px; --cv-tick: 15px;
+    --chat-pad: 12px 16px; --chat-w: 230px; --chat-who: 10px; --chat-fs: 16px;
+    --li-pad: 10px 14px; --li-ic: 32px; --li-fs: 15px;
+  }
+  body.wide .content { padding: 40px 56px; justify-content: space-between; }
+  body.wide .top { max-width: 640px; }
+  body.wide .pill { display: none; }
+  body.wide .text { display: flex; flex-direction: column; gap: 14px; }
+  body.wide .bottom { display: flex; flex-direction: column; gap: 20px; }
+  body.wide .cv   { right: 40px; top: 70px; }
+  body.wide .chat { right: 400px; top: 40px; }
+  body.wide .li   { right: 30px; bottom: 120px; }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="grid"></div>
+  <div class="orb a"></div>
+  <div class="orb b"></div>
+  <div class="line" style="top:30%; transform:rotate(-8deg)"></div>
+  <div class="line" style="top:72%; transform:rotate(5deg); opacity:.6"></div>
+
+  <div class="portrait">
+    <div class="disc"></div>
+    <img src="../../public/speakers/portraits/Inesa Maidanik.png" alt="Inesa Maidanik">
+  </div>
+
+  <!-- CV sheet with checked lines -->
+  <div class="float cv">
+    <div class="head"><div class="avatar"></div><div class="tag">CV</div></div>
+    <div class="bar" style="width:90%"></div>
+    <div class="bar" style="width:65%"></div>
+    <div class="row"><div class="tick"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="bar"></div></div>
+    <div class="row"><div class="tick"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="bar" style="max-width:75%"></div></div>
+    <div class="row"><div class="tick"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="bar" style="max-width:85%"></div></div>
+  </div>
+
+  <!-- Interview question bubble -->
+  <div class="float chat">
+    <div class="who">Interviewer</div>
+    <div class="q">“So, tell me about yourself…”</div>
+  </div>
+
+  <!-- LinkedIn profile chip -->
+  <div class="float li">
+    <svg class="logo-in" viewBox="0 0 72 72"><rect width="72" height="72" rx="10" fill="#0a66c2"/><path fill="#fff" d="M16.6 28.4h8.2V55h-8.2zM20.7 15.2a4.8 4.8 0 1 1 0 9.6 4.8 4.8 0 0 1 0-9.6M30 28.4h7.9V32h.1c1.1-2.1 3.8-4.3 7.8-4.3 8.3 0 9.9 5.5 9.9 12.7V55h-8.2V42c0-3.1-.1-7.1-4.3-7.1-4.3 0-5 3.4-5 6.9V55H30z"/></svg>
+    <div class="t">Inesa Maidanik<span>Recruiter · Adtelligent</span></div>
+  </div>
+
+  <div class="content">
+    <div class="top">
+      <img class="logo" src="../../public/logo_bit_conference.svg" alt="BitConf">
+      <div class="pill"><span class="dot"></span>Workshop</div>
+    </div>
+
+    <div class="text">
+      <div class="eyebrow">Workshop · 1.5 hours</div>
+      <div class="title">Inside the <span class="grad">Recruiter’s Mind</span>: How to Ace Your Interview</div>
+      <div class="sub">For anyone who has ever left an interview wondering <b>what they were actually looking for.</b></div>
+      <div class="speaker">
+        <div class="name">Inesa Maidanik</div>
+        <div class="role">Recruiter / Researcher at <b>Adtelligent</b></div>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <div class="facts">
+        <div class="fact"><div class="k">Date</div><div class="v">Sat, 14 Nov</div></div>
+        <div class="fact"><div class="k">Time</div><div class="v">11:00 – 12:30</div></div>
+        <div class="fact"><div class="k">Venue</div><div class="v">Nortek Center, Bălți</div></div>
+      </div>
+      <div class="cta">
+        <div class="btn">Get your free ticket →</div>
+        <div class="url">bitconf<span>.md</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  // ?format=square|wide picks the layout.
+  const params = new URLSearchParams(location.search);
+  document.body.classList.add(params.get('format') || 'square');
+</script>
+</body>
+</html>

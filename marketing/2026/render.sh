@@ -28,3 +28,10 @@ AVATAR="file://$PWD/avatar.html"
   --window-size=640,640 --screenshot="$PWD/bitconf-2026-telegram-avatar-mark.png" "$AVATAR?v=mark"
 "$CHROME" --headless=new --hide-scrollbars --allow-file-access-from-files --force-device-scale-factor=1 \
   --window-size=640,640 --screenshot="$PWD/bitconf-2026-telegram-avatar-full.png" "$AVATAR?v=full"
+
+# Workshop poster: Inesa Maidanik
+INESA="file://$PWD/workshop-inesa.html"
+"$CHROME" --headless=new --hide-scrollbars --allow-file-access-from-files --force-device-scale-factor=2 \
+  --window-size=1080,1080 --screenshot="$PWD/bitconf-2026-workshop-inesa-square.png" "$INESA?format=square"
+"$CHROME" --headless=new --hide-scrollbars --allow-file-access-from-files --force-device-scale-factor=2 \
+  --window-size=1200,630 --screenshot="$PWD/bitconf-2026-workshop-inesa-wide.png" "$INESA?format=wide"
