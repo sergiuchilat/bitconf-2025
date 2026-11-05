@@ -315,7 +315,7 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     events: [
       {
         title: 'SDLC Is Dead, Long Live the New SDLC',
-        speaker: 'Mihail Pecari',
+        speaker: 'Mihail Pecari (Software Architect at Grid Dynamics)',
         type: 'talk',
         track: 'presentations',
         duration: '30 min'
@@ -327,11 +327,14 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     time: '16:15 - 16:45',
     events: [
       {
-        title: 'Talk to be announced',
+        title: 'Architecture at Scale: A Sovereign Multi-Hypervisor Cloud for 1000+ Servers',
         speaker: 'Sergiu Chilat (DevOps Engineer & NOC Team Lead at Adtelligent)',
         type: 'talk',
         track: 'presentations',
-        duration: '30 min'
+        duration: '30 min',
+        abstract: [
+          'Step inside the ongoing process of how Adtelligent is engineering a sovereign multi-hypervisor cloud platform for 1,000+ servers. This session explores real-time architectural strategies, cost-optimization blueprints, and technical trade-offs for scaling private IaaS infrastructure with bare-metal automation.'
+        ]
       }
     ]
   },

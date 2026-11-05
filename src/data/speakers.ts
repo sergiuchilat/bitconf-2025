@@ -188,11 +188,12 @@ export const SPEAKERS_2026: Speaker[] = [
     role: "DevOps Engineer & NOC Team Lead",
     company: "Adtelligent",
     companyLink: "https://adtelligent.com",
+    bio: "Architecture at Scale: A Sovereign Multi-Hypervisor Cloud for 1000+ Servers",
     image: "/speakers/portraits/Sergiu Chilat.png",
     linkedinUrl: "https://www.linkedin.com/in/sergiu-chilat/",
     about: [
       "Sergiu is a DevOps Engineer and NOC Team Lead at Adtelligent, and part of the team that organizes BitConf.",
-      "Sergiu closes the 2026 speaker line-up, right before the closing remarks. The talk topic will be announced soon."
+      "Sergiu closes the 2026 speaker line-up, right before the closing remarks, with \"Architecture at Scale: A Sovereign Multi-Hypervisor Cloud for 1000+ Servers\": how Adtelligent is building its own cloud platform for more than 1,000 servers."
     ]
   },
   {
@@ -302,10 +303,11 @@ export const SPEAKERS_2026: Speaker[] = [
     image: "/speakers/portraits/Natalia Janu.png",
     linkedinUrl: "https://www.linkedin.com/in/natalia-janu-01b658446/"
   },
-  // Role to follow.
   {
     name: "Mihail Pecari",
-    company: "_",
+    role: "Software Architect",
+    company: "Grid Dynamics",
+    companyLink: "https://www.griddynamics.com",
     bio: "SDLC Is Dead, Long Live the New SDLC",
     image: "/speakers/portraits/Mihail Pecari.png",
     linkedinUrl: "https://www.linkedin.com/in/mihail-pecari/",
