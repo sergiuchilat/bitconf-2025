@@ -260,6 +260,7 @@ export const SPEAKERS_2026: Speaker[] = [
     role: "CEO, MDC.md Organizer",
     company: "FusionWorks",
     companyLink: "https://fusion.works",
+    bio: "Business Panel",
     image: "/speakers/portraits/Anton Perkin.png",
     about: [
       "Anton is the CEO of FusionWorks and the organizer of MDC.md, the biggest IT conference in Moldova. Few people know better what it takes to put on a great conference.",
@@ -294,7 +295,7 @@ export const SPEAKERS_2026: Speaker[] = [
   },
   {
     name: "Natalia Janu",
-    role: "Founder, Business Panel Speaker",
+    role: "Founder",
     company: "Janu Education",
     bio: "Business Panel",
     image: "/speakers/portraits/Natalia Janu.png",
@@ -314,7 +315,7 @@ export const SPEAKERS_2026: Speaker[] = [
   },
   {
     name: "Pavel Curcovici",
-    role: "Tekwill Balti Administrator, Business Panel Speaker",
+    role: "Tekwill Balti Administrator",
     company: "Tekwill",
     companyLink: "https://tekwill.md/",
     bio: "Business Panel",
