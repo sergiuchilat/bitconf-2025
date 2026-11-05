@@ -176,6 +176,7 @@ export const AVATARS_2026: ScheduleAvatars = {
   'cristian brînză': '/speakers/portraits/Cristian Brinza.png',
   'natalia janu': '/speakers/portraits/Natalia Janu.png',
   'mihail pecari': '/speakers/portraits/Mihail Pecari.png',
+  'pavel curcovici': '/speakers/portraits/Pavel Curcovici.png',
 };
 
 /**
@@ -184,7 +185,7 @@ export const AVATARS_2026: ScheduleAvatars = {
  * morning workshop and Cristian Brînză's afternoon workshop running in
  * parallel to it, like the 2025 QA workshop did.
  * Ecaterina Niculcea and Roman Voinitchi co-present and share one 30-minute
- * slot. The business panel is confirmed but its speakers are not yet.
+ * slot.
  */
 export const SCHEDULE_2026: ScheduleSlot[] = [
   { time: '9:45 - 10:15', events: [{ title: 'Registration & Coffee', speaker: '', type: 'break', duration: '30 min' }] },
@@ -269,7 +270,7 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
         panelists: [
           { name: 'Anton Perkin', detail: 'CEO at FusionWorks, MDC.md Organizer' },
           { name: 'Natalia Janu', detail: 'Founder of Janu Education' },
-          { name: 'TBA', detail: 'Panelist to be announced' }
+          { name: 'Pavel Curcovici', detail: 'Tekwill Balti Administrator' }
         ]
       }
     ]

@@ -136,8 +136,8 @@ export const SPEAKERS_2025: Speaker[] = [
 
 /**
  * BitConf 2026 line-up — confirmed speakers only.
- * Roman Fiodorov, Radu Dumbraveanu, Radu Tataru, Sergiu Chilat and Diana Lari
- * carry over from 2025; Roman Gluck, Inesa Maidanik, Ecaterina Niculcea,
+ * Roman Fiodorov, Radu Dumbraveanu, Radu Tataru, Sergiu Chilat, Diana Lari and
+ * Pavel Curcovici carry over from 2025; Roman Gluck, Inesa Maidanik, Ecaterina Niculcea,
  * Roman Voinitchi, Anton Perkin, Vitalie Jicol and Cristian Brînză are new
  * for 2026.
  *
@@ -310,6 +310,19 @@ export const SPEAKERS_2026: Speaker[] = [
     about: [
       "Mihail is back! After speaking at BitConf in 2022 and 2023, Mihail returns for a third time in 2026.",
       "This year's talk, \"SDLC Is Dead, Long Live the New SDLC\", looks at how the way we build software is changing."
+    ]
+  },
+  {
+    name: "Pavel Curcovici",
+    role: "Tekwill Balti Administrator, Business Panel Speaker",
+    company: "Tekwill",
+    companyLink: "https://tekwill.md/",
+    bio: "Business Panel",
+    image: "/speakers/portraits/Pavel Curcovici.png",
+    linkedinUrl: "https://www.linkedin.com/in/curcovici-pavel-461590101",
+    about: [
+      "Pavel runs Tekwill Bălți, the city's hub for tech education and startups, so few people know the local IT scene better.",
+      "Pavel spoke at BitConf 2025 with \"Tech Movers: From Ideas to Startups\" and returns in 2026 as the third voice on the business panel."
     ]
   }
 ];
