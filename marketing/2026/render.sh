@@ -35,3 +35,10 @@ INESA="file://$PWD/workshop-inesa.html"
   --window-size=1080,1080 --screenshot="$PWD/bitconf-2026-workshop-inesa-square.png" "$INESA?format=square"
 "$CHROME" --headless=new --hide-scrollbars --allow-file-access-from-files --force-device-scale-factor=2 \
   --window-size=1200,630 --screenshot="$PWD/bitconf-2026-workshop-inesa-wide.png" "$INESA?format=wide"
+
+# Printable workshop entry tickets (A4 PDF, 16 per page, black and white)
+TICKETS="file://$PWD/workshop-tickets.html"
+for W in inesa cristian; do
+  "$CHROME" --headless=new --allow-file-access-from-files --no-pdf-header-footer \
+    --print-to-pdf="$PWD/bitconf-2026-workshop-tickets-$W.pdf" "$TICKETS?w=$W&n=32"
+done
