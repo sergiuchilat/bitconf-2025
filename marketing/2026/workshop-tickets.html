@@ -3,7 +3,7 @@
   Printable entry tickets for the two BitConf 2026 workshops, black and white:
   A4, sixteen 95x34mm tickets per page (2 x 8), numbered, with a tear-off stub. Cut along the dashed lines.
   Render: ./render.sh (PDFs) — or open in Chrome and print at 100% / "Actual size".
-  ?w=inesa|cristian picks the workshop, ?n=32 how many tickets.
+  ?w=inesa|cristian picks the workshop, ?n=30 how many tickets.
 -->
 <html>
 <head>
@@ -104,7 +104,7 @@
   const PER_SHEET = 16;
   const params = new URLSearchParams(location.search);
   const w = WORKSHOPS[params.get('w') || 'inesa'];
-  const count = Number(params.get('n') || 32);
+  const count = Number(params.get('n') || 30);
   document.title = `BitConf 2026 workshop tickets — ${w.speaker}`;
 
   const tpl = document.getElementById('ticket');
