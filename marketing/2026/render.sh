@@ -40,5 +40,5 @@ INESA="file://$PWD/workshop-inesa.html"
 TICKETS="file://$PWD/workshop-tickets.html"
 for W in inesa cristian; do
   "$CHROME" --headless=new --allow-file-access-from-files --no-pdf-header-footer \
-    --print-to-pdf="$PWD/bitconf-2026-workshop-tickets-$W.pdf" "$TICKETS?w=$W&n=30"
+    --print-to-pdf="$PWD/bitconf-2026-workshop-tickets-$W.pdf" "$TICKETS?w=$W&n=32"
 done
