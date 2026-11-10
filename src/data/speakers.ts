@@ -176,11 +176,12 @@ export const SPEAKERS_2026: Speaker[] = [
     role: "Delivery Director SER Region, Amdaris, Entrepreneur, Commercial mentor and Ironman athlete",
     company: "Amdaris",
     companyLink: "https://amdaris.com",
+    bio: "In My Unbiased Opinion, I’m Right",
     image: "/speakers/portraits/Radu Tataru.png",
     linkedinUrl: "https://www.linkedin.com/in/radu-tataru/",
     about: [
       "This is Radu's third BitConf. Radu is Delivery Director for the SER Region at Amdaris and, on top of that, an entrepreneur, a commercial mentor and an Ironman athlete.",
-      "So if you need tips on managing projects or on surviving a 180 km bike ride, Radu is the person to ask. The talk topic will be announced soon."
+      "So if you need tips on managing projects or on surviving a 180 km bike ride, Radu is the person to ask."
     ]
   },
   {

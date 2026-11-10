@@ -238,7 +238,7 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     time: '12:00 - 12:30',
     events: [
       {
-        title: 'Talk to be announced',
+        title: 'In My Unbiased Opinion, I’m Right',
         speaker: 'Radu Tataru (Delivery Director SER Region, Amdaris)',
         type: 'talk',
         track: 'presentations',
