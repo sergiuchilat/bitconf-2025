@@ -160,14 +160,13 @@ export const SPEAKERS_2026: Speaker[] = [
   },
   {
     name: "Radu Dumbraveanu",
-    role: "Former Tech Leader",
-    company: "AmSoft Group",
-    companyLink: "https://amsoft-group.com",
+    role: "Lead Backend Engineer",
+    company: "Wellgrid",
     bio: "Navigating Complexity with GenAI",
     image: "/speakers/portraits/Radu Dumbraveanu.png",
     linkedinUrl: "https://www.linkedin.com/in/radudumbraveanu",
     about: [
-      "This is Radu's third BitConf. Radu is a former Tech Leader at AmSoft Group and holds a PhD in mathematics.",
+      "This is Radu's third BitConf. Radu is a Lead Backend Engineer at Wellgrid and holds a PhD in mathematics.",
       "Few people can explain complex things as clearly as Radu, which is exactly why we keep inviting Radu back."
     ]
   },
