@@ -246,8 +246,9 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
       }
     ]
   },
+  { time: '12:30 - 13:15', events: [{ title: 'Lunch', speaker: '', type: 'break', duration: '45 min' }] },
   {
-    time: '12:30 - 13:00',
+    time: '13:15 - 13:45',
     events: [
       {
         title: 'Lost in Translation: Communicating Across Cultures in IT',
@@ -261,7 +262,6 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
       }
     ]
   },
-  { time: '13:00 - 13:45', events: [{ title: 'Lunch', speaker: '', type: 'break', duration: '45 min' }] },
   {
     time: '13:45 - 14:45',
     events: [
