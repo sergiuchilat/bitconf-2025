@@ -238,8 +238,8 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     time: '12:00 - 12:30',
     events: [
       {
-        title: 'Making an Educational App Feel Native on Mobile',
-        speaker: 'Ecaterina Niculcea (Alecu Russo Balti State University), Roman Voinitchi (Freelancer)',
+        title: 'The Road to Your First Job Starts with a Well-Crafted CV',
+        speaker: 'Vitalie Jicol (DevOps Engineer at Cegeka)',
         type: 'talk',
         track: 'presentations',
         duration: '30 min'
@@ -302,8 +302,8 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     time: '15:15 - 15:45',
     events: [
       {
-        title: 'The Road to Your First Job Starts with a Well-Crafted CV',
-        speaker: 'Vitalie Jicol (DevOps Engineer at Cegeka)',
+        title: 'Making an Educational App Feel Native on Mobile',
+        speaker: 'Ecaterina Niculcea (Alecu Russo Balti State University), Roman Voinitchi (Freelancer)',
         type: 'talk',
         track: 'presentations',
         duration: '30 min'
