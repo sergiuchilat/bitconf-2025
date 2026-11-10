@@ -194,8 +194,8 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     time: '10:30 - 11:00',
     events: [
       {
-        title: 'What to Learn in the Era of AI',
-        speaker: 'Roman Fiodorov (Founder Filosoft Company, Tech-Lead at Aiomed.com)',
+        title: 'Talk to be announced',
+        speaker: 'Radu Dumbraveanu (Former Tech Leader at AmSoft Group)',
         type: 'talk',
         track: 'presentations',
         duration: '30 min'
@@ -226,8 +226,8 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     time: '11:30 - 12:00',
     events: [
       {
-        title: 'Talk to be announced',
-        speaker: 'Radu Dumbraveanu (Former Tech Leader at AmSoft Group)',
+        title: 'Making an Educational App Feel Native on Mobile',
+        speaker: 'Ecaterina Niculcea (Alecu Russo Balti State University), Roman Voinitchi (Freelancer)',
         type: 'talk',
         track: 'presentations',
         duration: '30 min'
@@ -238,8 +238,8 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     time: '12:00 - 12:30',
     events: [
       {
-        title: 'Making an Educational App Feel Native on Mobile',
-        speaker: 'Ecaterina Niculcea (Alecu Russo Balti State University), Roman Voinitchi (Freelancer)',
+        title: 'Talk to be announced',
+        speaker: 'Radu Tataru (Delivery Director SER Region, Amdaris)',
         type: 'talk',
         track: 'presentations',
         duration: '30 min'
@@ -250,11 +250,14 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     time: '12:30 - 13:00',
     events: [
       {
-        title: 'Talk to be announced',
-        speaker: 'Radu Tataru (Delivery Director SER Region, Amdaris)',
+        title: 'Lost in Translation: Communicating Across Cultures in IT',
+        speaker: 'Roman Gluck (Senior Product Manager at Globant)',
         type: 'talk',
         track: 'presentations',
-        duration: '30 min'
+        duration: '30 min',
+        abstract: [
+          "Why do smart people from different cultures sometimes struggle to understand each other? Drawing on real-life experiences from international tech teams, we'll explore cultural differences, common communication blind spots, and the misunderstandings they create. Expect relatable stories, a little humor, and practical tools (including a surprising lesson from AI!) to help you communicate better across cultures."
+        ]
       }
     ]
   },
@@ -279,14 +282,11 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     time: '14:45 - 15:15',
     events: [
       {
-        title: 'Lost in Translation: Communicating Across Cultures in IT',
-        speaker: 'Roman Gluck (Senior Product Manager at Globant)',
+        title: 'The Road to Your First Job Starts with a Well-Crafted CV',
+        speaker: 'Vitalie Jicol (DevOps Engineer at Cegeka)',
         type: 'talk',
         track: 'presentations',
-        duration: '30 min',
-        abstract: [
-          "Why do smart people from different cultures sometimes struggle to understand each other? Drawing on real-life experiences from international tech teams, we'll explore cultural differences, common communication blind spots, and the misunderstandings they create. Expect relatable stories, a little humor, and practical tools (including a surprising lesson from AI!) to help you communicate better across cultures."
-        ]
+        duration: '30 min'
       },
       {
         title: 'Creative Confidence Exercise',
@@ -302,8 +302,8 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     time: '15:15 - 15:45',
     events: [
       {
-        title: 'The Road to Your First Job Starts with a Well-Crafted CV',
-        speaker: 'Vitalie Jicol (DevOps Engineer at Cegeka)',
+        title: 'SDLC Is Dead, Long Live the New SDLC',
+        speaker: 'Mihail Pecari (Software Architect at Grid Dynamics)',
         type: 'talk',
         track: 'presentations',
         duration: '30 min'
@@ -314,19 +314,6 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     time: '15:45 - 16:15',
     events: [
       {
-        title: 'SDLC Is Dead, Long Live the New SDLC',
-        speaker: 'Mihail Pecari (Software Architect at Grid Dynamics)',
-        type: 'talk',
-        track: 'presentations',
-        duration: '30 min'
-      }
-    ]
-  },
-  // Sergiu closes out the speaker line-up, right before the closing remarks.
-  {
-    time: '16:15 - 16:45',
-    events: [
-      {
         title: 'Architecture at Scale: A Sovereign Multi-Hypervisor Cloud for 1000+ Servers',
         speaker: 'Sergiu Chilat (DevOps Engineer & NOC Team Lead at Adtelligent)',
         type: 'talk',
@@ -335,6 +322,19 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
         abstract: [
           'Step inside the ongoing process of how Adtelligent is engineering a sovereign multi-hypervisor cloud platform for 1,000+ servers. This session explores real-time architectural strategies, cost-optimization blueprints, and technical trade-offs for scaling private IaaS infrastructure with bare-metal automation.'
         ]
+      }
+    ]
+  },
+  // Roman Fiodorov closes out the speaker line-up, right before the closing remarks.
+  {
+    time: '16:15 - 16:45',
+    events: [
+      {
+        title: 'What to Learn in the Era of AI',
+        speaker: 'Roman Fiodorov (Founder Filosoft Company, Tech-Lead at Aiomed.com)',
+        type: 'talk',
+        track: 'presentations',
+        duration: '30 min'
       }
     ]
   },
