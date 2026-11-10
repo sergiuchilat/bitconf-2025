@@ -194,7 +194,7 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     time: '10:30 - 11:00',
     events: [
       {
-        title: 'Talk to be announced',
+        title: 'Navigating Complexity with GenAI',
         speaker: 'Radu Dumbraveanu (Former Tech Leader at AmSoft Group)',
         type: 'talk',
         track: 'presentations',

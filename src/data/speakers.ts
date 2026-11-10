@@ -163,12 +163,12 @@ export const SPEAKERS_2026: Speaker[] = [
     role: "Former Tech Leader",
     company: "AmSoft Group",
     companyLink: "https://amsoft-group.com",
-    // 2025 talk was "Collected Insights (2024–2025)" — year-specific, so not carried over.
+    bio: "Navigating Complexity with GenAI",
     image: "/speakers/portraits/Radu Dumbraveanu.png",
     linkedinUrl: "https://www.linkedin.com/in/radudumbraveanu",
     about: [
       "This is Radu's third BitConf. Radu is a former Tech Leader at AmSoft Group and holds a PhD in mathematics.",
-      "Few people can explain complex things as clearly as Radu, which is exactly why we keep inviting Radu back. The talk topic will be announced soon."
+      "Few people can explain complex things as clearly as Radu, which is exactly why we keep inviting Radu back."
     ]
   },
   {
