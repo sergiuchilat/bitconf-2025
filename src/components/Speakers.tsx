@@ -79,7 +79,12 @@ export default function Speakers({
         <div className="flex flex-wrap justify-center gap-8">
           {finalSpeakers.map((speaker, index) => (
             <div key={index} className={`group ${cardWidth} bg-bitconf-surface-2 rounded-lg shadow-md overflow-hidden border border-bitconf-primary/20 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-bitconf-primary/15 hover:border-bitconf-primary/50`}>
-              <div className={`${frameClass} bc-speaker-frame flex items-center justify-center overflow-hidden`}>
+              <div className={`${frameClass} bc-speaker-frame relative flex items-center justify-center overflow-hidden`}>
+                {speaker.organizer && (
+                  <span className="absolute top-3 left-3 z-10 rounded-full bg-bitconf-dark/80 border border-bitconf-mint/40 px-3 py-1 text-xs font-semibold text-bitconf-mint">
+                    Organizer
+                  </span>
+                )}
                 {speaker.name === "TBA" ? (
                   <div className="text-center text-white">
                     <div className="text-6xl mb-4">🎤</div>

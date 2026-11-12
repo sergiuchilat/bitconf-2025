@@ -11,6 +11,8 @@ export interface Speaker {
   linkedinUrl?: string;
   /** Longer bio for the speaker's own page, one string per paragraph. */
   about?: string[];
+  /** Also on the organizing team; shown as a badge instead of a second card. */
+  organizer?: boolean;
 }
 
 /** "Cristian Brînză" -> "cristian-brinza"; the speaker page's URL segment. */
@@ -191,6 +193,7 @@ export const SPEAKERS_2026: Speaker[] = [
     bio: "Architecture at Scale: A Sovereign Multi-Hypervisor Cloud for 1000+ Servers",
     image: "/speakers/portraits/Sergiu Chilat.png",
     linkedinUrl: "https://www.linkedin.com/in/sergiu-chilat/",
+    organizer: true,
     about: [
       "Sergiu is a DevOps Engineer and NOC Team Lead at Adtelligent, and part of the team that organizes BitConf.",
       "Sergiu closes the 2026 speaker line-up, right before the closing remarks, with \"Architecture at Scale: A Sovereign Multi-Hypervisor Cloud for 1000+ Servers\": how Adtelligent is building its own cloud platform for more than 1,000 servers."

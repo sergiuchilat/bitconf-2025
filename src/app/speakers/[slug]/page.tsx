@@ -96,7 +96,7 @@ export default async function SpeakerPage({ params }: Props) {
 
             <div>
               <p className="text-sm uppercase tracking-wider text-bitconf-mint mb-3">
-                BitConf {edition.year} Speaker
+                BitConf {edition.year} Speaker{speaker.organizer && ' & Organizer'}
               </p>
               <h1 className="text-4xl sm:text-5xl font-bold text-white mb-3">{speaker.name}</h1>
               {speaker.role && <p className="text-lg text-bitconf-primary font-medium mb-2">{speaker.role}</p>}

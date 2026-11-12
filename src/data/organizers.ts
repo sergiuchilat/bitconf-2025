@@ -9,16 +9,11 @@ export interface Organizer {
   linkedinUrl?: string;
 }
 
-/** The people who organise BitConf 2026, shown in the "Organizing Team" section. */
+/**
+ * The people who organise BitConf 2026, shown in the "Organizing Team" section.
+ * Organizers who also speak are flagged `organizer` in speakers.ts instead.
+ */
 export const ORGANIZERS_2026: Organizer[] = [
-  {
-    name: "Sergiu Chilat",
-    role: "Organizer",
-    company: "Adtelligent",
-    companyLink: "https://adtelligent.com",
-    image: "/speakers/portraits/Sergiu Chilat.png",
-    linkedinUrl: "https://www.linkedin.com/in/sergiu-chilat/"
-  },
   { name: "Anastasia Gaideic", image: "/organizers/Anastasia Gaideic.png" },
   { name: "Adela Gorea", image: "/organizers/Adela Gorea.png" },
   {
