@@ -204,12 +204,12 @@ export const SPEAKERS_2026: Speaker[] = [
     role: "Senior Product Manager / Public Speaking and Startup Mentor",
     company: "Globant",
     companyLink: "https://www.globant.com",
-    bio: "Lost in Translation: Communicating Across Cultures in IT",
+    bio: "All Stress, No Routine: A Guide for IT Professionals on How Not to End Up on a Farm",
     image: "/speakers/portraits/Roman Gluck.png",
     linkedinUrl: "https://www.linkedin.com/in/roman-gluck/",
     about: [
       "Roman is a Senior Product Manager at Globant and a mentor for public speaking and startups. Roman is also part of the team behind MDC.md.",
-      "2026 is Roman's first BitConf. The talk, \"Lost in Translation: Communicating Across Cultures in IT\", is about why smart people from different cultures sometimes struggle to understand each other, and what to do about it."
+      "2026 is Roman's first BitConf, with the talk \"All Stress, No Routine: A Guide for IT Professionals on How Not to End Up on a Farm\"."
     ]
   },
   {

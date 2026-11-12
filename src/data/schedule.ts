@@ -252,14 +252,11 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
     time: '13:15 - 13:45',
     events: [
       {
-        title: 'Lost in Translation: Communicating Across Cultures in IT',
+        title: 'All Stress, No Routine: A Guide for IT Professionals on How Not to End Up on a Farm',
         speaker: 'Roman Gluck (Senior Product Manager at Globant)',
         type: 'talk',
         track: 'presentations',
-        duration: '30 min',
-        abstract: [
-          "Why do smart people from different cultures sometimes struggle to understand each other? Drawing on real-life experiences from international tech teams, we'll explore cultural differences, common communication blind spots, and the misunderstandings they create. Expect relatable stories, a little humor, and practical tools (including a surprising lesson from AI!) to help you communicate better across cultures."
-        ]
+        duration: '30 min'
       }
     ]
   },
