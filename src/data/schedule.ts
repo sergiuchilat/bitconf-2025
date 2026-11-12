@@ -215,7 +215,7 @@ export const SCHEDULE_2026: ScheduleSlot[] = [
       },
       {
         title: 'Inside the Recruiter’s Mind: How to Ace Your Interview',
-        speaker: 'Inesa Maidanik (Recruiter / Researcher at Adtelligent)',
+        speaker: 'Inesa Maidanik (Recruiter / Researcher at Adtelligent), Artiom Burlaca (DevOps Engineer at Adtelligent)',
         type: 'workshop',
         track: 'workshops',
         duration: '1.5 hours',
