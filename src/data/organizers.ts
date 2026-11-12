@@ -19,12 +19,12 @@ export const ORGANIZERS_2026: Organizer[] = [
     image: "/speakers/portraits/Sergiu Chilat.png",
     linkedinUrl: "https://www.linkedin.com/in/sergiu-chilat/"
   },
-  { name: "Anastasia Gaideic" },
-  { name: "Adela Gorea" },
+  { name: "Anastasia Gaideic", image: "/organizers/Anastasia Gaideic.png" },
+  { name: "Adela Gorea", image: "/organizers/Adela Gorea.png" },
   {
     name: "Corina Negara",
     role: "Administrator",
     company: "Nortek"
   },
-  { name: "Dmitrii Socur" }
+  { name: "Dmitrii Socur", image: "/organizers/Dmitrii Socur.png" }
 ];
