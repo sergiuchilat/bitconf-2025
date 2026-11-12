@@ -345,6 +345,7 @@ export const SPEAKERS_2026: Speaker[] = [
     // Artiom runs this workshop together with Inesa, so they share a bio.
     bio: "Inside the Recruiter's Mind: How to Ace Your Interview",
     image: "/speakers/portraits/Artiom Burlaca.png",
+    linkedinUrl: "https://www.linkedin.com/in/artiom-burlaca-04902a290/",
     about: [
       "Artiom is a DevOps Engineer at Adtelligent, working on the infrastructure behind the company's ad-tech products.",
       "Artiom co-hosts the 1.5-hour workshop \"Inside the Recruiter's Mind: How to Ace Your Interview\" together with Inesa Maidanik, adding an engineer's view of the interview to the recruiter's."
