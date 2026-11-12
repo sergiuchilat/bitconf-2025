@@ -267,6 +267,7 @@ export const SPEAKERS_2026: Speaker[] = [
     companyLink: "https://fusion.works",
     bio: "Business Panel",
     image: "/speakers/portraits/Anton Perkin.png",
+    linkedinUrl: "https://www.linkedin.com/in/antonperkin/",
     about: [
       "Anton is the CEO of FusionWorks and the organizer of MDC.md, the biggest IT conference in Moldova. Few people know better what it takes to put on a great conference.",
       "2026 is Anton's first BitConf, and Anton joins this year's business panel."
