@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import { Organizer } from '@/data/organizers';
 
 interface OrganizersProps {
@@ -14,11 +17,27 @@ const initials = (name: string) =>
     .map((part) => part[0].toUpperCase())
     .join('');
 
+/** Fisher-Yates shuffle, so nobody is always first. */
+const shuffle = <T,>(items: T[]): T[] => {
+  const out = [...items];
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+};
+
 /** Same card look as the speakers grid, without talks or profile pages. */
 export default function Organizers({
   organizers,
   subtitle = 'The people who make BitConf happen',
 }: OrganizersProps) {
+  // Server and first client render keep the data order (no hydration mismatch); shuffle after mount.
+  const [ordered, setOrdered] = useState(organizers);
+  useEffect(() => {
+    setOrdered(shuffle(organizers));
+  }, [organizers]);
+
   if (organizers.length === 0) return null;
 
   return (
@@ -30,7 +49,7 @@ export default function Organizers({
         </div>
 
         <div className="flex flex-wrap justify-center gap-8">
-          {organizers.map((person) => (
+          {ordered.map((person) => (
             <div
               key={person.name}
               className="group w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)] xl:w-[calc(25%-1.5rem)] bg-bitconf-surface-2 rounded-lg shadow-md overflow-hidden border border-bitconf-primary/20 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-bitconf-primary/15 hover:border-bitconf-primary/50"
