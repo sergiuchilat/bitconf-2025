@@ -23,8 +23,8 @@ const navItems: NavItem[] = [
   { href: '#speakers', label: 'Speakers' },
   { href: '#schedule', label: 'Schedule' },
   { href: '#coming-soon', label: "What's coming" },
-  { href: '#past-editions', label: 'Past editions' },
   { href: '#partners', label: 'Partners' },
+  { href: '#past-editions', label: 'Past editions' },
   { href: '#registration', label: 'Register' },
   { href: '#contact', label: 'Contact' },
 ];
@@ -68,9 +68,9 @@ export default function Home() {
       />
       <Schedule edition={edition} slots={SCHEDULE_2026} avatars={AVATARS_2026} />
       <ComingSoon edition={edition} />
-      <PastEditions />
       <Partners />
       <Organizers organizers={ORGANIZERS_2026} />
+      <PastEditions />
       <Registration edition={edition} />
       <Contact edition={edition} />
       <Footer edition={edition} navItems={navItems} />
