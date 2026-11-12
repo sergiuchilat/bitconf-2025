@@ -304,7 +304,11 @@ export const SPEAKERS_2026: Speaker[] = [
     company: "Janu Education",
     bio: "Business Panel",
     image: "/speakers/portraits/Natalia Janu.png",
-    linkedinUrl: "https://www.linkedin.com/in/natalia-janu-01b658446/"
+    linkedinUrl: "https://www.linkedin.com/in/natalia-janu-01b658446/",
+    about: [
+      "Natalia is the founder of Janu Education, a lawyer and economist, and a doctoral candidate. Before starting her own business, Natalia spent more than 16 years at the State Tax Service, then launched Janu Education with the help of a grant she won.",
+      "Natalia is an expert in legal compliance and personal data protection, and runs workshops on Moldova's new data protection law, 195/2024. At BitConf 2026 Natalia joins the business panel."
+    ]
   },
   {
     name: "Mihail Pecari",
@@ -339,6 +343,10 @@ export const SPEAKERS_2026: Speaker[] = [
     companyLink: "https://adtelligent.com",
     // Artiom runs this workshop together with Inesa, so they share a bio.
     bio: "Inside the Recruiter's Mind: How to Ace Your Interview",
-    image: "/speakers/portraits/Artiom Burlaca.png"
+    image: "/speakers/portraits/Artiom Burlaca.png",
+    about: [
+      "Artiom is a DevOps Engineer at Adtelligent, working on the infrastructure behind the company's ad-tech products.",
+      "Artiom co-hosts the 1.5-hour workshop \"Inside the Recruiter's Mind: How to Ace Your Interview\" together with Inesa Maidanik, adding an engineer's view of the interview to the recruiter's."
+    ]
   }
 ];
