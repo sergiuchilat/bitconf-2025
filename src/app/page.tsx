@@ -7,11 +7,13 @@ import Schedule from '@/components/Schedule';
 import ComingSoon from '@/components/ComingSoon';
 import PastEditions from '@/components/PastEditions';
 import Partners from '@/components/Partners';
+import Organizers from '@/components/Organizers';
 import Registration from '@/components/Registration';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import { CURRENT_EDITION, editionLabel } from '@/config/editions';
 import { SPEAKERS_2026 } from '@/data/speakers';
+import { ORGANIZERS_2026 } from '@/data/organizers';
 import { SCHEDULE_2026, AVATARS_2026 } from '@/data/schedule';
 
 const edition = CURRENT_EDITION;
@@ -68,6 +70,7 @@ export default function Home() {
       <ComingSoon edition={edition} />
       <PastEditions />
       <Partners />
+      <Organizers organizers={ORGANIZERS_2026} />
       <Registration edition={edition} />
       <Contact edition={edition} />
       <Footer edition={edition} navItems={navItems} />
