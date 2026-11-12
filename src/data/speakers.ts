@@ -328,5 +328,12 @@ export const SPEAKERS_2026: Speaker[] = [
       "Pavel runs Tekwill Bălți, the city's hub for tech education and startups, so few people know the local IT scene better.",
       "Pavel spoke at BitConf 2025 with \"Tech Movers: From Ideas to Startups\" and returns in 2026 as the third voice on the business panel."
     ]
+  },
+  {
+    name: "Artiom Burlaca",
+    role: "DevOps Engineer",
+    company: "Adtelligent",
+    companyLink: "https://adtelligent.com",
+    image: "/speakers/portraits/Artiom Burlaca.png"
   }
 ];

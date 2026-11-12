@@ -177,6 +177,7 @@ export const AVATARS_2026: ScheduleAvatars = {
   'natalia janu': '/speakers/portraits/Natalia Janu.png',
   'mihail pecari': '/speakers/portraits/Mihail Pecari.png',
   'pavel curcovici': '/speakers/portraits/Pavel Curcovici.png',
+  'artiom burlaca': '/speakers/portraits/Artiom Burlaca.png',
 };
 
 /**
