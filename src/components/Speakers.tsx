@@ -39,6 +39,11 @@ export default function Speakers({
   linkProfiles = false,
 }: SpeakersProps) {
   const frameClass = frame === 'portrait' ? 'aspect-square' : 'h-64';
+  // Square portraits fit four to a row on wide screens; the 3:2 cards stay at three.
+  const cardWidth =
+    frame === 'portrait'
+      ? 'w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)] xl:w-[calc(25%-1.5rem)]'
+      : 'w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)]';
 
   // Fisher-Yates shuffle algorithm
   const shuffleArray = <T,>(array: T[]): T[] => {
@@ -73,7 +78,7 @@ export default function Speakers({
 
         <div className="flex flex-wrap justify-center gap-8">
           {finalSpeakers.map((speaker, index) => (
-            <div key={index} className="group w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)] bg-bitconf-surface-2 rounded-lg shadow-md overflow-hidden border border-bitconf-primary/20 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-bitconf-primary/15 hover:border-bitconf-primary/50">
+            <div key={index} className={`group ${cardWidth} bg-bitconf-surface-2 rounded-lg shadow-md overflow-hidden border border-bitconf-primary/20 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-bitconf-primary/15 hover:border-bitconf-primary/50`}>
               <div className={`${frameClass} bc-speaker-frame flex items-center justify-center overflow-hidden`}>
                 {speaker.name === "TBA" ? (
                   <div className="text-center text-white">
