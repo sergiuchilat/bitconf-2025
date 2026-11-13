@@ -39,6 +39,8 @@ export interface Edition {
   status: 'past' | 'upcoming';
   /** Only set once the edition has happened. */
   stats: EditionStats | null;
+  /** Shared photo album attendees can add their own photos to. */
+  photoAlbumUrl?: string;
 }
 
 const ORDINALS = ['th', 'st', 'nd', 'rd'];
@@ -105,6 +107,7 @@ export const EDITION_2026: Edition = {
     days: 1,
     projected: true,
   },
+  photoAlbumUrl: 'https://photos.app.goo.gl/YuYYJKSMb3cEnvqf8',
 };
 
 /** The edition the homepage promotes. */

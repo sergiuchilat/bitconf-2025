@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Header, { NavItem } from '@/components/Header';
 import Hero from '@/components/Hero';
+import PhotoAlbum from '@/components/PhotoAlbum';
 import About from '@/components/About';
 import Speakers from '@/components/Speakers';
 import Schedule from '@/components/Schedule';
@@ -20,6 +21,7 @@ const edition = CURRENT_EDITION;
 
 const navItems: NavItem[] = [
   { href: '#about', label: 'About' },
+  { href: '#photo-album', label: 'Photos' },
   { href: '#speakers', label: 'Speakers' },
   { href: '#schedule', label: 'Schedule' },
   { href: '#coming-soon', label: "What's coming" },
@@ -58,6 +60,7 @@ export default function Home() {
     <div className="min-h-screen">
       <Header edition={edition} navItems={navItems} />
       <Hero edition={edition} secondary={{ label: "What's coming", targetId: 'coming-soon' }} />
+      <PhotoAlbum edition={edition} />
       <About edition={edition} speakerCount={SPEAKERS_2026.length} />
       <Speakers
         speakers={SPEAKERS_2026}
