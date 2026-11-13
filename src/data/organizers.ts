@@ -19,7 +19,8 @@ export const ORGANIZERS_2026: Organizer[] = [
   {
     name: "Corina Negara",
     role: "Administrator",
-    company: "Nortek"
+    company: "Nortek",
+    image: "/organizers/Corina Negara.png"
   },
   { name: "Dmitrii Socur", image: "/organizers/Dmitrii Socur.png" }
 ];
